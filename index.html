@@ -145,8 +145,8 @@
             </div>
 
             <div class="bg-white rounded-2xl p-8 sm:p-12 shadow-lg">
-                <!-- Inline Success Banner -->
-                <div x-show="formSubmitted" x-transition class="mb-6 bg-green-50 border border-green-200 rounded-lg p-4 text-green-800 flex items-start space-x-3">
+                <!-- Inline Success Banner (id added, hidden by default for fallback) -->
+                <div id="successBanner" x-show="formSubmitted" x-transition class="mb-6 bg-green-50 border border-green-200 rounded-lg p-4 text-green-800 flex items-start space-x-3" style="display:none;">
                     <div class="mt-1">
                         <i class="fas fa-check-circle text-green-600"></i>
                     </div>
@@ -157,7 +157,7 @@
                 </div>
 
                 <!-- Error Message -->
-                <div x-show="formError" x-transition class="mb-6 bg-red-50 border border-red-200 rounded-lg p-4 text-red-800">
+                <div x-show="formError" x-transition class="mb-6 bg-red-50 border border-red-200 rounded-lg p-4 text-red-800" style="display:none;">
                     <i class="fas fa-exclamation-circle mr-2"></i>
                     There was an error sending your inquiry. Please try again or email us directly at admin@insurex24.com
                 </div>
@@ -286,8 +286,8 @@
         </div>
     </footer>
 
-    <!-- Success Modal -->
-    <div x-show="modalOpen" x-cloak class="fixed inset-0 flex items-center justify-center bg-black bg-opacity-40 backdrop-blur-sm z-50" x-transition.opacity>
+    <!-- Success Modal (id added, hidden by default for fallback) -->
+    <div id="successModal" x-show="modalOpen" x-cloak class="fixed inset-0 flex items-center justify-center bg-black bg-opacity-40 backdrop-blur-sm z-50" x-transition.opacity style="display:none;">
         <div class="bg-white rounded-2xl shadow-xl w-full max-w-md p-8 text-center animate-fade-in" role="dialog" aria-modal="true" aria-labelledby="modal-title" x-transition.scale>
             <div class="w-16 h-16 mx-auto bg-green-100 text-green-600 rounded-full flex items-center justify-center mb-4">
                 <i class="fas fa-check text-3xl" aria-hidden="true"></i>
@@ -295,8 +295,8 @@
             <h2 id="modal-title" class="text-2xl font-bold text-gray-900 mb-2">You're all set!</h2>
             <p class="text-gray-600 leading-relaxed mb-6">Thanks for your interest in Insurex24. Our team will reach out shortly with next steps.</p>
             <div class="flex gap-3">
-                <button @click="modalOpen = false" class="flex-1 bg-white border border-gray-200 text-gray-800 px-4 py-2 rounded-lg">Close</button>
-                <button @click="modalOpen = false" class="flex-1 bg-sky-600 text-white px-4 py-2 rounded-lg">Stay on page</button>
+                <button id="modalCloseBtn" class="flex-1 bg-white border border-gray-200 text-gray-800 px-4 py-2 rounded-lg">Close</button>
+                <button id="modalStayBtn" class="flex-1 bg-sky-600 text-white px-4 py-2 rounded-lg">Stay on page</button>
             </div>
         </div>
     </div>
@@ -306,25 +306,59 @@
       const formEl = document.getElementById('contactForm');
       if (!formEl) return;
 
-      formEl.addEventListener('submit', async function(e) {
+      const successBanner = document.getElementById('successBanner');
+      const errorBanner = document.querySelector('[x-show="formError"]') || null;
+      const modal = document.getElementById('successModal');
+      const modalCloseBtn = document.getElementById('modalCloseBtn');
+      const modalStayBtn = document.getElementById('modalStayBtn');
+
+      // Helpers to toggle Alpine state if possible, and fallback to DOM
+      function setAlpineFlag(root, flag, value) {
+        try {
+          if (root && root.__x && root.__x.$data && flag in root.__x.$data) {
+            root.__x.$data[flag] = value;
+            return true;
+          }
+          if (root && root.__x && root.__x.$data) {
+            root.__x.$data[flag] = value;
+            return true;
+          }
+        } catch (err) {
+          // ignore
+        }
+        return false;
+      }
+
+      // DOM fallback toggles
+      function showBanner(show) {
+        if (successBanner) successBanner.style.display = show ? 'flex' : 'none';
+        const root = document.querySelector('[x-data]');
+        if (root) setAlpineFlag(root, 'formSubmitted', show);
+      }
+      function showError(show) {
+        if (errorBanner) errorBanner.style.display = show ? 'block' : 'none';
+        const root = document.querySelector('[x-data]');
+        if (root) setAlpineFlag(root, 'formError', show);
+      }
+      function showModal(show) {
+        if (modal) modal.style.display = show ? 'flex' : 'none';
+        const root = document.querySelector('[x-data]');
+        if (root) setAlpineFlag(root, 'modalOpen', show);
+      }
+
+      // modal buttons
+      if (modalCloseBtn) modalCloseBtn.addEventListener('click', () => showModal(false));
+      if (modalStayBtn) modalStayBtn.addEventListener('click', () => showModal(false));
+
+      formEl.addEventListener('submit', async function (e) {
         e.preventDefault();
 
-        // safe access to Alpine data
-        const alpineRoot = document.querySelector('[x-data]');
-        const alpineData = alpineRoot && alpineRoot.__x && alpineRoot.__x.$data ? alpineRoot.__x.$data : null;
+        // disable submit
+        const submitBtn = formEl.querySelector('button[type="submit"]');
+        if (submitBtn) submitBtn.disabled = true;
 
-        // If Alpine not found for some reason, create a small fallback so UI doesn't break
-        if (!alpineData) {
-          console.warn('Alpine not available — using local fallback state for UI flags.');
-        }
-
-        // use local fallback setters
-        const setSubmitting = (v) => { if (alpineData) alpineData.isSubmitting = v; else { const btn = formEl.querySelector('button[type="submit"]'); if (btn) btn.disabled = v; } };
-        const setSubmitted = (v) => { if (alpineData) alpineData.formSubmitted = v; else { if (v) alert('Form submitted successfully (fallback).'); } };
-        const setError = (v) => { if (alpineData) alpineData.formError = v; else if (v) alert('Error sending inquiry (fallback).'); };
-
-        setSubmitting(true);
-        setError(false);
+        showError(false);
+        showBanner(false);
 
         const formData = new FormData(this);
         const data = {
@@ -337,11 +371,27 @@
           message: formData.get('message') || ''
         };
 
-        const emailBody = `\nNew Demo Request from Insurex24 Website\n\nName: ${data.firstName} ${data.lastName}\nEmail: ${data.email}\nCompany: ${data.company}\nPhone: ${data.phone}\nCompany Size: ${data.companySize}\n\nMessage:\n${data.message}\n\n---\nThis inquiry was submitted from the Insurex24 website contact form.`.trim();
+        const emailBody = `
+New Demo Request from Insurex24 Website
+
+Name: ${data.firstName} ${data.lastName}
+Email: ${data.email}
+Company: ${data.company}
+Phone: ${data.phone}
+Company Size: ${data.companySize}
+
+Message:
+${data.message}
+
+---
+This inquiry was submitted from the Insurex24 website contact form.
+        `.trim();
 
         try {
           const ACCESS_KEY = '298d39ae-34a4-4c8a-aedf-f55cffead471';
-          if (!ACCESS_KEY || ACCESS_KEY.startsWith('REPLACE')) throw new Error('No Web3Forms access key present. Replace ACCESS_KEY with your key.');
+          if (!ACCESS_KEY || ACCESS_KEY.startsWith('REPLACE')) {
+            throw new Error('No Web3Forms access key present. Replace ACCESS_KEY with your key.');
+          }
 
           const payload = {
             access_key: ACCESS_KEY,
@@ -369,27 +419,23 @@
           if (!response.ok) throw new Error(`HTTP ${response.status} - ${response.statusText} - ${JSON.stringify(result)}`);
 
           if (result && (result.success === true || result.message === 'Success' || response.status === 200)) {
-            setSubmitted(true);
-            setError(false);
-            this.reset();
+            // show banner & modal
+            showBanner(true);
+            showError(false);
+            formEl.reset();
 
-            // open modal if Alpine is available
-            if (alpineData) {
-              alpineData.modalOpen = true;
-              // auto close modal after 5s (optional)
-              setTimeout(() => { alpineData.modalOpen = false; }, 5000);
-            } else {
-              alert("You're all set! Thanks for your interest in Insurex24.");
-            }
+            showModal(true);
+            // auto close after 5s
+            setTimeout(() => showModal(false), 5000);
           } else {
             throw new Error('Form submission failed: ' + JSON.stringify(result));
           }
-        } catch (error) {
-          console.error('Error submitting contact form:', error);
-          setError(true);
-          setSubmitted(false);
+        } catch (err) {
+          console.error('Contact form error:', err);
+          showError(true);
+          showBanner(false);
         } finally {
-          setSubmitting(false);
+          if (submitBtn) submitBtn.disabled = false;
         }
       });
     });
