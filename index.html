@@ -743,26 +743,57 @@
     </footer>
 
     <script>
-        document.getElementById('contactForm').addEventListener('submit', async function(e) {
-            e.preventDefault();
-            
-            const alpineData = document.querySelector('[x-data]').__x.$data;
-            alpineData.isSubmitting = true;
-            alpineData.formError = false;
-            
-            const formData = new FormData(this);
-            const data = {
-                firstName: formData.get('firstName'),
-                lastName: formData.get('lastName'),
-                email: formData.get('email'),
-                company: formData.get('company'),
-                phone: formData.get('phone'),
-                companySize: formData.get('companySize'),
-                message: formData.get('message')
-            };
+document.addEventListener('DOMContentLoaded', function () {
+  const formEl = document.getElementById('contactForm');
+  if (!formEl) return;
 
-            // Create email body
-            const emailBody = `
+  formEl.addEventListener('submit', async function(e) {
+    e.preventDefault();
+
+    // safe access to Alpine data (optional chaining)
+    const alpineRoot = document.querySelector('[x-data]');
+    const alpineData = alpineRoot && alpineRoot.__x && alpineRoot.__x.$data ? alpineRoot.__x.$data : null;
+
+    // If Alpine not found for some reason, create a small fallback so UI doesn't break
+    if (!alpineData) {
+      console.warn('Alpine not available — using local fallback state for UI flags.');
+    }
+
+    // use local fallback setters
+    const setSubmitting = (v) => {
+      if (alpineData) alpineData.isSubmitting = v;
+      else {
+        const btn = formEl.querySelector('button[type="submit"]');
+        if (btn) btn.disabled = v;
+      }
+    };
+    const setSubmitted = (v) => {
+      if (alpineData) alpineData.formSubmitted = v;
+      else {
+        // fallback: show a simple alert
+        if (v) alert('Form submitted successfully (fallback).');
+      }
+    };
+    const setError = (v) => {
+      if (alpineData) alpineData.formError = v;
+      else if (v) alert('Error sending inquiry (fallback).');
+    };
+
+    setSubmitting(true);
+    setError(false);
+
+    const formData = new FormData(this);
+    const data = {
+      firstName: formData.get('firstName') || '',
+      lastName: formData.get('lastName') || '',
+      email: formData.get('email') || '',
+      company: formData.get('company') || '',
+      phone: formData.get('phone') || '',
+      companySize: formData.get('companySize') || '',
+      message: formData.get('message') || ''
+    };
+
+    const emailBody = `
 New Demo Request from Insurex24 Website
 
 Name: ${data.firstName} ${data.lastName}
@@ -776,45 +807,59 @@ ${data.message}
 
 ---
 This inquiry was submitted from the Insurex24 website contact form.
-            `;
+    `.trim();
 
-            // Using Web3Forms - Free service, no API key needed in frontend
-            try {
-                const response = await fetch('https://api.web3forms.com/submit', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                        'Accept': 'application/json'
-                    },
-                    body: JSON.stringify({
-                        access_key: '298d39ae-34a4-4c8a-aedf-f55cffead471',
-                        subject: `New Demo Request from ${data.firstName} ${data.lastName}`,
-                        from_name: 'Insurex24 Website',
-                        name: `${data.firstName} ${data.lastName}`,
-                        email: data.email,
-                        message: emailBody,
-                        to: 'admin@insurex24.com'
-                    })
-                });
+    try {
+      const ACCESS_KEY = '298d39ae-34a4-4c8a-aedf-f55cffead471';
+      if (!ACCESS_KEY || ACCESS_KEY.startsWith('REPLACE')) {
+        throw new Error('No Web3Forms access key present. Replace ACCESS_KEY with your key.');
+      }
 
-                const result = await response.json();
-                
-                if (result.success) {
-                    alpineData.formSubmitted = true;
-                    alpineData.formError = false;
-                    this.reset();
-                } else {
-                    throw new Error('Form submission failed');
-                }
-            } catch (error) {
-                console.error('Error:', error);
-                alpineData.formError = true;
-                alpineData.formSubmitted = false;
-            } finally {
-                alpineData.isSubmitting = false;
-            }
-        });
-    </script>
+      const payload = {
+        access_key: ACCESS_KEY,
+        subject: `New Demo Request from ${data.firstName} ${data.lastName}`,
+        from_name: 'Insurex24 Website',
+        name: `${data.firstName} ${data.lastName}`,
+        email: data.email,
+        message: emailBody,
+        to: 'admin@insurex24.com'
+      };
+
+      const response = await fetch('https://api.web3forms.com/submit', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+        body: JSON.stringify(payload)
+      });
+
+      const text = await response.text();
+      let result;
+      try { result = JSON.parse(text); } catch (err) { result = { raw: text }; }
+
+      console.log('Web3Forms response status:', response.status, response.statusText);
+      console.log('Web3Forms response body:', result);
+
+      if (!response.ok) {
+        throw new Error(`HTTP ${response.status} - ${response.statusText} - ${JSON.stringify(result)}`);
+      }
+
+      if (result && (result.success === true || result.message === 'Success' || response.status === 200)) {
+        setSubmitted(true);
+        setError(false);
+        this.reset();
+      } else {
+        throw new Error('Form submission failed: ' + JSON.stringify(result));
+      }
+    } catch (error) {
+      console.error('Error submitting contact form:', error);
+      setError(true);
+      setSubmitted(false);
+    } finally {
+      setSubmitting(false);
+    }
+  });
+});
+</script>
+
 
 </body>
 </html>
