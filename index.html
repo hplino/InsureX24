@@ -413,8 +413,8 @@ This inquiry was submitted from the Insurex24 website contact form.
           let result;
           try { result = JSON.parse(text); } catch (err) { result = { raw: text }; }
 
-          console.log('Web3Forms response status:', response.status, response.statusText);
-          console.log('Web3Forms response body:', result);
+          // console.log('Web3Forms response status:', response.status, response.statusText);
+          // console.log('Web3Forms response body:', result);
 
           if (!response.ok) throw new Error(`HTTP ${response.status} - ${response.statusText} - ${JSON.stringify(result)}`);
 
