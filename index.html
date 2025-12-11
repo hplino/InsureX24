@@ -4,13 +4,27 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Insurex24 - Enabling Large Insurance Ecosystems</title>
-    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Cdefs%3E%3ClinearGradient id='grad' x1='0%25' y1='0%25' x2='100%25' y2='100%25'%3E%3Cstop offset='0%25' style='stop-color:%230ea5e9;stop-opacity:1' /%3E%3Cstop offset='100%25' style='stop-color:%230284c7;stop-opacity:1' /%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='100' height='100' rx='20' fill='url(%23grad)'/%3E%3Cg fill='white'%3E%3Crect x='25' y='25' width='50' height='12' rx='2'/%3E%3Crect x='25' y='44' width='50' height='12' rx='2'/%3E%3Crect x='25' y='63' width='50' height='12' rx='2'/%3E%3C/g%3E%3C/svg%3E">
+
+    <!-- Favicons (PNG files you uploaded in /assets/) -->
+    <link rel="icon" type="image/png" sizes="32x32" href="/assets/logo-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/assets/logo-16x16.png">
+    <!-- apple touch (use icon.png you uploaded) -->
+    <link rel="apple-touch-icon" sizes="180x180" href="/assets/icon.png">
+    <meta name="theme-color" content="#0284c7">
+
+    <link rel="icon" href="/assets/logo-32x32.png">
+
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <script src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js" defer></script>
+
     <style>
         .animate-fade-in { animation: fadeIn 0.22s ease-out; }
         @keyframes fadeIn { from { opacity: 0; transform: scale(0.97); } to { opacity: 1; transform: scale(1); } }
+
+        /* small helpers for logo images */
+        .site-logo { width: 40px; height: 40px; object-fit: contain; }
+        .site-logo--small { width: 28px; height: 28px; object-fit: contain; }
     </style>
 </head>
 <body class="font-sans antialiased" style="height: auto; min-height: 100%;" x-data="{ mobileMenuOpen: false, formSubmitted: false, formError: false, isSubmitting: false, modalOpen: false }">
@@ -21,12 +35,12 @@
             <div class="flex justify-between items-center h-16 sm:h-20">
                 <div class="flex items-center">
                     <div class="flex-shrink-0">
-                        <div class="flex items-center">
-                            <div class="w-10 h-10 bg-gradient-to-br from-sky-500 to-sky-600 rounded-lg flex items-center justify-center">
-                                <i class="fas fa-layer-group text-white text-xl"></i>
-                            </div>
+                        <!-- logo image + text -->
+                        <a href="/" class="flex items-center">
+                            <!-- If you'd prefer logo inside gradient box, replace with wrapper div -->
+                            <img src="/assets/logo.png" alt="Insurex24" class="site-logo rounded-lg">
                             <span class="ml-3 text-xl sm:text-2xl font-bold bg-gradient-to-r from-sky-500 to-sky-600 bg-clip-text text-transparent">Insurex24</span>
-                        </div>
+                        </a>
                     </div>
                 </div>
                 
@@ -156,7 +170,7 @@
                     </div>
                 </div>
 
-                <!-- Error Message -->
+                <!-- Error Message (hidden by default so fallback script can show) -->
                 <div x-show="formError" x-transition class="mb-6 bg-red-50 border border-red-200 rounded-lg p-4 text-red-800" style="display:none;">
                     <i class="fas fa-exclamation-circle mr-2"></i>
                     There was an error sending your inquiry. Please try again or email us directly at admin@insurex24.com
@@ -228,10 +242,10 @@
             <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 mb-12">
                 <div>
                     <div class="flex items-center mb-6">
-                        <div class="w-10 h-10 bg-gradient-to-br from-sky-500 to-sky-600 rounded-lg flex items-center justify-center">
-                            <i class="fas fa-layer-group text-white text-xl"></i>
-                        </div>
-                        <span class="ml-3 text-xl font-bold">Insurex24</span>
+                        <a href="/" class="flex items-center">
+                            <img src="/assets/logo.png" alt="Insurex24" class="site-logo--small rounded-lg">
+                            <span class="ml-3 text-xl font-bold">Insurex24</span>
+                        </a>
                     </div>
                     <p class="text-gray-400 mb-6">Enabling large insurance ecosystems with modern middleware technology.</p>
                     <div class="flex space-x-4">
@@ -413,8 +427,8 @@ This inquiry was submitted from the Insurex24 website contact form.
           let result;
           try { result = JSON.parse(text); } catch (err) { result = { raw: text }; }
 
-          // console.log('Web3Forms response status:', response.status, response.statusText);
-          // console.log('Web3Forms response body:', result);
+          console.log('Web3Forms response status:', response.status, response.statusText);
+          console.log('Web3Forms response body:', result);
 
           if (!response.ok) throw new Error(`HTTP ${response.status} - ${response.statusText} - ${JSON.stringify(result)}`);
 
