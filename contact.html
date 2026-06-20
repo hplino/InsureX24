@@ -1,0 +1,269 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/><meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>Contact & Demo – Insurex24</title>
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0%25' y1='0%25' x2='100%25' y2='100%25'%3E%3Cstop offset='0%25' style='stop-color:%231A8FE3'/%3E%3Cstop offset='100%25' style='stop-color:%231565C0'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='100' height='100' rx='22' fill='url(%23g)'/%3E%3Cg fill='white'%3E%3Crect x='24' y='24' width='52' height='11' rx='3'/%3E%3Crect x='24' y='44' width='52' height='11' rx='3'/%3E%3Crect x='24' y='64' width='52' height='11' rx='3'/%3E%3C/g%3E%3C/svg%3E"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet"/>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"/>
+<script src="https://cdn.tailwindcss.com"></script>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}html{scroll-behavior:smooth}body{font-family:'Inter',system-ui,sans-serif;background:#F8FAFC;overflow-x:hidden}
+.grad{background:linear-gradient(135deg,#93C5FD,#60A5FA,#1A8FE3,#1240A0);background-size:300%;-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;animation:gf 6s ease infinite}
+@keyframes gf{0%,100%{background-position:0%}50%{background-position:100%}}
+.btn-primary{background:linear-gradient(135deg,#1A8FE3,#1565C0);color:#fff;display:inline-flex;align-items:center;justify-content:center;gap:.6rem;border-radius:14px;padding:.95rem 2.2rem;font-weight:700;font-size:.92rem;text-decoration:none;border:none;cursor:pointer;position:relative;overflow:hidden;transition:transform .25s,box-shadow .25s;box-shadow:0 0 28px rgba(26,143,227,.45),0 8px 32px rgba(26,143,227,.25);width:100%}
+.btn-primary::before{content:'';position:absolute;inset:0;background:linear-gradient(135deg,rgba(255,255,255,.18),transparent 60%);pointer-events:none}
+.btn-primary:hover{transform:translateY(-3px) scale(1.02);box-shadow:0 0 48px rgba(21,101,192,.65),0 16px 48px rgba(26,143,227,.35)}
+.btn-ghost{border:1.5px solid rgba(26,143,227,.4);color:#1565C0;background:rgba(26,143,227,.06);display:inline-flex;align-items:center;justify-content:center;gap:.6rem;border-radius:14px;padding:.95rem 2.2rem;font-weight:600;font-size:.92rem;text-decoration:none;transition:all .25s}
+.btn-ghost:hover{background:rgba(26,143,227,.12);border-color:rgba(26,143,227,.6);color:#1240A0;transform:translateY(-2px)}
+#nav{position:fixed;top:0;left:0;right:0;z-index:100;background:rgba(255,255,255,.92);backdrop-filter:blur(28px);border-bottom:1px solid rgba(0,0,0,.07);transition:background .3s,box-shadow .3s}
+#nav.solid{background:rgba(255,255,255,.99);box-shadow:0 4px 32px rgba(0,0,0,.08)}
+.nlink{color:#64748B;font-size:.85rem;font-weight:600;padding:.5rem 1rem;border-radius:10px;text-decoration:none;transition:all .2s}
+.nlink:hover{color:#1E293B;background:rgba(0,0,0,.04)}.nlink.act{color:#1565C0;background:rgba(26,143,227,.1)}
+#mob{max-height:0;overflow:hidden;transition:max-height .4s cubic-bezier(0,.8,.4,1),opacity .3s;opacity:0;background:#fff;border-top:1px solid rgba(0,0,0,.06)}
+#mob.open{max-height:32rem;opacity:1}
+.hero-bg{background:linear-gradient(135deg,#EFF6FF 0%,#DBEAFE 40%,#EFF6FF 100%);position:relative;overflow:hidden;min-height:52vh;display:flex;align-items:center}
+.dot-grid{position:absolute;inset:0;background-image:radial-gradient(rgba(26,143,227,.15) 1.2px,transparent 1.2px);background-size:38px 38px;animation:dd 25s linear infinite}
+@keyframes dd{from{background-position:0 0}to{background-position:38px 38px}}
+.orb{position:absolute;border-radius:50%;filter:blur(90px);pointer-events:none}
+.oa{width:700px;height:700px;top:-250px;right:-200px;background:radial-gradient(circle,rgba(59,130,246,.18),transparent 65%);animation:oa 20s ease-in-out infinite}
+.ob{width:400px;height:400px;bottom:-100px;left:-80px;background:radial-gradient(circle,rgba(26,143,227,.12),transparent 65%);animation:ob 25s ease-in-out infinite}
+@keyframes oa{0%,100%{transform:translate(0,0) scale(1)}50%{transform:translate(-60px,70px) scale(1.1)}}
+@keyframes ob{0%,100%{transform:translate(0,0) scale(1)}50%{transform:translate(50px,-40px) scale(1.08)}}
+.hero-badge{display:inline-flex;align-items:center;gap:.5rem;padding:.45rem 1.2rem;border-radius:24px;background:rgba(26,143,227,.1);border:1px solid rgba(26,143,227,.3);color:#1565C0;font-size:.78rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase}
+.live-dot{width:7px;height:7px;border-radius:50%;background:#1A8FE3;box-shadow:0 0 10px #1A8FE3;animation:ld 1.6s ease-in-out infinite}
+@keyframes ld{0%,100%{opacity:1}50%{opacity:.3}}
+.ibox{display:inline-flex;align-items:center;justify-content:center;flex-shrink:0}
+/* Form */
+.form-field{display:flex;flex-direction:column;gap:.4rem}
+.form-field label{font-size:.82rem;font-weight:700;color:#374151}
+.form-field input,.form-field select,.form-field textarea{border:2px solid #E2E8F0;border-radius:14px;padding:.75rem 1rem;font-size:.9rem;color:#111827;background:#fff;width:100%;outline:none;transition:border-color .2s,box-shadow .2s;font-family:'Inter',sans-serif}
+.form-field input:focus,.form-field select:focus,.form-field textarea:focus{border-color:#3B82F6;box-shadow:0 0 0 4px rgba(59,130,246,.1)}
+.form-field.err input,.form-field.err select,.form-field.err textarea{border-color:#EF4444;box-shadow:0 0 0 4px rgba(239,68,68,.08)}
+.err-msg{font-size:.76rem;color:#EF4444;font-weight:600;margin-top:.2rem;display:none}
+.form-field.err .err-msg{display:block}
+/* Card */
+.wcard{background:#fff;border-radius:28px;border:1px solid #E2E8F0;box-shadow:0 4px 32px rgba(0,0,0,.04)}
+/* Trust bar */
+.trust-item{text-align:center;padding:1rem}
+/* Step */
+.step-circle{width:32px;height:32px;border-radius:50%;background:linear-gradient(135deg,#1A8FE3,#1565C0);display:flex;align-items:center;justify-content:center;font-size:.8rem;font-weight:900;color:#fff;flex-shrink:0;box-shadow:0 0 16px rgba(26,143,227,.35)}
+/* Modal */
+#modal{position:fixed;inset:0;z-index:999;display:flex;align-items:center;justify-content:center;padding:1.5rem;background:rgba(0,0,0,.5);backdrop-filter:blur(12px);opacity:0;pointer-events:none;transition:opacity .35s}
+#modal.show{opacity:1;pointer-events:auto}
+#modal-card{transform:scale(.88) translateY(20px);transition:transform .4s cubic-bezier(.16,1,.3,1)}
+#modal.show #modal-card{transform:scale(1) translateY(0)}
+.rv{opacity:0;transform:translateY(36px);transition:opacity .8s cubic-bezier(.16,1,.3,1),transform .8s cubic-bezier(.16,1,.3,1)}
+.rv.in{opacity:1;transform:none}
+::-webkit-scrollbar{width:5px}::-webkit-scrollbar-track{background:#F8FAFC}::-webkit-scrollbar-thumb{background:linear-gradient(#1A8FE3,#1565C0);border-radius:3px}
+</style>
+</head>
+<body>
+<nav id="nav">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="flex justify-between items-center h-[68px]">
+      <a href="index.html" class="flex items-center gap-2.5"><div class="w-9 h-9 rounded-xl flex items-center justify-center" style="background:linear-gradient(135deg,#1A8FE3,#1565C0);box-shadow:0 0 18px rgba(26,143,227,.35)"><i class="fas fa-layer-group text-white text-sm"></i></div><span class="text-[1.08rem] font-black text-slate-900 tracking-tight">Insurex<span class="grad">24</span></span></a>
+      <div class="hidden md:flex items-center gap-0.5">
+        <a href="platform.html" class="nlink">Platform</a><a href="services.html" class="nlink">Services</a><a href="api.html" class="nlink">API Automation</a><a href="data-platform.html" class="nlink">Data Platform</a>
+        <a href="contact.html" class="btn-primary ml-3 !py-2.5 !px-5 !text-[.84rem] !rounded-xl !w-auto">Get Demo</a>
+      </div>
+      <button id="bur" class="md:hidden p-2 rounded-xl text-slate-600 hover:bg-black/5"><i id="bic" class="fas fa-bars text-lg"></i></button>
+    </div>
+  </div>
+  <div id="mob">
+    <div class="px-4 py-4 space-y-1">
+      <a href="platform.html" class="ml block py-3 px-4 rounded-xl text-slate-600 hover:text-slate-900 text-sm font-semibold">Platform</a>
+      <a href="services.html" class="ml block py-3 px-4 rounded-xl text-slate-600 hover:text-slate-900 text-sm font-semibold">Services</a>
+      <a href="api.html" class="ml block py-3 px-4 rounded-xl text-slate-600 hover:text-slate-900 text-sm font-semibold">API Automation</a>
+      <a href="data-platform.html" class="ml block py-3 px-4 rounded-xl text-slate-600 hover:text-slate-900 text-sm font-semibold">Data Platform</a>
+      <a href="contact.html" class="ml block mt-3 btn-primary !py-3 !rounded-xl">Get Demo</a>
+    </div>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero-bg pt-[68px]">
+  <div class="dot-grid"></div><div class="orb oa"></div><div class="orb ob"></div>
+  <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 py-20 lg:py-28 relative z-10 text-center">
+    <div class="hero-badge mb-6 mx-auto w-fit"><div class="live-dot"></div>Book a Demo</div>
+    <h1 class="text-[clamp(2.4rem,5.5vw,4rem)] font-black text-slate-900 leading-[1.07] tracking-tight mb-5">Let's Talk <span class="grad">Insurance Tech</span></h1>
+    <p class="text-[1.05rem] text-slate-600 leading-relaxed max-w-xl mx-auto">Fill in the form and our solutions team will contact you within 1 business day to set up a personalised demo.</p>
+  </div>
+</section>
+
+<!-- TRUST BADGES -->
+<section class="bg-white border-b border-slate-100 py-6">
+  <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="grid grid-cols-2 sm:grid-cols-4 gap-2">
+      <div class="trust-item"><i class="fas fa-bolt text-blue-600 text-xl mb-1.5 block"></i><p class="text-slate-900 font-bold text-sm">Fast Onboarding</p><p class="text-slate-400 text-xs">Go-live in weeks</p></div>
+      <div class="trust-item"><i class="fas fa-headset text-violet-600 text-xl mb-1.5 block"></i><p class="text-slate-900 font-bold text-sm">Dedicated CSM</p><p class="text-slate-400 text-xs">Named success manager</p></div>
+      <div class="trust-item"><i class="fas fa-shield-alt text-emerald-600 text-xl mb-1.5 block"></i><p class="text-slate-900 font-bold text-sm">IRDAI Compliant</p><p class="text-slate-400 text-xs">Fully regulated</p></div>
+      <div class="trust-item"><i class="fas fa-lock text-amber-600 text-xl mb-1.5 block"></i><p class="text-slate-900 font-bold text-sm">Enterprise Security</p><p class="text-slate-400 text-xs">SOC 2 ready</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- FORM + SIDEBAR -->
+<section class="py-20 lg:py-28">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="grid grid-cols-1 lg:grid-cols-5 gap-10 items-start">
+
+      <!-- FORM -->
+      <div class="lg:col-span-3 rv">
+        <div class="wcard p-8 sm:p-10">
+          <h2 class="text-2xl font-black text-slate-900 mb-1">Request a Demo</h2>
+          <p class="text-slate-400 text-sm mb-8">Our team will reach out within 1 business day.</p>
+          <form id="demo-form" novalidate>
+            <input type="hidden" name="access_key" value="298d39ae-34a4-4c8a-aedf-f55cffead471"/>
+            <input type="hidden" name="subject" value="New Demo Request — Insurex24"/>
+            <input type="checkbox" name="botcheck" style="display:none"/>
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-5 mb-5">
+              <div class="form-field" id="ff-firstName"><label>First Name <span class="text-red-500">*</span></label><input type="text" name="firstName" id="firstName" placeholder="Rahul"/><span class="err-msg">First name is required</span></div>
+              <div class="form-field" id="ff-lastName"><label>Last Name <span class="text-red-500">*</span></label><input type="text" name="lastName" id="lastName" placeholder="Sharma"/><span class="err-msg">Last name is required</span></div>
+            </div>
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-5 mb-5">
+              <div class="form-field" id="ff-email"><label>Work Email <span class="text-red-500">*</span></label><input type="email" name="email" id="email" placeholder="you@company.com"/><span class="err-msg">Valid work email required</span></div>
+              <div class="form-field" id="ff-phone"><label>Phone Number</label><input type="tel" name="phone" id="phone" placeholder="+91 98765 43210"/><span class="err-msg">Enter a valid phone number</span></div>
+            </div>
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-5 mb-5">
+              <div class="form-field" id="ff-company"><label>Company Name <span class="text-red-500">*</span></label><input type="text" name="company" id="company" placeholder="HDFC Life"/><span class="err-msg">Company name is required</span></div>
+              <div class="form-field" id="ff-companySize"><label>Company Size <span class="text-red-500">*</span></label>
+                <select name="companySize" id="companySize">
+                  <option value="">Select size</option>
+                  <option>1–50 employees</option><option>51–200 employees</option><option>201–1,000 employees</option><option>1,001–5,000 employees</option><option>5,000+ employees</option>
+                </select>
+                <span class="err-msg">Please select company size</span>
+              </div>
+            </div>
+            <div class="form-field mb-5" id="ff-interest"><label>Area of Interest</label>
+              <select name="interest" id="interest">
+                <option value="">Choose a product area (optional)</option>
+                <option>Platform & MACH Architecture</option><option>API Automation</option><option>Data Platform</option><option>OCR & Document AI</option><option>SMS & Email Communication</option><option>KYC & Verification</option><option>Operations Suite</option><option>All of the above</option>
+              </select>
+            </div>
+            <div class="form-field mb-7" id="ff-message"><label>Message</label><textarea name="message" id="message" rows="4" placeholder="Tell us about your current stack and what you're trying to solve…"></textarea></div>
+            <div id="form-error" class="hidden mb-5 p-4 rounded-2xl text-sm font-semibold text-red-700" style="background:#FEF2F2;border:1px solid #FCA5A5"><i class="fas fa-exclamation-circle mr-2"></i><span id="ferr-text">Something went wrong. Please try again.</span></div>
+            <button type="submit" id="sub-btn" class="btn-primary !text-[.96rem] !py-3.5">
+              <span id="btn-txt"><i class="fas fa-paper-plane text-sm"></i>Send Request</span>
+              <span id="btn-spin" class="hidden"><i class="fas fa-spinner fa-spin text-sm"></i>Sending…</span>
+            </button>
+            <p class="text-xs text-slate-400 mt-3 text-center">By submitting you agree to our <a href="#" class="underline hover:text-slate-600">Privacy Policy</a>.</p>
+          </form>
+        </div>
+      </div>
+
+      <!-- SIDEBAR -->
+      <div class="lg:col-span-2 space-y-5 rv">
+        <div class="wcard p-7">
+          <h3 class="font-black text-slate-900 mb-5">Get In Touch</h3>
+          <div class="space-y-4">
+            <div class="flex items-start gap-4"><div class="ibox w-10 h-10" style="background:#EFF6FF;border-radius:12px"><i class="fas fa-envelope text-blue-600 text-sm"></i></div><div><p class="text-xs text-slate-400 font-bold uppercase tracking-wide mb-0.5">Email</p><a href="mailto:admin@insurex24.com" class="text-slate-800 font-bold text-sm hover:text-blue-600">admin@insurex24.com</a></div></div>
+            <div class="flex items-start gap-4"><div class="ibox w-10 h-10" style="background:#EFF6FF;border-radius:12px"><i class="fas fa-clock text-blue-600 text-sm"></i></div><div><p class="text-xs text-slate-400 font-bold uppercase tracking-wide mb-0.5">Response Time</p><p class="text-slate-800 font-bold text-sm">Within 1 business day</p></div></div>
+            <div class="flex items-start gap-4"><div class="ibox w-10 h-10" style="background:#EFF6FF;border-radius:12px"><i class="fas fa-map-marker-alt text-blue-600 text-sm"></i></div><div><p class="text-xs text-slate-400 font-bold uppercase tracking-wide mb-0.5">Headquarters</p><p class="text-slate-800 font-bold text-sm">Mumbai, India</p></div></div>
+          </div>
+        </div>
+        <div class="wcard p-7">
+          <h3 class="font-black text-slate-900 mb-5">What to Expect</h3>
+          <div class="space-y-4">
+            <div class="flex items-start gap-3"><div class="step-circle">1</div><div><p class="font-bold text-slate-800 text-sm">Discovery call</p><p class="text-slate-400 text-xs mt-0.5">30-min call to understand your stack and goals</p></div></div>
+            <div class="flex items-start gap-3"><div class="step-circle">2</div><div><p class="font-bold text-slate-800 text-sm">Tailored demo</p><p class="text-slate-400 text-xs mt-0.5">Live demo of features most relevant to your use case</p></div></div>
+            <div class="flex items-start gap-3"><div class="step-circle">3</div><div><p class="font-bold text-slate-800 text-sm">Proposal & pricing</p><p class="text-slate-400 text-xs mt-0.5">Transparent pricing tailored to your scale</p></div></div>
+            <div class="flex items-start gap-3"><div class="step-circle">4</div><div><p class="font-bold text-slate-800 text-sm">Pilot & onboarding</p><p class="text-slate-400 text-xs mt-0.5">Guided pilot with dedicated integration support</p></div></div>
+          </div>
+        </div>
+        <div class="wcard p-7">
+          <h3 class="font-black text-slate-900 mb-5">Explore Products</h3>
+          <div class="space-y-2">
+            <a href="platform.html" class="flex items-center gap-3 p-3 rounded-xl hover:bg-blue-50 transition-colors group"><div class="ibox w-9 h-9" style="background:#EFF6FF;border-radius:10px"><i class="fas fa-microchip text-blue-600 text-sm"></i></div><p class="font-bold text-slate-700 text-sm group-hover:text-blue-700">MACH Platform</p><i class="fas fa-arrow-right text-blue-300 text-xs ml-auto opacity-0 group-hover:opacity-100 transition-opacity"></i></a>
+            <a href="api.html" class="flex items-center gap-3 p-3 rounded-xl hover:bg-violet-50 transition-colors group"><div class="ibox w-9 h-9" style="background:#F5F3FF;border-radius:10px"><i class="fas fa-bolt text-violet-600 text-sm"></i></div><p class="font-bold text-slate-700 text-sm group-hover:text-violet-700">API Automation</p><i class="fas fa-arrow-right text-violet-300 text-xs ml-auto opacity-0 group-hover:opacity-100 transition-opacity"></i></a>
+            <a href="data-platform.html" class="flex items-center gap-3 p-3 rounded-xl hover:bg-emerald-50 transition-colors group"><div class="ibox w-9 h-9" style="background:#ECFDF5;border-radius:10px"><i class="fas fa-chart-line text-emerald-600 text-sm"></i></div><p class="font-bold text-slate-700 text-sm group-hover:text-emerald-700">Data Platform</p><i class="fas fa-arrow-right text-emerald-300 text-xs ml-auto opacity-0 group-hover:opacity-100 transition-opacity"></i></a>
+            <a href="services.html" class="flex items-center gap-3 p-3 rounded-xl hover:bg-amber-50 transition-colors group"><div class="ibox w-9 h-9" style="background:#FFFBEB;border-radius:10px"><i class="fas fa-cogs text-amber-600 text-sm"></i></div><p class="font-bold text-slate-700 text-sm group-hover:text-amber-700">Services Suite</p><i class="fas fa-arrow-right text-amber-300 text-xs ml-auto opacity-0 group-hover:opacity-100 transition-opacity"></i></a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SUCCESS MODAL -->
+<div id="modal" role="dialog" aria-modal="true" aria-labelledby="modal-title">
+  <div id="modal-card" class="bg-white rounded-3xl shadow-2xl p-12 max-w-md w-full text-center">
+    <div class="w-20 h-20 rounded-full mx-auto mb-6 flex items-center justify-center" style="background:linear-gradient(135deg,#22C55E,#16A34A);box-shadow:0 0 32px rgba(34,197,94,.4)">
+      <i class="fas fa-check text-white text-3xl"></i>
+    </div>
+    <h2 id="modal-title" class="text-2xl font-black text-slate-900 mb-3">Request Sent!</h2>
+    <p class="text-slate-500 text-sm leading-relaxed mb-8">Thank you for reaching out. Our solutions team will contact you within 1 business day to schedule your personalised demo.</p>
+    <button onclick="closeModal()" class="btn-primary !py-3 !rounded-2xl">Back to Home</button>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer style="background:#F8FAFC;border-top:1px solid #E2E8F0">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-14">
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-10 mb-12">
+      <div class="lg:col-span-2"><a href="index.html" class="flex items-center gap-2.5 mb-5"><div class="w-9 h-9 rounded-xl flex items-center justify-center" style="background:linear-gradient(135deg,#1A8FE3,#1565C0)"><i class="fas fa-layer-group text-white text-sm"></i></div><span class="text-[1.05rem] font-black text-slate-900">Insurex<span class="grad">24</span></span></a><p class="text-slate-500 text-sm leading-relaxed max-w-xs mb-5">Enabling large insurance ecosystems with modern MACH middleware technology.</p><a href="mailto:admin@insurex24.com" class="inline-flex items-center gap-2 text-slate-500 hover:text-slate-900 text-sm transition-colors"><div class="w-8 h-8 rounded-lg flex items-center justify-center" style="background:#EFF6FF;border:1px solid #DBEAFE"><i class="fas fa-envelope text-blue-600 text-xs"></i></div>admin@insurex24.com</a></div>
+      <div><p class="text-xs font-black text-slate-900 uppercase tracking-widest mb-4">Platform</p><ul class="space-y-2.5"><li><a href="platform.html" class="text-slate-500 hover:text-slate-900 text-sm">Features</a></li><li><a href="api.html" class="text-slate-500 hover:text-slate-900 text-sm">API Automation</a></li><li><a href="data-platform.html" class="text-slate-500 hover:text-slate-900 text-sm">Data Platform</a></li></ul></div>
+      <div><p class="text-xs font-black text-slate-900 uppercase tracking-widest mb-4">Services</p><ul class="space-y-2.5"><li><a href="services.html#ocr" class="text-slate-500 hover:text-slate-900 text-sm">OCR</a></li><li><a href="services.html#communication" class="text-slate-500 hover:text-slate-900 text-sm">SMS & Email</a></li><li><a href="services.html#verification" class="text-slate-500 hover:text-slate-900 text-sm">KYC</a></li></ul></div>
+      <div><p class="text-xs font-black text-slate-900 uppercase tracking-widest mb-4">Company</p><ul class="space-y-2.5"><li><a href="#" class="text-slate-500 hover:text-slate-900 text-sm">About</a></li><li><a href="contact.html" class="text-slate-500 hover:text-slate-900 text-sm">Contact</a></li></ul></div>
+    </div>
+    <div class="border-t pt-8 flex flex-col sm:flex-row justify-between items-center gap-4" style="border-color:#E2E8F0"><p class="text-slate-500 text-sm">© 2026 Insurex24. All rights reserved.</p><div class="flex gap-6"><a href="#" class="text-slate-500 hover:text-slate-900 text-sm">Privacy</a><a href="#" class="text-slate-500 hover:text-slate-900 text-sm">Terms</a></div></div>
+  </div>
+</footer>
+
+<script>
+const nav=document.getElementById('nav');
+window.addEventListener('scroll',()=>nav.classList.toggle('solid',scrollY>20));
+const bur=document.getElementById('bur'),mob=document.getElementById('mob'),bic=document.getElementById('bic');
+bur.addEventListener('click',()=>{const o=mob.classList.toggle('open');bic.className=o?'fas fa-times text-lg':'fas fa-bars text-lg'});
+document.querySelectorAll('.ml').forEach(a=>a.addEventListener('click',()=>{mob.classList.remove('open');bic.className='fas fa-bars text-lg'}));
+const ro=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');ro.unobserve(e.target)}}),{threshold:.1});
+document.querySelectorAll('.rv').forEach(el=>ro.observe(el));
+
+/* Validation */
+function setErr(id,on){const el=document.getElementById('ff-'+id);if(el)el.classList.toggle('err',on)}
+function validate(){
+  let ok=true;
+  const fn=document.getElementById('firstName').value.trim();
+  const ln=document.getElementById('lastName').value.trim();
+  const em=document.getElementById('email').value.trim();
+  const co=document.getElementById('company').value.trim();
+  const cs=document.getElementById('companySize').value;
+  const ph=document.getElementById('phone').value.trim();
+  setErr('firstName',!fn);setErr('lastName',!ln);setErr('company',!co);setErr('companySize',!cs);
+  const emailOk=/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(em);setErr('email',!emailOk);
+  if(ph){const phOk=/^[\+\d\s\-()\./]{7,20}$/.test(ph);setErr('phone',!phOk);if(!phOk)ok=false;}else{setErr('phone',false)}
+  if(!fn||!ln||!emailOk||!co||!cs)ok=false;
+  return ok;
+}
+
+document.getElementById('demo-form').addEventListener('submit',async function(e){
+  e.preventDefault();
+  document.getElementById('form-error').classList.add('hidden');
+  if(!validate())return;
+  const btn=document.getElementById('sub-btn');
+  document.getElementById('btn-txt').classList.add('hidden');
+  document.getElementById('btn-spin').classList.remove('hidden');
+  btn.disabled=true;
+  try{
+    const res=await fetch('https://api.web3forms.com/submit',{method:'POST',body:new FormData(this)});
+    const json=await res.json();
+    if(json.success){this.reset();showModal();}
+    else throw new Error(json.message||'Submission failed');
+  }catch(err){
+    const fe=document.getElementById('form-error');
+    document.getElementById('ferr-text').textContent=err.message||'Something went wrong. Please try again.';
+    fe.classList.remove('hidden');
+  }finally{
+    document.getElementById('btn-txt').classList.remove('hidden');
+    document.getElementById('btn-spin').classList.add('hidden');
+    btn.disabled=false;
+  }
+});
+
+function showModal(){const m=document.getElementById('modal');m.classList.add('show');document.body.style.overflow='hidden'}
+function closeModal(){document.getElementById('modal').classList.remove('show');document.body.style.overflow='';window.location.href='index.html'}
+document.getElementById('modal').addEventListener('click',function(e){if(e.target===this)closeModal()});
+document.addEventListener('keydown',e=>{if(e.key==='Escape')closeModal()});
+</script>
+</body>
+</html>

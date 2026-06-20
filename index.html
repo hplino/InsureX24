@@ -2,1385 +2,395 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8"/>
-<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>Insurex24 – Enabling Large Insurance Ecosystems</title>
-<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0%25' y1='0%25' x2='100%25' y2='100%25'%3E%3Cstop offset='0%25' style='stop-color:%230ea5e9'/%3E%3Cstop offset='100%25' style='stop-color:%230284c7'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='100' height='100' rx='20' fill='url(%23g)'/%3E%3Cg fill='white'%3E%3Crect x='25' y='25' width='50' height='12' rx='2'/%3E%3Crect x='25' y='44' width='50' height='12' rx='2'/%3E%3Crect x='25' y='63' width='50' height='12' rx='2'/%3E%3C/g%3E%3C/svg%3E"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>Insurex24 – Insurance Middleware Platform</title>
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0%25' y1='0%25' x2='100%25' y2='100%25'%3E%3Cstop offset='0%25' style='stop-color:%231A8FE3'/%3E%3Cstop offset='100%25' style='stop-color:%231565C0'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='100' height='100' rx='22' fill='url(%23g)'/%3E%3Cg fill='white'%3E%3Crect x='24' y='24' width='52' height='11' rx='3'/%3E%3Crect x='24' y='44' width='52' height='11' rx='3'/%3E%3Crect x='24' y='64' width='52' height='11' rx='3'/%3E%3C/g%3E%3C/svg%3E"/>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet"/>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"/>
 <script src="https://cdn.tailwindcss.com"></script>
 <style>
-  *{box-sizing:border-box}
-  html{scroll-behavior:smooth}
-  body{margin:0;font-family:system-ui,-apple-system,sans-serif}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:'Inter',system-ui,sans-serif;background:#fff;color:#111827;overflow-x:hidden}
 
-  .gradient-text{background:linear-gradient(135deg,#0ea5e9,#0284c7);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.grad{background:linear-gradient(135deg,#93C5FD 0%,#60A5FA 40%,#1A8FE3 70%,#1240A0 100%);background-size:300% 300%;-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;animation:gFlow 6s ease infinite}
+@keyframes gFlow{0%,100%{background-position:0% 50%}50%{background-position:100% 50%}}
 
-  .animated-bg{background:linear-gradient(270deg,#e0f2fe,#f0f9ff,#ecfeff,#f0fdf4);background-size:400% 400%;animation:shimmer 8s ease infinite}
-  @keyframes shimmer{0%,100%{background-position:0% 50%}50%{background-position:100% 50%}}
+.btn-primary{background:linear-gradient(135deg,#1A8FE3,#1565C0);color:#fff;display:inline-flex;align-items:center;justify-content:center;gap:.6rem;border-radius:14px;padding:.95rem 2.2rem;font-weight:700;font-size:.92rem;text-decoration:none;border:none;cursor:pointer;position:relative;overflow:hidden;transition:transform .25s,box-shadow .25s;box-shadow:0 0 28px rgba(26,143,227,.45),0 8px 32px rgba(26,143,227,.25);letter-spacing:.01em}
+.btn-primary::before{content:'';position:absolute;inset:0;background:linear-gradient(135deg,rgba(255,255,255,.18),transparent 60%);pointer-events:none}
+.btn-primary:hover{transform:translateY(-3px) scale(1.02);box-shadow:0 0 48px rgba(21,101,192,.65),0 16px 48px rgba(26,143,227,.35)}
+.btn-ghost{border:1.5px solid rgba(26,143,227,.4);color:#1565C0;background:rgba(26,143,227,.06);display:inline-flex;align-items:center;justify-content:center;gap:.6rem;border-radius:14px;padding:.95rem 2.2rem;font-weight:600;font-size:.92rem;text-decoration:none;transition:all .25s}
+.btn-ghost:hover{background:rgba(26,143,227,.12);border-color:rgba(26,143,227,.6);color:#1240A0;transform:translateY(-2px)}
 
-  .card-hover{transition:transform .25s ease,box-shadow .25s ease}
-  .card-hover:hover{transform:translateY(-6px);box-shadow:0 20px 40px -10px rgba(0,0,0,.15)}
+#nav{position:fixed;top:0;left:0;right:0;z-index:100;background:rgba(255,255,255,.92);backdrop-filter:blur(28px);-webkit-backdrop-filter:blur(28px);border-bottom:1px solid rgba(0,0,0,.07);transition:background .3s,box-shadow .3s}
+#nav.solid{background:rgba(255,255,255,.99);box-shadow:0 4px 32px rgba(0,0,0,.08)}
+.nlink{color:#64748B;font-size:.85rem;font-weight:600;padding:.5rem 1rem;border-radius:10px;text-decoration:none;transition:all .2s;letter-spacing:.01em}
+.nlink:hover{color:#1E293B;background:rgba(0,0,0,.04)}
+.nlink.act{color:#1565C0;background:rgba(26,143,227,.1)}
+#mob{max-height:0;overflow:hidden;transition:max-height .4s cubic-bezier(0,.8,.4,1),opacity .3s;opacity:0;background:#fff;border-top:1px solid rgba(0,0,0,.06)}
+#mob.open{max-height:32rem;opacity:1}
 
-  .section-fade{opacity:0;transform:translateY(28px);transition:opacity .65s ease,transform .65s ease}
-  .section-fade.visible{opacity:1;transform:translateY(0)}
+.hero-bg{min-height:100vh;background:linear-gradient(135deg,#EFF6FF 0%,#DBEAFE 40%,#EFF6FF 100%);position:relative;overflow:hidden;display:flex;align-items:center}
+.dot-grid{position:absolute;inset:0;background-image:radial-gradient(rgba(26,143,227,.15) 1.2px,transparent 1.2px);background-size:38px 38px;animation:dotDrift 25s linear infinite}
+@keyframes dotDrift{from{background-position:0 0}to{background-position:38px 38px}}
+.orb{position:absolute;border-radius:50%;filter:blur(90px);will-change:transform;pointer-events:none}
+.oa{width:800px;height:800px;top:-250px;left:-250px;background:radial-gradient(circle,rgba(59,130,246,.18) 0%,transparent 65%);animation:oa 20s ease-in-out infinite}
+.ob{width:700px;height:700px;bottom:-200px;right:-180px;background:radial-gradient(circle,rgba(21,101,192,.12) 0%,transparent 65%);animation:ob 25s ease-in-out infinite}
+.oc{width:450px;height:450px;top:35%;left:50%;background:radial-gradient(circle,rgba(6,182,212,.1) 0%,transparent 65%);animation:oc 17s ease-in-out infinite}
+@keyframes oa{0%,100%{transform:translate(0,0) scale(1)}40%{transform:translate(80px,-90px) scale(1.1)}70%{transform:translate(-50px,50px) scale(.92)}}
+@keyframes ob{0%,100%{transform:translate(0,0) scale(1)}35%{transform:translate(-70px,80px) scale(1.08)}65%{transform:translate(50px,-40px) scale(.95)}}
+@keyframes oc{0%,100%{transform:translate(-50%,0) scale(1)}50%{transform:translate(calc(-50% - 70px),-60px) scale(1.2)}}
 
-  .log-line{animation:logUp .3s ease-out forwards}
-  @keyframes logUp{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
+.hero-badge{display:inline-flex;align-items:center;gap:.5rem;padding:.45rem 1.2rem;border-radius:24px;background:rgba(26,143,227,.08);border:1px solid rgba(26,143,227,.28);color:#1565C0;font-size:.78rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase}
+.live-dot{width:7px;height:7px;border-radius:50%;background:#22C55E;box-shadow:0 0 10px #22C55E;animation:ldot 1.6s ease-in-out infinite}
+@keyframes ldot{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.4;transform:scale(.7)}}
 
-  @keyframes modalIn{from{opacity:0;transform:scale(.95)}to{opacity:1;transform:scale(1)}}
-  .modal-anim{animation:modalIn .3s ease-out}
+.snum{font-size:2.6rem;font-weight:900;background:linear-gradient(135deg,#60A5FA,#1A8FE3);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;line-height:1;letter-spacing:-.02em}
 
-  #mob-menu{max-height:0;opacity:0;overflow:hidden;transition:max-height .3s ease,opacity .3s ease}
-  #mob-menu.open{max-height:24rem;opacity:1}
+.feat-card{background:#fff;border-radius:24px;border:1px solid #E2E8F0;transition:transform .3s cubic-bezier(.16,1,.3,1),box-shadow .3s;position:relative;overflow:hidden;text-decoration:none;display:block;color:inherit}
+.feat-card::after{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,#1A8FE3,#60A5FA,#06B6D4);opacity:0;transition:opacity .3s}
+.feat-card:hover{transform:translateY(-8px) scale(1.015);box-shadow:0 32px 72px -12px rgba(0,0,0,.12),0 0 0 1px rgba(26,143,227,.15)}
+.feat-card:hover::after{opacity:1}
 
-  .nav-link.active{color:#0284c7}
+.svc-card{background:#fff;border:1px solid #E2E8F0;border-radius:20px;transition:all .3s cubic-bezier(.16,1,.3,1);text-decoration:none;display:block;position:relative;overflow:hidden}
+.svc-card:hover{border-color:rgba(26,143,227,.4);transform:translateY(-5px);box-shadow:0 20px 50px rgba(26,143,227,.12)}
 
-  /* scenario tab active */
-  .sc-tab.active{background:#0284c7;color:#fff;box-shadow:0 4px 14px rgba(2,132,199,.4);transform:scale(1.05)}
-  .sc-tab:not(.active){background:#fff;color:#374151;border:1px solid #e5e7eb}
+.step-n{width:58px;height:58px;border-radius:50%;background:linear-gradient(135deg,#1A8FE3,#1565C0);display:flex;align-items:center;justify-content:center;font-size:1.3rem;font-weight:900;color:#fff;margin:0 auto 1.25rem;box-shadow:0 0 28px rgba(26,143,227,.4),0 8px 24px rgba(26,143,227,.2)}
+
+.sbadge{display:inline-flex;align-items:center;gap:.4rem;padding:.38rem 1.1rem;border-radius:24px;font-size:.78rem;font-weight:700;letter-spacing:.04em}
+.chip{display:inline-flex;align-items:center;gap:.35rem;padding:.3rem .9rem;border-radius:20px;font-size:.75rem;font-weight:700}
+.ibox{display:inline-flex;align-items:center;justify-content:center;border-radius:16px;flex-shrink:0}
+
+.cta-light{background:linear-gradient(135deg,#EFF6FF,#DBEAFE);position:relative;overflow:hidden}
+.cta-ring{position:absolute;border-radius:50%;border:1px solid rgba(26,143,227,.2);pointer-events:none}
+
+.rv{opacity:0;transform:translateY(36px);transition:opacity .8s cubic-bezier(.16,1,.3,1),transform .8s cubic-bezier(.16,1,.3,1)}
+.rv.in{opacity:1;transform:none}
+.d1{transition-delay:.08s}.d2{transition-delay:.16s}.d3{transition-delay:.24s}.d4{transition-delay:.32s}.d5{transition-delay:.42s}
+
+.glass-panel{background:#fff;border:1px solid #E2E8F0;border-radius:22px;box-shadow:0 4px 24px rgba(0,0,0,.06)}
+.bar-fill{height:100%;border-radius:inherit;background:linear-gradient(90deg,#1A8FE3,#60A5FA);animation:barPulse 3s ease-in-out infinite alternate}
+@keyframes barPulse{from{width:80%}to{width:96%}}
+
+@keyframes heroIn{from{opacity:0;transform:translateY(40px)}to{opacity:1;transform:none}}
+::-webkit-scrollbar{width:5px}::-webkit-scrollbar-track{background:#F8FAFC}::-webkit-scrollbar-thumb{background:linear-gradient(#1A8FE3,#1565C0);border-radius:3px}
 </style>
 </head>
-<body class="antialiased">
+<body>
 
-<!-- ════════════════════ NAVBAR ════════════════════ -->
-<nav id="navbar" class="bg-white sticky top-0 z-50 shadow-sm transition-shadow duration-300">
+<nav id="nav">
   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-    <div class="flex justify-between items-center h-16 sm:h-20">
-
-      <a href="#" class="flex items-center gap-3">
-        <div class="w-10 h-10 bg-gradient-to-br from-sky-500 to-sky-600 rounded-lg flex items-center justify-center">
-          <i class="fas fa-layer-group text-white text-lg"></i>
-        </div>
-        <span class="text-xl font-bold gradient-text">Insurex24</span>
+    <div class="flex justify-between items-center h-[68px]">
+      <a href="index.html" class="flex items-center gap-2.5">
+        <div class="w-9 h-9 rounded-xl flex items-center justify-center" style="background:linear-gradient(135deg,#1A8FE3,#1565C0);box-shadow:0 0 18px rgba(26,143,227,.35)"><i class="fas fa-layer-group text-white text-sm"></i></div>
+        <span class="text-[1.08rem] font-black text-slate-900 tracking-tight">Insurex<span class="grad">24</span></span>
       </a>
-
-      <div class="hidden md:flex items-center gap-6">
-        <a href="#platform"      class="nav-link text-sm font-medium text-gray-600 hover:text-sky-600 transition-colors" data-sec="platform">Platform</a>
-        <a href="#mach"                    class="nav-link text-sm font-medium text-gray-600 hover:text-sky-600 transition-colors" data-sec="mach">MACH</a>
-        <a href="#ocr-services"            class="nav-link text-sm font-medium text-gray-600 hover:text-sky-600 transition-colors" data-sec="ocr-services">Services</a>
-        <a href="#data-platform"           class="nav-link text-sm font-medium text-gray-600 hover:text-sky-600 transition-colors" data-sec="data-platform">Data Platform</a>
-        <a href="#benefits"                class="nav-link text-sm font-medium text-gray-600 hover:text-sky-600 transition-colors" data-sec="benefits">Benefits</a>
-        <a href="#contact" class="bg-gradient-to-r from-sky-500 to-sky-600 text-white px-5 py-2 rounded-lg text-sm font-semibold hover:shadow-lg transition-shadow">Get Started</a>
+      <div class="hidden md:flex items-center gap-0.5">
+        <a href="platform.html" class="nlink">Platform</a>
+        <a href="services.html" class="nlink">Services</a>
+        <a href="api.html" class="nlink">API Automation</a>
+        <a href="data-platform.html" class="nlink">Data Platform</a>
+        <a href="contact.html" class="btn-primary ml-3 !py-2.5 !px-5 !text-[.84rem] !rounded-xl">Get Demo</a>
       </div>
-
-      <button id="burger" class="md:hidden text-gray-600 p-2" aria-label="Toggle menu">
-        <i id="burger-icon" class="fas fa-bars text-xl"></i>
+      <button id="bur" class="md:hidden p-2 rounded-xl text-slate-600 hover:bg-black/5 transition-colors">
+        <i id="bic" class="fas fa-bars text-lg"></i>
       </button>
     </div>
   </div>
-
-  <div id="mob-menu" class="md:hidden bg-white border-t">
+  <div id="mob">
     <div class="px-4 py-4 space-y-1">
-      <a href="#platform"      class="mob-link block py-2.5 px-3 rounded-lg text-gray-700 hover:bg-sky-50 hover:text-sky-600 text-sm font-medium">Platform</a>
-      <a href="#mach"                class="mob-link block py-2.5 px-3 rounded-lg text-gray-700 hover:bg-sky-50 hover:text-sky-600 text-sm font-medium">MACH</a>
-      <a href="#ocr-services"        class="mob-link block py-2.5 px-3 rounded-lg text-gray-700 hover:bg-sky-50 hover:text-sky-600 text-sm font-medium">Services</a>
-      <a href="#data-platform"       class="mob-link block py-2.5 px-3 rounded-lg text-gray-700 hover:bg-sky-50 hover:text-sky-600 text-sm font-medium">Data Platform</a>
-      <a href="#benefits"            class="mob-link block py-2.5 px-3 rounded-lg text-gray-700 hover:bg-sky-50 hover:text-sky-600 text-sm font-medium">Benefits</a>
-      <a href="#contact" class="mob-link block mt-2 bg-gradient-to-r from-sky-500 to-sky-600 text-white px-4 py-3 rounded-lg text-center text-sm font-semibold">Get Started</a>
+      <a href="platform.html" class="ml block py-3 px-4 rounded-xl text-slate-600 hover:bg-slate-50 hover:text-slate-900 text-sm font-semibold">Platform</a>
+      <a href="services.html" class="ml block py-3 px-4 rounded-xl text-slate-600 hover:bg-slate-50 hover:text-slate-900 text-sm font-semibold">Services</a>
+      <a href="api.html" class="ml block py-3 px-4 rounded-xl text-slate-600 hover:bg-slate-50 hover:text-slate-900 text-sm font-semibold">API Automation</a>
+      <a href="data-platform.html" class="ml block py-3 px-4 rounded-xl text-slate-600 hover:bg-slate-50 hover:text-slate-900 text-sm font-semibold">Data Platform</a>
+      <a href="contact.html" class="ml block mt-3 btn-primary !py-3 !rounded-xl">Get Demo</a>
     </div>
   </div>
 </nav>
 
-<!-- ════════════════════ HERO ════════════════════ -->
-<section class="animated-bg py-16 sm:py-24 lg:py-32">
-  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-    <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+<!-- HERO -->
+<section class="hero-bg pt-[68px]">
+  <div class="dot-grid"></div>
+  <div class="orb oa"></div><div class="orb ob"></div><div class="orb oc"></div>
+  <div class="cta-ring" style="width:800px;height:800px;top:50%;left:70%;transform:translate(-50%,-50%);opacity:.4"></div>
+  <div class="cta-ring" style="width:1100px;height:1100px;top:50%;left:70%;transform:translate(-50%,-50%);opacity:.2"></div>
 
-      <div>
-        <div class="flex flex-wrap gap-2 mb-6">
-          <div class="inline-flex items-center gap-2 bg-sky-100 text-sky-700 px-4 py-2 rounded-full text-sm font-semibold">
-            <span class="w-2 h-2 bg-sky-500 rounded-full animate-pulse"></span>
-            Insurance Middleware Platform
-          </div>
-          <div class="inline-flex items-center gap-2 bg-green-100 text-green-700 px-3 py-2 rounded-full text-sm font-semibold">
-            <i class="fas fa-check-circle text-green-500 text-xs"></i> MACH Architecture
-          </div>
-        </div>
-
-        <h1 class="text-4xl sm:text-5xl lg:text-6xl font-bold text-gray-900 leading-tight mb-6">
-          Next-Generation
-          <span class="gradient-text"> Insurance</span>
-          Middleware Platform
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24 lg:py-36 relative z-10 w-full">
+    <div class="flex flex-col lg:flex-row lg:items-center lg:gap-16">
+      <div class="flex-1" style="animation:heroIn 1s cubic-bezier(.16,1,.3,1) both">
+        <div class="hero-badge mb-6"><div class="live-dot"></div>No Code / Low Code Insurance Middleware</div>
+        <h1 class="text-[clamp(2.8rem,6vw,4.8rem)] font-black text-slate-900 leading-[1.04] tracking-[-0.03em] mb-6">
+          The <span class="grad">Intelligent Layer</span><br/>Between Legacy<br/>&amp; Digital
         </h1>
-
-        <p class="text-lg text-gray-600 mb-8 leading-relaxed">
-          MACH architecture. API-first design. Insurex24 connects your legacy core to modern digital channels — faster, smarter, and without costly system replacements.
+        <p class="text-[1.1rem] text-slate-600 leading-[1.75] max-w-xl mb-10" style="animation:heroIn 1s cubic-bezier(.16,1,.3,1) .15s both">
+          Insurex24 bridges core insurance systems to modern digital channels with enterprise-grade APIs, real-time data pipelines, and AI-powered automation — go live in weeks, not years.
         </p>
-
-        <div class="flex flex-col sm:flex-row gap-4 mb-10">
-          <a href="#contact" class="bg-gradient-to-r from-sky-500 to-sky-600 text-white px-8 py-4 rounded-xl font-semibold hover:shadow-2xl transition-shadow text-center">Request Demo</a>
-          <a href="#api-automation" class="bg-white text-gray-800 px-8 py-4 rounded-xl font-semibold border-2 border-gray-200 hover:border-sky-500 transition-colors text-center">Explore Our API Platform</a>
+        <div class="flex flex-wrap gap-3 mb-10" style="animation:heroIn 1s cubic-bezier(.16,1,.3,1) .3s both">
+          <a href="contact.html" class="btn-primary"><i class="fas fa-play-circle text-sm"></i>See It Live</a>
+          <a href="platform.html" class="btn-ghost"><i class="fas fa-cube text-sm"></i>Explore Platform</a>
         </div>
-
-        <div class="flex flex-wrap gap-6">
-          <div class="flex items-center gap-2"><i class="fas fa-check-circle text-green-500"></i><span class="text-gray-700 text-sm font-medium">MACH Architecture</span></div>
-          <div class="flex items-center gap-2"><i class="fas fa-check-circle text-green-500"></i><span class="text-gray-700 text-sm font-medium">Cloud-Native</span></div>
-          <div class="flex items-center gap-2"><i class="fas fa-check-circle text-green-500"></i><span class="text-gray-700 text-sm font-medium">API-First</span></div>
+        <div class="flex flex-wrap gap-2" style="animation:heroIn 1s cubic-bezier(.16,1,.3,1) .45s both">
+          <span class="chip" style="background:rgba(34,197,94,.1);border:1px solid rgba(34,197,94,.25);color:#16A34A"><i class="fas fa-check text-xs"></i>99.9% Uptime</span>
+          <span class="chip" style="background:rgba(26,143,227,.1);border:1px solid rgba(26,143,227,.25);color:#1565C0"><i class="fas fa-bolt text-xs"></i>200ms Latency</span>
+          <span class="chip" style="background:rgba(99,102,241,.1);border:1px solid rgba(99,102,241,.22);color:#4338CA"><i class="fas fa-code-branch text-xs"></i>50+ APIs</span>
+          <span class="chip" style="background:rgba(6,182,212,.1);border:1px solid rgba(6,182,212,.22);color:#0E7490"><i class="fas fa-shield-alt text-xs"></i>SOC 2 Ready</span>
         </div>
       </div>
 
-      <div>
-        <div class="bg-gradient-to-br from-slate-900 to-slate-800 rounded-2xl p-6 shadow-2xl">
-          <div class="flex justify-between items-center mb-5">
-            <span class="text-xs font-bold text-slate-400 uppercase tracking-wider">Insurex24 Platform</span>
-            <span class="bg-sky-500 text-white text-xs font-bold px-3 py-1 rounded-full">MACH Architecture</span>
+      <!-- Floating dashboard -->
+      <div class="hidden xl:flex flex-col gap-4 w-80 flex-shrink-0 mt-12 lg:mt-0" style="animation:heroIn 1s cubic-bezier(.16,1,.3,1) .25s both">
+        <div class="glass-panel p-5">
+          <div class="flex items-center justify-between mb-4">
+            <p class="text-slate-900 font-bold text-sm">API Health</p>
+            <span class="text-[.72rem] font-bold px-2.5 py-0.5 rounded-full" style="background:rgba(34,197,94,.12);border:1px solid rgba(34,197,94,.28);color:#16A34A">All Systems Go</span>
           </div>
-          <div class="grid grid-cols-4 gap-2 mb-5">
-            <div class="bg-sky-600 rounded-xl p-3 text-center"><span class="text-white text-xl font-black block">M</span><span class="text-white opacity-80 text-xs block">Micro-services</span></div>
-            <div class="bg-cyan-600 rounded-xl p-3 text-center"><span class="text-white text-xl font-black block">A</span><span class="text-white opacity-80 text-xs block">API-first</span></div>
-            <div class="bg-green-600 rounded-xl p-3 text-center"><span class="text-white text-xl font-black block">C</span><span class="text-white opacity-80 text-xs block">Cloud-native</span></div>
-            <div class="bg-orange-500 rounded-xl p-3 text-center"><span class="text-white text-xl font-black block">H</span><span class="text-white opacity-80 text-xs block">Head-less</span></div>
-          </div>
-          <div class="bg-slate-700 rounded-xl p-4 mb-4">
-            <div class="flex items-center justify-between mb-3">
-              <span class="text-xs font-semibold text-slate-400 uppercase tracking-wider">API Ecosystem</span>
-              <span class="text-xs text-green-400 font-semibold">● Live</span>
-            </div>
-            <div class="grid grid-cols-3 gap-2 text-center">
-              <div class="bg-slate-800 rounded-lg p-2"><p class="text-sky-400 font-bold text-sm">50+</p><p class="text-slate-500 text-xs">APIs</p></div>
-              <div class="bg-slate-800 rounded-lg p-2"><p class="text-sky-400 font-bold text-sm">50+</p><p class="text-slate-500 text-xs">Products</p></div>
-              <div class="bg-slate-800 rounded-lg p-2"><p class="text-sky-400 font-bold text-sm">200ms</p><p class="text-slate-500 text-xs">Avg Latency</p></div>
-            </div>
-          </div>
-          <div class="bg-slate-700 rounded-xl p-4">
-            <div class="flex items-center justify-between mb-3">
-              <span class="text-xs font-semibold text-slate-400 uppercase tracking-wider">Partner Apps</span>
-              <span class="text-xs text-slate-500">9 portals</span>
-            </div>
-            <div class="grid grid-cols-3 gap-2">
-              <div class="bg-sky-500 rounded-lg h-12 flex flex-col items-center justify-center gap-0.5"><i class="fas fa-user-tie text-white text-sm"></i><span class="text-white text-xs font-medium">POSP</span></div>
-              <div class="bg-cyan-500 rounded-lg h-12 flex flex-col items-center justify-center gap-0.5"><i class="fas fa-route text-white text-sm"></i><span class="text-white text-xs font-medium">Policy</span></div>
-              <div class="bg-indigo-500 rounded-lg h-12 flex flex-col items-center justify-center gap-0.5"><i class="fas fa-sliders-h text-white text-sm"></i><span class="text-white text-xs font-medium">Admin</span></div>
-              <div class="bg-green-500 rounded-lg h-12 flex flex-col items-center justify-center gap-0.5"><i class="fas fa-users text-white text-sm"></i><span class="text-white text-xs font-medium">CRM</span></div>
-              <div class="bg-amber-500 rounded-lg h-12 flex flex-col items-center justify-center gap-0.5"><i class="fas fa-piggy-bank text-white text-sm"></i><span class="text-white text-xs font-medium">Endow.</span></div>
-              <div class="bg-rose-500 rounded-lg h-12 flex flex-col items-center justify-center gap-0.5"><i class="fas fa-file-invoice text-white text-sm"></i><span class="text-white text-xs font-medium">Claims</span></div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-    </div>
-  </div>
-</section>
-
-<!-- ════════════════════ PLATFORM ════════════════════ -->
-<section id="platform" class="py-16 sm:py-20 lg:py-24 bg-white">
-  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-    <div class="section-fade">
-      <div class="text-center mb-14">
-        <h2 class="text-3xl sm:text-4xl lg:text-5xl font-bold text-gray-900 mb-4">Insurance Middleware / Middle Office</h2>
-        <p class="text-lg text-gray-600 max-w-2xl mx-auto">A modern platform that bridges the gap between your legacy systems and digital innovation</p>
-      </div>
-
-      <div class="grid grid-cols-1 lg:grid-cols-3 gap-8 mb-14">
-        <!-- Legacy -->
-        <div class="bg-gradient-to-br from-sky-50 to-sky-100 rounded-2xl p-8 border-2 border-sky-200 card-hover">
-          <div class="w-16 h-16 bg-sky-600 rounded-xl flex items-center justify-center mb-6"><i class="fas fa-server text-white text-2xl"></i></div>
-          <h3 class="text-2xl font-bold text-gray-900 mb-3">Legacy Systems</h3>
-          <p class="text-gray-600 mb-5 text-sm leading-relaxed">Your existing core policy administration systems remain intact. No need for costly replacements.</p>
-          <ul class="space-y-2">
-            <li class="flex items-center gap-2 text-sm text-gray-700"><i class="fas fa-circle text-sky-600 text-xs"></i>Core Insurance Systems</li>
-            <li class="flex items-center gap-2 text-sm text-gray-700"><i class="fas fa-circle text-sky-600 text-xs"></i>Policy Administration</li>
-            <li class="flex items-center gap-2 text-sm text-gray-700"><i class="fas fa-circle text-sky-600 text-xs"></i>Claims Management</li>
-          </ul>
-        </div>
-        <!-- Insurex24 Layer (featured) -->
-        <div class="bg-gradient-to-br from-cyan-50 to-cyan-100 rounded-2xl p-8 border-2 border-cyan-200 card-hover lg:scale-105 lg:shadow-2xl">
-          <div class="w-16 h-16 bg-gradient-to-r from-sky-500 to-sky-600 rounded-xl flex items-center justify-center mb-6"><i class="fas fa-layer-group text-white text-2xl"></i></div>
-          <h3 class="text-2xl font-bold text-gray-900 mb-3">Insurex24 Layer</h3>
-          <p class="text-gray-600 mb-5 text-sm leading-relaxed">The intelligent middleware that connects, transforms, and orchestrates data between systems.</p>
-          <ul class="space-y-2">
-            <li class="flex items-center gap-2 text-sm text-gray-700"><i class="fas fa-circle text-cyan-600 text-xs"></i>API Gateway</li>
-            <li class="flex items-center gap-2 text-sm text-gray-700"><i class="fas fa-circle text-cyan-600 text-xs"></i>Data Transformation</li>
-            <li class="flex items-center gap-2 text-sm text-gray-700"><i class="fas fa-circle text-cyan-600 text-xs"></i>Business Logic</li>
-          </ul>
-        </div>
-        <!-- Digital Channels -->
-        <div class="bg-gradient-to-br from-green-50 to-green-100 rounded-2xl p-8 border-2 border-green-200 card-hover">
-          <div class="w-16 h-16 bg-green-600 rounded-xl flex items-center justify-center mb-6"><i class="fas fa-mobile-alt text-white text-2xl"></i></div>
-          <h3 class="text-2xl font-bold text-gray-900 mb-3">Digital Channels</h3>
-          <p class="text-gray-600 mb-5 text-sm leading-relaxed">Modern customer-facing applications that deliver exceptional digital experiences.</p>
-          <ul class="space-y-2">
-            <li class="flex items-center gap-2 text-sm text-gray-700"><i class="fas fa-circle text-green-600 text-xs"></i>Web Portals</li>
-            <li class="flex items-center gap-2 text-sm text-gray-700"><i class="fas fa-circle text-green-600 text-xs"></i>Mobile Apps</li>
-            <li class="flex items-center gap-2 text-sm text-gray-700"><i class="fas fa-circle text-green-600 text-xs"></i>Partner Integrations</li>
-          </ul>
-        </div>
-      </div>
-
-      <div class="bg-gray-50 rounded-2xl p-8 sm:p-12">
-        <div class="text-center mb-10">
-          <h3 class="text-2xl font-bold text-gray-900 mb-2">How It Works</h3>
-          <p class="text-gray-500">Insurex24 seamlessly connects your existing infrastructure with modern digital capabilities</p>
-        </div>
-        <div class="flex flex-col lg:flex-row items-center justify-between gap-6 lg:gap-4">
-          <div class="flex-1 text-center">
-            <div class="w-16 h-16 bg-sky-600 rounded-full flex items-center justify-center mx-auto mb-4 shadow-lg"><span class="text-white font-bold text-xl">1</span></div>
-            <p class="font-bold text-gray-900 mb-1">Connect</p><p class="text-sm text-gray-500">Integrate with existing core systems via APIs</p>
-          </div>
-          <i class="fas fa-arrow-right text-gray-300 text-2xl hidden lg:block"></i>
-          <div class="flex-1 text-center">
-            <div class="w-16 h-16 bg-cyan-600 rounded-full flex items-center justify-center mx-auto mb-4 shadow-lg"><span class="text-white font-bold text-xl">2</span></div>
-            <p class="font-bold text-gray-900 mb-1">Transform</p><p class="text-sm text-gray-500">Process and orchestrate data intelligently</p>
-          </div>
-          <i class="fas fa-arrow-right text-gray-300 text-2xl hidden lg:block"></i>
-          <div class="flex-1 text-center">
-            <div class="w-16 h-16 bg-green-600 rounded-full flex items-center justify-center mx-auto mb-4 shadow-lg"><span class="text-white font-bold text-xl">3</span></div>
-            <p class="font-bold text-gray-900 mb-1">Deliver</p><p class="text-sm text-gray-500">Power modern digital experiences</p>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ════════════════════ MACH ════════════════════ -->
-<section id="mach" class="py-16 sm:py-20 lg:py-24 bg-slate-900">
-  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-    <div class="section-fade">
-      <div class="text-center mb-14">
-        <div class="inline-flex items-center gap-2 bg-sky-500 bg-opacity-20 text-sky-400 px-4 py-2 rounded-full text-sm font-semibold mb-6 border border-sky-500 border-opacity-40">
-          <i class="fas fa-microchip"></i> Technology Foundation
-        </div>
-        <h2 class="text-3xl sm:text-4xl lg:text-5xl font-bold text-white mb-4">Built on <span class="text-sky-400">MACH</span> Architecture</h2>
-        <p class="text-lg text-slate-400 max-w-2xl mx-auto">Every layer of Insurex24 follows MACH principles — giving you the composable foundation to innovate at speed, without limits.</p>
-      </div>
-
-      <div class="flex justify-center gap-3 sm:gap-4 mb-12">
-        <div class="w-14 h-14 sm:w-16 sm:h-16 bg-sky-600 rounded-xl flex items-center justify-center shadow-xl"><span class="text-white text-2xl sm:text-3xl font-black">M</span></div>
-        <div class="w-14 h-14 sm:w-16 sm:h-16 bg-cyan-600 rounded-xl flex items-center justify-center shadow-xl"><span class="text-white text-2xl sm:text-3xl font-black">A</span></div>
-        <div class="w-14 h-14 sm:w-16 sm:h-16 bg-green-600 rounded-xl flex items-center justify-center shadow-xl"><span class="text-white text-2xl sm:text-3xl font-black">C</span></div>
-        <div class="w-14 h-14 sm:w-16 sm:h-16 bg-orange-500 rounded-xl flex items-center justify-center shadow-xl"><span class="text-white text-2xl sm:text-3xl font-black">H</span></div>
-      </div>
-
-      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 mb-10">
-        <div class="bg-slate-800 rounded-2xl p-7 border border-slate-700 card-hover">
-          <div class="w-12 h-12 bg-sky-600 rounded-xl flex items-center justify-center mb-5"><i class="fas fa-cubes text-white text-xl"></i></div>
-          <h3 class="text-xl font-bold mb-1 text-sky-400">M — Microservices</h3>
-          <p class="text-slate-400 text-sm leading-relaxed mb-4">Independent, loosely-coupled services — each owning its domain, deployed and scaled without affecting the rest.</p>
-          <ul class="space-y-1.5">
-            <li class="flex items-center gap-2 text-xs text-sky-400 font-medium"><i class="fas fa-check-circle"></i>Domain-driven design</li>
-            <li class="flex items-center gap-2 text-xs text-sky-400 font-medium"><i class="fas fa-check-circle"></i>Independent deployment</li>
-            <li class="flex items-center gap-2 text-xs text-sky-400 font-medium"><i class="fas fa-check-circle"></i>Fault isolation</li>
-            <li class="flex items-center gap-2 text-xs text-sky-400 font-medium"><i class="fas fa-check-circle"></i>Team autonomy</li>
-          </ul>
-        </div>
-        <div class="bg-slate-800 rounded-2xl p-7 border border-slate-700 card-hover">
-          <div class="w-12 h-12 bg-cyan-600 rounded-xl flex items-center justify-center mb-5"><i class="fas fa-plug text-white text-xl"></i></div>
-          <h3 class="text-xl font-bold mb-1 text-cyan-400">A — API-first</h3>
-          <p class="text-slate-400 text-sm leading-relaxed mb-4">10,000+ standardised insurance APIs covering every product line — RESTful, documented, and versioned for stability.</p>
-          <ul class="space-y-1.5">
-            <li class="flex items-center gap-2 text-xs text-cyan-400 font-medium"><i class="fas fa-check-circle"></i>10,000+ insurance APIs</li>
-            <li class="flex items-center gap-2 text-xs text-cyan-400 font-medium"><i class="fas fa-check-circle"></i>OpenAPI 3.0 docs</li>
-            <li class="flex items-center gap-2 text-xs text-cyan-400 font-medium"><i class="fas fa-check-circle"></i>Event-driven support</li>
-            <li class="flex items-center gap-2 text-xs text-cyan-400 font-medium"><i class="fas fa-check-circle"></i>Versioned contracts</li>
-          </ul>
-        </div>
-        <div class="bg-slate-800 rounded-2xl p-7 border border-slate-700 card-hover">
-          <div class="w-12 h-12 bg-green-600 rounded-xl flex items-center justify-center mb-5"><i class="fas fa-cloud text-white text-xl"></i></div>
-          <h3 class="text-xl font-bold mb-1 text-green-400">C — Cloud-native</h3>
-          <p class="text-slate-400 text-sm leading-relaxed mb-4">Container-first, orchestrated by Kubernetes — deployable on AWS, Azure, GCP, or your own data centre.</p>
-          <ul class="space-y-1.5">
-            <li class="flex items-center gap-2 text-xs text-green-400 font-medium"><i class="fas fa-check-circle"></i>Multi-cloud ready</li>
-            <li class="flex items-center gap-2 text-xs text-green-400 font-medium"><i class="fas fa-check-circle"></i>Kubernetes-native</li>
-            <li class="flex items-center gap-2 text-xs text-green-400 font-medium"><i class="fas fa-check-circle"></i>Auto-scaling</li>
-            <li class="flex items-center gap-2 text-xs text-green-400 font-medium"><i class="fas fa-check-circle"></i>Zero-downtime deploy</li>
-          </ul>
-        </div>
-        <div class="bg-slate-800 rounded-2xl p-7 border border-slate-700 card-hover">
-          <div class="w-12 h-12 bg-orange-500 rounded-xl flex items-center justify-center mb-5"><i class="fas fa-code-branch text-white text-xl"></i></div>
-          <h3 class="text-xl font-bold mb-1 text-orange-400">H — Headless</h3>
-          <p class="text-slate-400 text-sm leading-relaxed mb-4">Deliver through any frontend, channel, or partner interface — web, mobile, chatbot, or embedded.</p>
-          <ul class="space-y-1.5">
-            <li class="flex items-center gap-2 text-xs text-orange-400 font-medium"><i class="fas fa-check-circle"></i>Frontend agnostic</li>
-            <li class="flex items-center gap-2 text-xs text-orange-400 font-medium"><i class="fas fa-check-circle"></i>Omni-channel delivery</li>
-            <li class="flex items-center gap-2 text-xs text-orange-400 font-medium"><i class="fas fa-check-circle"></i>White-label ready</li>
-            <li class="flex items-center gap-2 text-xs text-orange-400 font-medium"><i class="fas fa-check-circle"></i>No vendor lock-in</li>
-          </ul>
-        </div>
-      </div>
-
-      <div class="bg-slate-800 border border-slate-700 rounded-2xl p-8 text-center">
-        <p class="text-slate-300 text-base sm:text-lg mb-5 max-w-2xl mx-auto">MACH gives you a composable, vendor-neutral, future-proof platform. Build what you need — swap what you outgrow.</p>
-        <div class="flex flex-wrap justify-center gap-2">
-          <span class="bg-slate-700 text-slate-300 border border-slate-600 px-4 py-1.5 rounded-full text-sm"><i class="fas fa-check text-sky-400 mr-1.5"></i>Composable by design</span>
-          <span class="bg-slate-700 text-slate-300 border border-slate-600 px-4 py-1.5 rounded-full text-sm"><i class="fas fa-check text-sky-400 mr-1.5"></i>Vendor-neutral</span>
-          <span class="bg-slate-700 text-slate-300 border border-slate-600 px-4 py-1.5 rounded-full text-sm"><i class="fas fa-check text-sky-400 mr-1.5"></i>Future-proof</span>
-          <span class="bg-slate-700 text-slate-300 border border-slate-600 px-4 py-1.5 rounded-full text-sm"><i class="fas fa-check text-sky-400 mr-1.5"></i>Standards-based</span>
-          <span class="bg-slate-700 text-slate-300 border border-slate-600 px-4 py-1.5 rounded-full text-sm"><i class="fas fa-check text-sky-400 mr-1.5"></i>Open ecosystem</span>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ════════════════════ FEATURES (PaaS) ════════════════════ -->
-<section id="features" class="py-16 sm:py-20 lg:py-24 bg-white">
-  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-    <div class="section-fade">
-      <div class="text-center mb-14">
-        <h2 class="text-3xl sm:text-4xl lg:text-5xl font-bold text-gray-900 mb-4">Platform as a Service (PaaS)</h2>
-        <p class="text-lg text-gray-600 max-w-2xl mx-auto">Cloud-native, microservices-based, API-first platform built for scale and innovation</p>
-      </div>
-      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
-        <div class="bg-gray-50 rounded-2xl p-8 hover:bg-white hover:shadow-xl transition-all duration-300 card-hover border border-transparent hover:border-gray-100">
-          <div class="w-14 h-14 bg-sky-100 rounded-xl flex items-center justify-center mb-6"><i class="fas fa-cloud text-sky-600 text-2xl"></i></div>
-          <h3 class="text-xl font-bold text-gray-900 mb-3">Cloud-Native</h3>
-          <p class="text-gray-600 leading-relaxed text-sm">Built from the ground up for cloud environments with automatic scaling, high availability, and global deployment.</p>
-        </div>
-        <div class="bg-gray-50 rounded-2xl p-8 hover:bg-white hover:shadow-xl transition-all duration-300 card-hover border border-transparent hover:border-gray-100">
-          <div class="w-14 h-14 bg-cyan-100 rounded-xl flex items-center justify-center mb-6"><i class="fas fa-cubes text-cyan-600 text-2xl"></i></div>
-          <h3 class="text-xl font-bold text-gray-900 mb-3">Microservices</h3>
-          <p class="text-gray-600 leading-relaxed text-sm">Modular architecture allows independent deployment, scaling, and updates of individual services without disruption.</p>
-        </div>
-        <div class="bg-gray-50 rounded-2xl p-8 hover:bg-white hover:shadow-xl transition-all duration-300 card-hover border border-transparent hover:border-gray-100">
-          <div class="w-14 h-14 bg-green-100 rounded-xl flex items-center justify-center mb-6"><i class="fas fa-plug text-green-600 text-2xl"></i></div>
-          <h3 class="text-xl font-bold text-gray-900 mb-3">API-First</h3>
-          <p class="text-gray-600 leading-relaxed text-sm">RESTful APIs enable seamless integration with any system, channel, or partner — all well-documented and versioned.</p>
-        </div>
-        <div class="bg-gray-50 rounded-2xl p-8 hover:bg-white hover:shadow-xl transition-all duration-300 card-hover border border-transparent hover:border-gray-100">
-          <div class="w-14 h-14 bg-indigo-100 rounded-xl flex items-center justify-center mb-6"><i class="fas fa-box-open text-indigo-600 text-2xl"></i></div>
-          <h3 class="text-xl font-bold text-gray-900 mb-3">Containerized</h3>
-          <p class="text-gray-600 leading-relaxed text-sm">Docker containers and Kubernetes orchestration provide portability and efficient resource utilisation.</p>
-        </div>
-        <div class="bg-gray-50 rounded-2xl p-8 hover:bg-white hover:shadow-xl transition-all duration-300 card-hover border border-transparent hover:border-gray-100">
-          <div class="w-14 h-14 bg-orange-100 rounded-xl flex items-center justify-center mb-6"><i class="fas fa-expand-arrows-alt text-orange-600 text-2xl"></i></div>
-          <h3 class="text-xl font-bold text-gray-900 mb-3">Scalable</h3>
-          <p class="text-gray-600 leading-relaxed text-sm">Horizontal and vertical scaling ensures your platform grows with business demands without performance loss.</p>
-        </div>
-        <div class="bg-gray-50 rounded-2xl p-8 hover:bg-white hover:shadow-xl transition-all duration-300 card-hover border border-transparent hover:border-gray-100">
-          <div class="w-14 h-14 bg-teal-100 rounded-xl flex items-center justify-center mb-6"><i class="fas fa-rocket text-teal-600 text-2xl"></i></div>
-          <h3 class="text-xl font-bold text-gray-900 mb-3">Fast Innovation</h3>
-          <p class="text-gray-600 leading-relaxed text-sm">Rapid product development and deployment cycles enable quick time-to-market for new insurance products.</p>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ════════════════════ ARCHITECTURE ════════════════════ -->
-<section id="architecture" class="py-16 sm:py-20 lg:py-24 bg-gray-50">
-  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-    <div class="section-fade">
-      <div class="text-center mb-14">
-        <h2 class="text-3xl sm:text-4xl lg:text-5xl font-bold text-gray-900 mb-4">Modern Architecture</h2>
-        <p class="text-lg text-gray-600 max-w-2xl mx-auto">Built with cutting-edge technologies for flexibility, scalability, and reliability</p>
-      </div>
-
-      <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center mb-14">
-        <div>
-          <h3 class="text-2xl font-bold text-gray-900 mb-8">Technology Stack</h3>
-          <div class="space-y-6">
-            <div class="flex items-start gap-4">
-              <div class="w-12 h-12 bg-sky-100 rounded-xl flex items-center justify-center shrink-0"><i class="fas fa-cubes text-sky-600 text-xl"></i></div>
-              <div><h4 class="font-bold text-gray-900 mb-1">Docker &amp; Kubernetes</h4><p class="text-gray-600 text-sm leading-relaxed">Containerization and orchestration for consistent deployment and automatic scaling.</p></div>
-            </div>
-            <div class="flex items-start gap-4">
-              <div class="w-12 h-12 bg-cyan-100 rounded-xl flex items-center justify-center shrink-0"><i class="fas fa-code text-cyan-600 text-xl"></i></div>
-              <div><h4 class="font-bold text-gray-900 mb-1">Microservices Architecture</h4><p class="text-gray-600 text-sm leading-relaxed">Independent, loosely-coupled services developed, deployed, and scaled independently.</p></div>
-            </div>
-            <div class="flex items-start gap-4">
-              <div class="w-12 h-12 bg-green-100 rounded-xl flex items-center justify-center shrink-0"><i class="fas fa-network-wired text-green-600 text-xl"></i></div>
-              <div><h4 class="font-bold text-gray-900 mb-1">API Gateway</h4><p class="text-gray-600 text-sm leading-relaxed">Centralized entry point with authentication, rate limiting, and routing.</p></div>
-            </div>
-            <div class="flex items-start gap-4">
-              <div class="w-12 h-12 bg-orange-100 rounded-xl flex items-center justify-center shrink-0"><i class="fas fa-database text-orange-600 text-xl"></i></div>
-              <div><h4 class="font-bold text-gray-900 mb-1">Event-Driven</h4><p class="text-gray-600 text-sm leading-relaxed">Asynchronous messaging and event streaming for real-time data processing.</p></div>
-            </div>
-          </div>
-        </div>
-
-        <div class="bg-gradient-to-br from-sky-50 to-cyan-50 rounded-2xl p-6 space-y-4">
-          <div class="bg-white rounded-xl p-5 shadow">
-            <div class="flex items-center justify-between mb-3">
-              <span class="font-semibold text-gray-900 text-sm">Digital Channels</span>
-              <div class="flex gap-1.5"><div class="w-2.5 h-2.5 bg-green-500 rounded-full"></div><div class="w-2.5 h-2.5 bg-green-500 rounded-full"></div><div class="w-2.5 h-2.5 bg-green-500 rounded-full"></div></div>
-            </div>
-            <div class="grid grid-cols-3 gap-2">
-              <div class="bg-sky-100 h-10 rounded-lg flex items-center justify-center"><i class="fas fa-globe text-sky-600"></i></div>
-              <div class="bg-cyan-100 h-10 rounded-lg flex items-center justify-center"><i class="fas fa-mobile text-cyan-600"></i></div>
-              <div class="bg-green-100 h-10 rounded-lg flex items-center justify-center"><i class="fas fa-desktop text-green-600"></i></div>
-            </div>
-          </div>
-          <div class="bg-gradient-to-r from-sky-500 to-sky-600 rounded-xl p-5 shadow">
-            <div class="text-white font-bold mb-3 flex items-center justify-between text-sm">
-              <span>Insurex24 Middleware</span><i class="fas fa-layer-group"></i>
-            </div>
-            <div class="grid grid-cols-2 gap-2 text-xs">
-              <div class="bg-white bg-opacity-20 rounded p-2 text-white text-center">API Gateway</div>
-              <div class="bg-white bg-opacity-20 rounded p-2 text-white text-center">Auth Service</div>
-              <div class="bg-white bg-opacity-20 rounded p-2 text-white text-center">Policy Service</div>
-              <div class="bg-white bg-opacity-20 rounded p-2 text-white text-center">Claims Service</div>
-            </div>
-          </div>
-          <div class="bg-white rounded-xl p-5 shadow">
-            <div class="flex items-center justify-between mb-3">
-              <span class="font-semibold text-gray-900 text-sm">Core Systems</span>
-              <i class="fas fa-server text-gray-400"></i>
-            </div>
-            <div class="bg-gray-100 h-8 rounded-lg flex items-center px-3 text-sm text-gray-700 mb-2"><i class="fas fa-database text-gray-400 mr-2 text-xs"></i>Policy Administration</div>
-            <div class="bg-gray-100 h-8 rounded-lg flex items-center px-3 text-sm text-gray-700"><i class="fas fa-database text-gray-400 mr-2 text-xs"></i>Claims Management</div>
-          </div>
-        </div>
-      </div>
-
-      <div class="bg-white rounded-2xl p-8 sm:p-12 shadow-sm">
-        <h3 class="text-2xl font-bold text-gray-900 mb-8 text-center">Key Capabilities</h3>
-        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-          <div class="text-center"><div class="w-16 h-16 bg-sky-600 rounded-2xl flex items-center justify-center mx-auto mb-4"><i class="fas fa-sync text-white text-2xl"></i></div><h4 class="font-bold text-gray-900 mb-2">Real-Time Sync</h4><p class="text-sm text-gray-500">Instant data synchronization across all systems</p></div>
-          <div class="text-center"><div class="w-16 h-16 bg-cyan-600 rounded-2xl flex items-center justify-center mx-auto mb-4"><i class="fas fa-shield-alt text-white text-2xl"></i></div><h4 class="font-bold text-gray-900 mb-2">Enterprise Security</h4><p class="text-sm text-gray-500">Bank-level encryption and compliance</p></div>
-          <div class="text-center"><div class="w-16 h-16 bg-green-600 rounded-2xl flex items-center justify-center mx-auto mb-4"><i class="fas fa-chart-line text-white text-2xl"></i></div><h4 class="font-bold text-gray-900 mb-2">Analytics Ready</h4><p class="text-sm text-gray-500">Built-in data analytics and reporting</p></div>
-          <div class="text-center"><div class="w-16 h-16 bg-orange-600 rounded-2xl flex items-center justify-center mx-auto mb-4"><i class="fas fa-cogs text-white text-2xl"></i></div><h4 class="font-bold text-gray-900 mb-2">Configurable</h4><p class="text-sm text-gray-500">No-code configuration for business rules</p></div>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ════════════════════ API AUTOMATION ════════════════════ -->
-<section id="api-automation" class="py-16 sm:py-20 lg:py-24 bg-white">
-  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-    <div class="section-fade">
-      <div class="text-center mb-14">
-        <div class="inline-block bg-sky-100 text-sky-700 px-4 py-2 rounded-full text-sm font-semibold mb-4">API Automation</div>
-        <h2 class="text-3xl sm:text-4xl lg:text-5xl font-bold text-gray-900 mb-4">Automate Your Insurance API Workflows</h2>
-        <p class="text-lg text-gray-600 max-w-2xl mx-auto">Build, schedule, test, and monitor API integrations without writing complex code.</p>
-      </div>
-
-      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-14">
-        <div class="bg-gradient-to-br from-sky-50 to-sky-100 rounded-2xl p-7 border border-sky-200 card-hover">
-          <div class="w-14 h-14 bg-sky-600 rounded-xl flex items-center justify-center mb-5"><i class="fas fa-project-diagram text-white text-2xl"></i></div>
-          <h3 class="text-lg font-bold text-gray-900 mb-2">Visual Workflow Builder</h3>
-          <p class="text-gray-600 text-sm mb-4 leading-relaxed">Drag-and-drop canvas to design multi-step API flows — triggers, conditions, transformations, and actions — without code.</p>
-          <ul class="space-y-1.5"><li class="flex items-center gap-2 text-sm"><i class="fas fa-check text-sky-500"></i><span class="text-gray-700">If-else branching logic</span></li><li class="flex items-center gap-2 text-sm"><i class="fas fa-check text-sky-500"></i><span class="text-gray-700">Parallel &amp; sequential steps</span></li><li class="flex items-center gap-2 text-sm"><i class="fas fa-check text-sky-500"></i><span class="text-gray-700">Loop &amp; retry handling</span></li></ul>
-        </div>
-        <div class="bg-gradient-to-br from-cyan-50 to-cyan-100 rounded-2xl p-7 border border-cyan-200 card-hover">
-          <div class="w-14 h-14 bg-cyan-600 rounded-xl flex items-center justify-center mb-5"><i class="fas fa-clock text-white text-2xl"></i></div>
-          <h3 class="text-lg font-bold text-gray-900 mb-2">Scheduled Triggers</h3>
-          <p class="text-gray-600 text-sm mb-4 leading-relaxed">Run API jobs on cron schedule — nightly batch renewals, daily claims reports, hourly premium reconciliation.</p>
-          <ul class="space-y-1.5"><li class="flex items-center gap-2 text-sm"><i class="fas fa-check text-cyan-500"></i><span class="text-gray-700">Cron expression builder</span></li><li class="flex items-center gap-2 text-sm"><i class="fas fa-check text-cyan-500"></i><span class="text-gray-700">Timezone-aware scheduling</span></li><li class="flex items-center gap-2 text-sm"><i class="fas fa-check text-cyan-500"></i><span class="text-gray-700">Run history &amp; audit logs</span></li></ul>
-        </div>
-        <div class="bg-gradient-to-br from-green-50 to-green-100 rounded-2xl p-7 border border-green-200 card-hover">
-          <div class="w-14 h-14 bg-green-600 rounded-xl flex items-center justify-center mb-5"><i class="fas fa-bolt text-white text-2xl"></i></div>
-          <h3 class="text-lg font-bold text-gray-900 mb-2">Event-Driven Webhooks</h3>
-          <p class="text-gray-600 text-sm mb-4 leading-relaxed">React instantly to business events — new policy issued, claim filed, payment received — and trigger downstream calls.</p>
-          <ul class="space-y-1.5"><li class="flex items-center gap-2 text-sm"><i class="fas fa-check text-green-500"></i><span class="text-gray-700">Inbound &amp; outbound webhooks</span></li><li class="flex items-center gap-2 text-sm"><i class="fas fa-check text-green-500"></i><span class="text-gray-700">Payload filtering &amp; routing</span></li><li class="flex items-center gap-2 text-sm"><i class="fas fa-check text-green-500"></i><span class="text-gray-700">Signature verification</span></li></ul>
-        </div>
-        <div class="bg-gradient-to-br from-indigo-50 to-indigo-100 rounded-2xl p-7 border border-indigo-200 card-hover">
-          <div class="w-14 h-14 bg-indigo-600 rounded-xl flex items-center justify-center mb-5"><i class="fas fa-vial text-white text-2xl"></i></div>
-          <h3 class="text-lg font-bold text-gray-900 mb-2">Automated API Testing</h3>
-          <p class="text-gray-600 text-sm mb-4 leading-relaxed">Define test suites that run on every deployment — validate response schemas, assert business rules, catch regressions.</p>
-          <ul class="space-y-1.5"><li class="flex items-center gap-2 text-sm"><i class="fas fa-check text-indigo-500"></i><span class="text-gray-700">Contract &amp; schema validation</span></li><li class="flex items-center gap-2 text-sm"><i class="fas fa-check text-indigo-500"></i><span class="text-gray-700">Load &amp; stress testing</span></li><li class="flex items-center gap-2 text-sm"><i class="fas fa-check text-indigo-500"></i><span class="text-gray-700">CI/CD pipeline integration</span></li></ul>
-        </div>
-        <div class="bg-gradient-to-br from-orange-50 to-orange-100 rounded-2xl p-7 border border-orange-200 card-hover">
-          <div class="w-14 h-14 bg-orange-600 rounded-xl flex items-center justify-center mb-5"><i class="fas fa-redo-alt text-white text-2xl"></i></div>
-          <h3 class="text-lg font-bold text-gray-900 mb-2">Smart Error Recovery</h3>
-          <p class="text-gray-600 text-sm mb-4 leading-relaxed">Configurable retry policies with exponential back-off, dead-letter queuing, and automated alerts.</p>
-          <ul class="space-y-1.5"><li class="flex items-center gap-2 text-sm"><i class="fas fa-check text-orange-500"></i><span class="text-gray-700">Exponential back-off retries</span></li><li class="flex items-center gap-2 text-sm"><i class="fas fa-check text-orange-500"></i><span class="text-gray-700">Dead-letter queue (DLQ)</span></li><li class="flex items-center gap-2 text-sm"><i class="fas fa-check text-orange-500"></i><span class="text-gray-700">Slack / email alerting</span></li></ul>
-        </div>
-        <div class="bg-gradient-to-br from-teal-50 to-teal-100 rounded-2xl p-7 border border-teal-200 card-hover">
-          <div class="w-14 h-14 bg-teal-600 rounded-xl flex items-center justify-center mb-5"><i class="fas fa-chart-area text-white text-2xl"></i></div>
-          <h3 class="text-lg font-bold text-gray-900 mb-2">API Health Monitoring</h3>
-          <p class="text-gray-600 text-sm mb-4 leading-relaxed">Real-time dashboards track uptime, latency, error rates, and SLA compliance across every endpoint.</p>
-          <ul class="space-y-1.5"><li class="flex items-center gap-2 text-sm"><i class="fas fa-check text-teal-500"></i><span class="text-gray-700">Latency &amp; error-rate metrics</span></li><li class="flex items-center gap-2 text-sm"><i class="fas fa-check text-teal-500"></i><span class="text-gray-700">SLA breach alerts</span></li><li class="flex items-center gap-2 text-sm"><i class="fas fa-check text-teal-500"></i><span class="text-gray-700">Distributed tracing</span></li></ul>
-        </div>
-      </div>
-
-      <!-- Flow diagram -->
-      <div class="bg-gradient-to-r from-gray-900 to-gray-800 rounded-2xl p-8 sm:p-12 mb-10">
-        <h3 class="text-2xl font-bold text-white text-center mb-10">How API Automation Works</h3>
-        <div class="flex flex-col lg:flex-row items-center justify-between gap-5">
-          <div class="text-center flex-1"><div class="w-16 h-16 bg-sky-500 rounded-xl flex items-center justify-center mx-auto mb-3"><i class="fas fa-bolt text-white text-2xl"></i></div><p class="text-white font-bold mb-1">Trigger</p><p class="text-gray-400 text-xs">Event, webhook, or schedule fires</p></div>
-          <div class="hidden lg:flex gap-1 items-center"><div class="w-2 h-2 bg-sky-400 rounded-full animate-bounce" style="animation-delay:0s"></div><div class="w-2 h-2 bg-sky-400 rounded-full animate-bounce" style="animation-delay:.15s"></div><div class="w-2 h-2 bg-sky-400 rounded-full animate-bounce" style="animation-delay:.3s"></div></div>
-          <div class="text-center flex-1"><div class="w-16 h-16 bg-cyan-500 rounded-xl flex items-center justify-center mx-auto mb-3"><i class="fas fa-exchange-alt text-white text-2xl"></i></div><p class="text-white font-bold mb-1">Transform</p><p class="text-gray-400 text-xs">Map &amp; enrich payload data</p></div>
-          <div class="hidden lg:flex gap-1 items-center"><div class="w-2 h-2 bg-cyan-400 rounded-full animate-bounce" style="animation-delay:0s"></div><div class="w-2 h-2 bg-cyan-400 rounded-full animate-bounce" style="animation-delay:.15s"></div><div class="w-2 h-2 bg-cyan-400 rounded-full animate-bounce" style="animation-delay:.3s"></div></div>
-          <div class="text-center flex-1"><div class="w-16 h-16 bg-green-500 rounded-xl flex items-center justify-center mx-auto mb-3"><i class="fas fa-paper-plane text-white text-2xl"></i></div><p class="text-white font-bold mb-1">Execute</p><p class="text-gray-400 text-xs">Call target APIs in sequence</p></div>
-          <div class="hidden lg:flex gap-1 items-center"><div class="w-2 h-2 bg-green-400 rounded-full animate-bounce" style="animation-delay:0s"></div><div class="w-2 h-2 bg-green-400 rounded-full animate-bounce" style="animation-delay:.15s"></div><div class="w-2 h-2 bg-green-400 rounded-full animate-bounce" style="animation-delay:.3s"></div></div>
-          <div class="text-center flex-1"><div class="w-16 h-16 bg-orange-500 rounded-xl flex items-center justify-center mx-auto mb-3"><i class="fas fa-shield-alt text-white text-2xl"></i></div><p class="text-white font-bold mb-1">Validate</p><p class="text-gray-400 text-xs">Assert response &amp; retry on failure</p></div>
-          <div class="hidden lg:flex gap-1 items-center"><div class="w-2 h-2 bg-orange-400 rounded-full animate-bounce" style="animation-delay:0s"></div><div class="w-2 h-2 bg-orange-400 rounded-full animate-bounce" style="animation-delay:.15s"></div><div class="w-2 h-2 bg-orange-400 rounded-full animate-bounce" style="animation-delay:.3s"></div></div>
-          <div class="text-center flex-1"><div class="w-16 h-16 bg-purple-500 rounded-xl flex items-center justify-center mx-auto mb-3"><i class="fas fa-chart-line text-white text-2xl"></i></div><p class="text-white font-bold mb-1">Monitor</p><p class="text-gray-400 text-xs">Log, alert, and report outcomes</p></div>
-        </div>
-      </div>
-
-      <!-- Interactive demo -->
-      <div class="bg-gray-50 rounded-2xl p-8 sm:p-10">
-        <div class="text-center mb-8">
-          <h3 class="text-2xl font-bold text-gray-900 mb-2">Live API Automation Demo</h3>
-          <p class="text-gray-500 text-sm">Select a scenario and run the automation flow</p>
-        </div>
-        <!-- Scenario tabs -->
-        <div class="flex flex-wrap justify-center gap-3 mb-8">
-          <button class="sc-tab active px-4 py-2 rounded-lg text-sm font-semibold transition-all" data-sc="0" onclick="selectScenario(0)"><i class="fas fa-file-contract mr-2"></i>New Policy</button>
-          <button class="sc-tab px-4 py-2 rounded-lg text-sm font-semibold transition-all" data-sc="1" onclick="selectScenario(1)"><i class="fas fa-file-invoice mr-2"></i>Claim Filed</button>
-          <button class="sc-tab px-4 py-2 rounded-lg text-sm font-semibold transition-all" data-sc="2" onclick="selectScenario(2)"><i class="fas fa-bolt mr-2"></i>Instant Quote</button>
-          <button class="sc-tab px-4 py-2 rounded-lg text-sm font-semibold transition-all" data-sc="3" onclick="selectScenario(3)"><i class="fas fa-sync-alt mr-2"></i>Premium Sync</button>
-        </div>
-
-        <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
-          <!-- Request panel -->
-          <div>
-            <div class="flex items-center justify-between mb-3">
-              <span class="text-sm font-semibold text-gray-700">API Request</span>
-              <span id="req-method" class="bg-sky-100 text-sky-700 text-xs font-bold px-3 py-1 rounded-full">POST</span>
-            </div>
-            <div class="bg-gray-900 rounded-xl p-5 font-mono text-sm" style="min-height:13rem">
-              <p class="text-gray-500 mb-1 text-xs"># Endpoint</p>
-              <p id="req-endpoint" class="text-yellow-300 mb-4 text-xs">POST /api/v1/policies</p>
-              <p class="text-gray-500 mb-1 text-xs"># Payload</p>
-              <pre id="req-payload" class="text-green-300 text-xs whitespace-pre-wrap"></pre>
-            </div>
-            <button id="run-btn" onclick="runDemo()" class="mt-4 w-full bg-gradient-to-r from-sky-500 to-sky-600 text-white px-6 py-3 rounded-xl font-semibold hover:shadow-lg transition-shadow flex items-center justify-center gap-2">
-              <i class="fas fa-play"></i> Run Automation
-            </button>
-          </div>
-          <!-- Log panel -->
-          <div>
-            <div class="flex items-center justify-between mb-3">
-              <span class="text-sm font-semibold text-gray-700">Automation Log</span>
-              <span id="http-badge" class="hidden bg-green-100 text-green-700 text-xs font-bold px-3 py-1 rounded-full">HTTP 200</span>
-            </div>
-            <div id="log-output" class="bg-gray-900 rounded-xl p-5 font-mono text-xs overflow-auto" style="min-height:13rem">
-              <span class="text-gray-600 italic">Click "Run Automation" to start...</span>
-            </div>
-          </div>
-        </div>
-
-        <!-- Stats -->
-        <div class="grid grid-cols-2 sm:grid-cols-4 gap-4 mt-8">
-          <div class="bg-white rounded-xl p-4 text-center shadow-sm"><p id="stat-calls" class="text-2xl font-bold text-sky-600">0</p><p class="text-xs text-gray-500 mt-1">API Calls Run</p></div>
-          <div class="bg-white rounded-xl p-4 text-center shadow-sm"><p id="stat-success" class="text-2xl font-bold text-green-600">0</p><p class="text-xs text-gray-500 mt-1">Successful</p></div>
-          <div class="bg-white rounded-xl p-4 text-center shadow-sm"><p id="stat-latency" class="text-2xl font-bold text-orange-500">—</p><p class="text-xs text-gray-500 mt-1">Avg Latency</p></div>
-          <div class="bg-white rounded-xl p-4 text-center shadow-sm"><p id="stat-rate" class="text-2xl font-bold text-indigo-600">—</p><p class="text-xs text-gray-500 mt-1">Success Rate</p></div>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ════════════════════ OCR & DOCUMENT INTELLIGENCE ════════════════════ -->
-<section id="ocr-services" class="py-16 sm:py-20 lg:py-24 bg-white">
-  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-    <div class="section-fade">
-      <div class="text-center mb-14">
-        <div class="inline-block bg-violet-100 text-violet-700 px-4 py-2 rounded-full text-sm font-semibold mb-4">OCR Services</div>
-        <h2 class="text-3xl sm:text-4xl lg:text-5xl font-bold text-gray-900 mb-4">OCR &amp; Document Intelligence</h2>
-        <p class="text-lg text-gray-600 max-w-2xl mx-auto">Extract structured data from PDFs, scanned documents, and images instantly — no manual entry, no errors.</p>
-      </div>
-
-      <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-14">
-        <!-- PDF to Text -->
-        <div class="bg-gradient-to-br from-violet-50 to-purple-50 rounded-2xl p-8 border-2 border-violet-200 card-hover">
-          <div class="w-16 h-16 bg-violet-600 rounded-xl flex items-center justify-center mb-6"><i class="fas fa-file-pdf text-white text-2xl"></i></div>
-          <h3 class="text-2xl font-bold text-gray-900 mb-3">PDF to Text</h3>
-          <p class="text-gray-600 mb-6 text-sm leading-relaxed">Convert insurance policy documents, claim forms, and regulatory PDFs into structured, machine-readable text in seconds.</p>
-          <div class="grid grid-cols-2 gap-3">
-            <div class="bg-white rounded-xl p-4 shadow-sm"><i class="fas fa-file-alt text-violet-500 text-xl mb-2 block"></i><p class="text-sm font-semibold text-gray-800">Policy Documents</p><p class="text-xs text-gray-500">Extract policy terms &amp; conditions</p></div>
-            <div class="bg-white rounded-xl p-4 shadow-sm"><i class="fas fa-file-invoice text-violet-500 text-xl mb-2 block"></i><p class="text-sm font-semibold text-gray-800">Claim Forms</p><p class="text-xs text-gray-500">Parse claim data automatically</p></div>
-            <div class="bg-white rounded-xl p-4 shadow-sm"><i class="fas fa-file-contract text-violet-500 text-xl mb-2 block"></i><p class="text-sm font-semibold text-gray-800">KYC Documents</p><p class="text-xs text-gray-500">Extract identity information</p></div>
-            <div class="bg-white rounded-xl p-4 shadow-sm"><i class="fas fa-clipboard-list text-violet-500 text-xl mb-2 block"></i><p class="text-sm font-semibold text-gray-800">Regulatory Reports</p><p class="text-xs text-gray-500">Digitise statutory filings</p></div>
-          </div>
-        </div>
-
-        <!-- Image to Text -->
-        <div class="bg-gradient-to-br from-pink-50 to-rose-50 rounded-2xl p-8 border-2 border-pink-200 card-hover">
-          <div class="w-16 h-16 bg-pink-600 rounded-xl flex items-center justify-center mb-6"><i class="fas fa-image text-white text-2xl"></i></div>
-          <h3 class="text-2xl font-bold text-gray-900 mb-3">Image to Text (OCR)</h3>
-          <p class="text-gray-600 mb-6 text-sm leading-relaxed">Extract text from scanned images, ID card photos, and handwritten forms with AI-powered high accuracy.</p>
-          <div class="grid grid-cols-2 gap-3">
-            <div class="bg-white rounded-xl p-4 shadow-sm"><i class="fas fa-id-card text-pink-500 text-xl mb-2 block"></i><p class="text-sm font-semibold text-gray-800">ID Cards</p><p class="text-xs text-gray-500">Aadhaar, PAN, driving licence</p></div>
-            <div class="bg-white rounded-xl p-4 shadow-sm"><i class="fas fa-camera text-pink-500 text-xl mb-2 block"></i><p class="text-sm font-semibold text-gray-800">Live Camera Capture</p><p class="text-xs text-gray-500">Real-time document scanning</p></div>
-            <div class="bg-white rounded-xl p-4 shadow-sm"><i class="fas fa-file-medical text-pink-500 text-xl mb-2 block"></i><p class="text-sm font-semibold text-gray-800">Medical Reports</p><p class="text-xs text-gray-500">Extract health data from images</p></div>
-            <div class="bg-white rounded-xl p-4 shadow-sm"><i class="fas fa-car-crash text-pink-500 text-xl mb-2 block"></i><p class="text-sm font-semibold text-gray-800">Accident Photos</p><p class="text-xs text-gray-500">Damage assessment from images</p></div>
-          </div>
-        </div>
-      </div>
-
-      <!-- OCR stats banner -->
-      <div class="bg-gradient-to-r from-slate-900 to-slate-800 rounded-2xl p-8 sm:p-12">
-        <div class="grid grid-cols-1 lg:grid-cols-2 gap-10 items-center">
-          <div>
-            <h3 class="text-2xl font-bold text-white mb-6">Enterprise OCR Capabilities</h3>
-            <div class="space-y-4">
-              <div class="flex items-start gap-3"><div class="w-8 h-8 bg-violet-600 rounded-lg flex items-center justify-center shrink-0"><i class="fas fa-check text-white text-xs"></i></div><div><p class="text-white font-semibold text-sm">99.9% Accuracy Rate</p><p class="text-slate-400 text-xs">AI-powered extraction with human-level precision</p></div></div>
-              <div class="flex items-start gap-3"><div class="w-8 h-8 bg-violet-600 rounded-lg flex items-center justify-center shrink-0"><i class="fas fa-check text-white text-xs"></i></div><div><p class="text-white font-semibold text-sm">Multi-Language Support</p><p class="text-slate-400 text-xs">English, Hindi, and all regional Indian languages</p></div></div>
-              <div class="flex items-start gap-3"><div class="w-8 h-8 bg-violet-600 rounded-lg flex items-center justify-center shrink-0"><i class="fas fa-check text-white text-xs"></i></div><div><p class="text-white font-semibold text-sm">Bulk Batch Processing</p><p class="text-slate-400 text-xs">Process thousands of documents simultaneously via API</p></div></div>
-              <div class="flex items-start gap-3"><div class="w-8 h-8 bg-violet-600 rounded-lg flex items-center justify-center shrink-0"><i class="fas fa-check text-white text-xs"></i></div><div><p class="text-white font-semibold text-sm">Structured JSON Output</p><p class="text-slate-400 text-xs">Schema-validated data ready for direct integration</p></div></div>
-            </div>
-          </div>
-          <div class="grid grid-cols-2 gap-4">
-            <div class="bg-slate-700 rounded-xl p-5 text-center"><p class="text-violet-400 text-2xl font-black">99.9%</p><p class="text-slate-400 text-xs mt-1">OCR Accuracy</p></div>
-            <div class="bg-slate-700 rounded-xl p-5 text-center"><p class="text-violet-400 text-2xl font-black">&lt;2s</p><p class="text-slate-400 text-xs mt-1">Processing Time</p></div>
-            <div class="bg-slate-700 rounded-xl p-5 text-center"><p class="text-violet-400 text-2xl font-black">50+</p><p class="text-slate-400 text-xs mt-1">Document Types</p></div>
-            <div class="bg-slate-700 rounded-xl p-5 text-center"><p class="text-violet-400 text-2xl font-black">20+</p><p class="text-slate-400 text-xs mt-1">Languages</p></div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ════════════════════ COMMUNICATION SERVICES ════════════════════ -->
-<section id="communication-services" class="py-16 sm:py-20 lg:py-24 bg-gray-50">
-  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-    <div class="section-fade">
-      <div class="text-center mb-14">
-        <div class="inline-block bg-green-100 text-green-700 px-4 py-2 rounded-full text-sm font-semibold mb-4">Communication Services</div>
-        <h2 class="text-3xl sm:text-4xl lg:text-5xl font-bold text-gray-900 mb-4">SMS &amp; Email Services</h2>
-        <p class="text-lg text-gray-600 max-w-2xl mx-auto">Deliver timely, personalised communications to customers and partners across SMS and email channels at scale.</p>
-      </div>
-
-      <div class="grid grid-cols-1 lg:grid-cols-2 gap-10 mb-14">
-        <!-- SMS Service -->
-        <div class="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden card-hover">
-          <div class="bg-gradient-to-r from-green-500 to-emerald-600 p-6">
-            <div class="w-14 h-14 bg-white bg-opacity-20 rounded-xl flex items-center justify-center mb-4"><i class="fas fa-comment-dots text-white text-2xl"></i></div>
-            <h3 class="text-2xl font-bold text-white mb-2">SMS Service</h3>
-            <p class="text-green-100 text-sm">High-delivery transactional and promotional SMS for every insurance touchpoint.</p>
-          </div>
-          <div class="p-7">
-            <ul class="space-y-4">
-              <li class="flex items-start gap-3"><i class="fas fa-check-circle text-green-500 mt-0.5 shrink-0"></i><div><p class="font-semibold text-gray-800 text-sm">Transactional SMS</p><p class="text-gray-500 text-xs">Policy issuance, premium due, claim status updates</p></div></li>
-              <li class="flex items-start gap-3"><i class="fas fa-check-circle text-green-500 mt-0.5 shrink-0"></i><div><p class="font-semibold text-gray-800 text-sm">OTP Delivery</p><p class="text-gray-500 text-xs">Secure one-time passwords for login and KYC verification</p></div></li>
-              <li class="flex items-start gap-3"><i class="fas fa-check-circle text-green-500 mt-0.5 shrink-0"></i><div><p class="font-semibold text-gray-800 text-sm">Bulk SMS Campaigns</p><p class="text-gray-500 text-xs">Renewal reminders and promotional offers at scale</p></div></li>
-              <li class="flex items-start gap-3"><i class="fas fa-check-circle text-green-500 mt-0.5 shrink-0"></i><div><p class="font-semibold text-gray-800 text-sm">Real-Time Delivery Reports</p><p class="text-gray-500 text-xs">Per-message delivery status and analytics dashboard</p></div></li>
-              <li class="flex items-start gap-3"><i class="fas fa-check-circle text-green-500 mt-0.5 shrink-0"></i><div><p class="font-semibold text-gray-800 text-sm">DLT-Approved Templates</p><p class="text-gray-500 text-xs">Pre-registered templates with dynamic variable substitution</p></div></li>
-            </ul>
-            <div class="grid grid-cols-3 gap-3 mt-6">
-              <div class="bg-green-50 rounded-xl p-3 text-center"><p class="text-green-600 font-bold text-lg">99%</p><p class="text-xs text-gray-500">Delivery Rate</p></div>
-              <div class="bg-green-50 rounded-xl p-3 text-center"><p class="text-green-600 font-bold text-lg">&lt;3s</p><p class="text-xs text-gray-500">Delivery Time</p></div>
-              <div class="bg-green-50 rounded-xl p-3 text-center"><p class="text-green-600 font-bold text-lg">10M+</p><p class="text-xs text-gray-500">SMS/Day</p></div>
-            </div>
-          </div>
-        </div>
-
-        <!-- Email Service -->
-        <div class="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden card-hover">
-          <div class="bg-gradient-to-r from-sky-500 to-blue-600 p-6">
-            <div class="w-14 h-14 bg-white bg-opacity-20 rounded-xl flex items-center justify-center mb-4"><i class="fas fa-envelope-open-text text-white text-2xl"></i></div>
-            <h3 class="text-2xl font-bold text-white mb-2">Email Service</h3>
-            <p class="text-blue-100 text-sm">Branded, template-driven email delivery for every insurance customer journey.</p>
-          </div>
-          <div class="p-7">
-            <ul class="space-y-4">
-              <li class="flex items-start gap-3"><i class="fas fa-check-circle text-sky-500 mt-0.5 shrink-0"></i><div><p class="font-semibold text-gray-800 text-sm">Transactional Emails</p><p class="text-gray-500 text-xs">Policy documents, e-receipts, claim acknowledgements</p></div></li>
-              <li class="flex items-start gap-3"><i class="fas fa-check-circle text-sky-500 mt-0.5 shrink-0"></i><div><p class="font-semibold text-gray-800 text-sm">HTML Email Templates</p><p class="text-gray-500 text-xs">White-label branded templates with drag-and-drop editor</p></div></li>
-              <li class="flex items-start gap-3"><i class="fas fa-check-circle text-sky-500 mt-0.5 shrink-0"></i><div><p class="font-semibold text-gray-800 text-sm">Bulk Email Campaigns</p><p class="text-gray-500 text-xs">Renewal campaigns, product announcements, newsletters</p></div></li>
-              <li class="flex items-start gap-3"><i class="fas fa-check-circle text-sky-500 mt-0.5 shrink-0"></i><div><p class="font-semibold text-gray-800 text-sm">Auto Attachment Support</p><p class="text-gray-500 text-xs">Attach policy PDFs, certificates, and reports dynamically</p></div></li>
-              <li class="flex items-start gap-3"><i class="fas fa-check-circle text-sky-500 mt-0.5 shrink-0"></i><div><p class="font-semibold text-gray-800 text-sm">Open &amp; Click Tracking</p><p class="text-gray-500 text-xs">Engagement analytics and automated bounce management</p></div></li>
-            </ul>
-            <div class="grid grid-cols-3 gap-3 mt-6">
-              <div class="bg-sky-50 rounded-xl p-3 text-center"><p class="text-sky-600 font-bold text-lg">98%</p><p class="text-xs text-gray-500">Inbox Rate</p></div>
-              <div class="bg-sky-50 rounded-xl p-3 text-center"><p class="text-sky-600 font-bold text-lg">5M+</p><p class="text-xs text-gray-500">Emails/Day</p></div>
-              <div class="bg-sky-50 rounded-xl p-3 text-center"><p class="text-sky-600 font-bold text-lg">DMARC</p><p class="text-xs text-gray-500">Compliant</p></div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- Communication use cases -->
-      <div class="bg-white rounded-2xl p-8 sm:p-12 shadow-sm border border-gray-100">
-        <h3 class="text-2xl font-bold text-gray-900 mb-8 text-center">Omni-Channel Insurance Communication</h3>
-        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-          <div class="text-center bg-orange-50 rounded-2xl p-6 card-hover"><div class="w-14 h-14 bg-orange-100 rounded-xl flex items-center justify-center mx-auto mb-4"><i class="fas fa-bell text-orange-600 text-2xl"></i></div><h4 class="font-bold text-gray-900 mb-2">Policy Alerts</h4><p class="text-sm text-gray-500">Premium due, expiry &amp; renewal reminders via SMS + email</p></div>
-          <div class="text-center bg-green-50 rounded-2xl p-6 card-hover"><div class="w-14 h-14 bg-green-100 rounded-xl flex items-center justify-center mx-auto mb-4"><i class="fas fa-file-invoice text-green-600 text-2xl"></i></div><h4 class="font-bold text-gray-900 mb-2">Claim Updates</h4><p class="text-sm text-gray-500">Real-time status notifications at every claims milestone</p></div>
-          <div class="text-center bg-blue-50 rounded-2xl p-6 card-hover"><div class="w-14 h-14 bg-blue-100 rounded-xl flex items-center justify-center mx-auto mb-4"><i class="fas fa-key text-blue-600 text-2xl"></i></div><h4 class="font-bold text-gray-900 mb-2">OTP &amp; Auth</h4><p class="text-sm text-gray-500">Secure OTP for login, transactions, and KYC verification</p></div>
-          <div class="text-center bg-purple-50 rounded-2xl p-6 card-hover"><div class="w-14 h-14 bg-purple-100 rounded-xl flex items-center justify-center mx-auto mb-4"><i class="fas fa-bullhorn text-purple-600 text-2xl"></i></div><h4 class="font-bold text-gray-900 mb-2">Campaigns</h4><p class="text-sm text-gray-500">Targeted promotions and cross-sell &amp; up-sell campaigns</p></div>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ════════════════════ VERIFICATION SERVICES ════════════════════ -->
-<section id="verification-services" class="py-16 sm:py-20 lg:py-24 bg-white">
-  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-    <div class="section-fade">
-      <div class="text-center mb-14">
-        <div class="inline-block bg-amber-100 text-amber-700 px-4 py-2 rounded-full text-sm font-semibold mb-4">Verification Services</div>
-        <h2 class="text-3xl sm:text-4xl lg:text-5xl font-bold text-gray-900 mb-4">KYC &amp; Aadhaar Verification</h2>
-        <p class="text-lg text-gray-600 max-w-2xl mx-auto">Instant, IRDAI-compliant identity verification — onboard customers and agents in minutes, not days.</p>
-      </div>
-
-      <div class="grid grid-cols-1 lg:grid-cols-2 gap-10 mb-14">
-        <!-- KYC -->
-        <div class="bg-gradient-to-br from-amber-50 to-orange-50 rounded-2xl p-8 border-2 border-amber-200 card-hover">
-          <div class="w-16 h-16 bg-amber-500 rounded-xl flex items-center justify-center mb-6"><i class="fas fa-user-check text-white text-2xl"></i></div>
-          <h3 class="text-2xl font-bold text-gray-900 mb-3">KYC Verification</h3>
-          <p class="text-gray-600 mb-6 text-sm leading-relaxed">Full digital KYC pipeline — PAN, Aadhaar, bank account, and face match — all via API in under 60 seconds.</p>
           <div class="space-y-3">
-            <div class="bg-white rounded-xl p-4 flex items-center gap-4 shadow-sm">
-              <div class="w-10 h-10 bg-amber-100 rounded-lg flex items-center justify-center shrink-0"><i class="fas fa-id-card text-amber-600"></i></div>
-              <div class="flex-1"><p class="font-semibold text-gray-800 text-sm">PAN Verification</p><p class="text-xs text-gray-500">Real-time PAN validation against Income Tax database</p></div>
-              <span class="bg-green-100 text-green-700 text-xs font-bold px-2 py-0.5 rounded-full shrink-0">Live</span>
-            </div>
-            <div class="bg-white rounded-xl p-4 flex items-center gap-4 shadow-sm">
-              <div class="w-10 h-10 bg-amber-100 rounded-lg flex items-center justify-center shrink-0"><i class="fas fa-fingerprint text-amber-600"></i></div>
-              <div class="flex-1"><p class="font-semibold text-gray-800 text-sm">Aadhaar eKYC</p><p class="text-xs text-gray-500">OTP-based Aadhaar verification via UIDAI APIs</p></div>
-              <span class="bg-green-100 text-green-700 text-xs font-bold px-2 py-0.5 rounded-full shrink-0">Live</span>
-            </div>
-            <div class="bg-white rounded-xl p-4 flex items-center gap-4 shadow-sm">
-              <div class="w-10 h-10 bg-amber-100 rounded-lg flex items-center justify-center shrink-0"><i class="fas fa-university text-amber-600"></i></div>
-              <div class="flex-1"><p class="font-semibold text-gray-800 text-sm">Bank Account Verification</p><p class="text-xs text-gray-500">Penny-drop and NACH mandate verification</p></div>
-              <span class="bg-green-100 text-green-700 text-xs font-bold px-2 py-0.5 rounded-full shrink-0">Live</span>
-            </div>
-            <div class="bg-white rounded-xl p-4 flex items-center gap-4 shadow-sm">
-              <div class="w-10 h-10 bg-amber-100 rounded-lg flex items-center justify-center shrink-0"><i class="fas fa-user-circle text-amber-600"></i></div>
-              <div class="flex-1"><p class="font-semibold text-gray-800 text-sm">Face Match &amp; Liveness</p><p class="text-xs text-gray-500">Selfie vs. ID photo with anti-spoofing liveness check</p></div>
-              <span class="bg-green-100 text-green-700 text-xs font-bold px-2 py-0.5 rounded-full shrink-0">Live</span>
-            </div>
+            <div><div class="flex justify-between text-xs text-slate-500 mb-1"><span>Core PAS Connector</span><span class="text-green-600 font-bold">98%</span></div><div class="h-1.5 rounded-full" style="background:#F1F5F9"><div style="width:98%;height:100%;border-radius:inherit;background:linear-gradient(90deg,#22C55E,#16A34A)"></div></div></div>
+            <div><div class="flex justify-between text-xs text-slate-500 mb-1"><span>Claims Engine</span><span class="text-blue-600 font-bold">94%</span></div><div class="h-1.5 rounded-full" style="background:#F1F5F9"><div class="bar-fill" style="width:94%;height:100%;border-radius:inherit"></div></div></div>
+            <div><div class="flex justify-between text-xs text-slate-500 mb-1"><span>KYC Service</span><span class="font-bold" style="color:#1A8FE3">99%</span></div><div class="h-1.5 rounded-full" style="background:#F1F5F9"><div style="width:99%;height:100%;border-radius:inherit;background:linear-gradient(90deg,#1A8FE3,#1565C0)"></div></div></div>
           </div>
         </div>
-
-        <!-- Aadhaar -->
-        <div class="bg-gradient-to-br from-blue-50 to-indigo-50 rounded-2xl p-8 border-2 border-blue-200 card-hover">
-          <div class="w-16 h-16 bg-blue-600 rounded-xl flex items-center justify-center mb-6"><i class="fas fa-fingerprint text-white text-2xl"></i></div>
-          <h3 class="text-2xl font-bold text-gray-900 mb-3">Aadhaar Verification</h3>
-          <p class="text-gray-600 mb-6 text-sm leading-relaxed">UIDAI-integrated Aadhaar verification for agents, customers, and nominees — OTP-based, paperless, and fully IRDAI-compliant.</p>
-          <div class="space-y-3">
-            <div class="bg-white rounded-xl p-4 flex items-center gap-4 shadow-sm">
-              <div class="w-10 h-10 bg-blue-100 rounded-lg flex items-center justify-center shrink-0"><i class="fas fa-mobile-alt text-blue-600"></i></div>
-              <div><p class="font-semibold text-gray-800 text-sm">OTP-Based Verification</p><p class="text-xs text-gray-500">UIDAI OTP sent to Aadhaar-registered mobile number</p></div>
-            </div>
-            <div class="bg-white rounded-xl p-4 flex items-center gap-4 shadow-sm">
-              <div class="w-10 h-10 bg-blue-100 rounded-lg flex items-center justify-center shrink-0"><i class="fas fa-qrcode text-blue-600"></i></div>
-              <div><p class="font-semibold text-gray-800 text-sm">QR Code Scan</p><p class="text-xs text-gray-500">Offline Aadhaar XML verification via secure QR scan</p></div>
-            </div>
-            <div class="bg-white rounded-xl p-4 flex items-center gap-4 shadow-sm">
-              <div class="w-10 h-10 bg-blue-100 rounded-lg flex items-center justify-center shrink-0"><i class="fas fa-cloud-download-alt text-blue-600"></i></div>
-              <div><p class="font-semibold text-gray-800 text-sm">DigiLocker Integration</p><p class="text-xs text-gray-500">Fetch government-verified documents directly from DigiLocker</p></div>
-            </div>
-            <div class="bg-white rounded-xl p-4 flex items-center gap-4 shadow-sm">
-              <div class="w-10 h-10 bg-blue-100 rounded-lg flex items-center justify-center shrink-0"><i class="fas fa-shield-alt text-blue-600"></i></div>
-              <div><p class="font-semibold text-gray-800 text-sm">Masked Aadhaar Storage</p><p class="text-xs text-gray-500">Store only last 4 digits — DPDP &amp; PMLA compliant</p></div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- Verification stats banner -->
-      <div class="bg-gradient-to-r from-amber-500 to-orange-500 rounded-2xl p-8 sm:p-12 text-white">
-        <div class="text-center mb-8">
-          <h3 class="text-2xl font-bold mb-2">Verification at Insurance Speed</h3>
-          <p class="opacity-90 text-sm">Fully IRDAI, DPDP, and PMLA compliant verification APIs</p>
-        </div>
-        <div class="grid grid-cols-2 sm:grid-cols-4 gap-6 text-center">
-          <div><p class="text-3xl font-black">&lt;5s</p><p class="opacity-80 text-sm mt-1">KYC Completion</p></div>
-          <div><p class="text-3xl font-black">100%</p><p class="opacity-80 text-sm mt-1">IRDAI Compliant</p></div>
-          <div><p class="text-3xl font-black">99.5%</p><p class="opacity-80 text-sm mt-1">Match Accuracy</p></div>
-          <div><p class="text-3xl font-black">0</p><p class="opacity-80 text-sm mt-1">Paper Required</p></div>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ════════════════════ OPERATIONS AUTOMATION ════════════════════ -->
-<section id="operations-automation" class="py-16 sm:py-20 lg:py-24 bg-gray-50">
-  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-    <div class="section-fade">
-      <div class="text-center mb-14">
-        <div class="inline-block bg-rose-100 text-rose-700 px-4 py-2 rounded-full text-sm font-semibold mb-4">Operations Automation</div>
-        <h2 class="text-3xl sm:text-4xl lg:text-5xl font-bold text-gray-900 mb-4">Automate Insurance Operations</h2>
-        <p class="text-lg text-gray-600 max-w-2xl mx-auto">Eliminate manual, repetitive tasks across every insurance operation — from policy issuance to claims settlement to regulatory reporting.</p>
-      </div>
-
-      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-14">
-        <!-- Policy Operations -->
-        <div class="bg-white rounded-2xl p-7 shadow-sm hover:shadow-xl transition-shadow card-hover border border-gray-100">
-          <div class="w-14 h-14 bg-sky-100 rounded-xl flex items-center justify-center mb-5"><i class="fas fa-file-signature text-sky-600 text-2xl"></i></div>
-          <h3 class="text-lg font-bold text-gray-900 mb-2">Policy Operations</h3>
-          <p class="text-gray-600 text-sm mb-4 leading-relaxed">Automate the full policy lifecycle — issuance, endorsements, cancellations, and renewals — without manual intervention.</p>
-          <ul class="space-y-1.5">
-            <li class="flex items-center gap-2 text-sm text-gray-700"><i class="fas fa-check-circle text-sky-500 text-xs"></i>Auto policy issuance on payment confirmation</li>
-            <li class="flex items-center gap-2 text-sm text-gray-700"><i class="fas fa-check-circle text-sky-500 text-xs"></i>Scheduled renewal reminders &amp; auto-renewals</li>
-            <li class="flex items-center gap-2 text-sm text-gray-700"><i class="fas fa-check-circle text-sky-500 text-xs"></i>Endorsement processing with maker-checker</li>
-          </ul>
-        </div>
-
-        <!-- Claims Operations -->
-        <div class="bg-white rounded-2xl p-7 shadow-sm hover:shadow-xl transition-shadow card-hover border border-gray-100">
-          <div class="w-14 h-14 bg-rose-100 rounded-xl flex items-center justify-center mb-5"><i class="fas fa-clipboard-check text-rose-600 text-2xl"></i></div>
-          <h3 class="text-lg font-bold text-gray-900 mb-2">Claims Operations</h3>
-          <p class="text-gray-600 text-sm mb-4 leading-relaxed">Automate FNOL intake, document collection, fraud checks, assessment routing, and settlement disbursement.</p>
-          <ul class="space-y-1.5">
-            <li class="flex items-center gap-2 text-sm text-gray-700"><i class="fas fa-check-circle text-rose-500 text-xs"></i>Auto FNOL registration from any channel</li>
-            <li class="flex items-center gap-2 text-sm text-gray-700"><i class="fas fa-check-circle text-rose-500 text-xs"></i>AI-assisted fraud detection &amp; flagging</li>
-            <li class="flex items-center gap-2 text-sm text-gray-700"><i class="fas fa-check-circle text-rose-500 text-xs"></i>Automated settlement &amp; payment trigger</li>
-          </ul>
-        </div>
-
-        <!-- Premium Collection -->
-        <div class="bg-white rounded-2xl p-7 shadow-sm hover:shadow-xl transition-shadow card-hover border border-gray-100">
-          <div class="w-14 h-14 bg-green-100 rounded-xl flex items-center justify-center mb-5"><i class="fas fa-rupee-sign text-green-600 text-2xl"></i></div>
-          <h3 class="text-lg font-bold text-gray-900 mb-2">Premium Collection</h3>
-          <p class="text-gray-600 text-sm mb-4 leading-relaxed">Automate premium collection, payment reconciliation, receipt generation, and lapse management.</p>
-          <ul class="space-y-1.5">
-            <li class="flex items-center gap-2 text-sm text-gray-700"><i class="fas fa-check-circle text-green-500 text-xs"></i>Auto-debit via NACH mandate</li>
-            <li class="flex items-center gap-2 text-sm text-gray-700"><i class="fas fa-check-circle text-green-500 text-xs"></i>Payment reconciliation with accounting</li>
-            <li class="flex items-center gap-2 text-sm text-gray-700"><i class="fas fa-check-circle text-green-500 text-xs"></i>Auto e-receipt generation &amp; delivery</li>
-          </ul>
-        </div>
-
-        <!-- Regulatory Compliance -->
-        <div class="bg-white rounded-2xl p-7 shadow-sm hover:shadow-xl transition-shadow card-hover border border-gray-100">
-          <div class="w-14 h-14 bg-indigo-100 rounded-xl flex items-center justify-center mb-5"><i class="fas fa-balance-scale text-indigo-600 text-2xl"></i></div>
-          <h3 class="text-lg font-bold text-gray-900 mb-2">Regulatory Compliance</h3>
-          <p class="text-gray-600 text-sm mb-4 leading-relaxed">Auto-generate IRDAI returns, statutory submissions, and audit reports on schedule — zero manual preparation.</p>
-          <ul class="space-y-1.5">
-            <li class="flex items-center gap-2 text-sm text-gray-700"><i class="fas fa-check-circle text-indigo-500 text-xs"></i>Scheduled IRDAI statutory returns</li>
-            <li class="flex items-center gap-2 text-sm text-gray-700"><i class="fas fa-check-circle text-indigo-500 text-xs"></i>TAT monitoring &amp; SLA breach alerts</li>
-            <li class="flex items-center gap-2 text-sm text-gray-700"><i class="fas fa-check-circle text-indigo-500 text-xs"></i>One-click audit evidence packages</li>
-          </ul>
-        </div>
-
-        <!-- Agent Operations -->
-        <div class="bg-white rounded-2xl p-7 shadow-sm hover:shadow-xl transition-shadow card-hover border border-gray-100">
-          <div class="w-14 h-14 bg-orange-100 rounded-xl flex items-center justify-center mb-5"><i class="fas fa-user-tie text-orange-600 text-2xl"></i></div>
-          <h3 class="text-lg font-bold text-gray-900 mb-2">Agent Operations</h3>
-          <p class="text-gray-600 text-sm mb-4 leading-relaxed">Automate agent onboarding, commission calculation, payout processing, and performance reporting.</p>
-          <ul class="space-y-1.5">
-            <li class="flex items-center gap-2 text-sm text-gray-700"><i class="fas fa-check-circle text-orange-500 text-xs"></i>Auto commission calculation per rule</li>
-            <li class="flex items-center gap-2 text-sm text-gray-700"><i class="fas fa-check-circle text-orange-500 text-xs"></i>Payout processing &amp; TDS deduction</li>
-            <li class="flex items-center gap-2 text-sm text-gray-700"><i class="fas fa-check-circle text-orange-500 text-xs"></i>License renewal alerts &amp; reminders</li>
-          </ul>
-        </div>
-
-        <!-- Customer Service -->
-        <div class="bg-white rounded-2xl p-7 shadow-sm hover:shadow-xl transition-shadow card-hover border border-gray-100">
-          <div class="w-14 h-14 bg-teal-100 rounded-xl flex items-center justify-center mb-5"><i class="fas fa-headset text-teal-600 text-2xl"></i></div>
-          <h3 class="text-lg font-bold text-gray-900 mb-2">Customer Service</h3>
-          <p class="text-gray-600 text-sm mb-4 leading-relaxed">Automate customer queries, grievance workflows, escalations, and service request fulfilment.</p>
-          <ul class="space-y-1.5">
-            <li class="flex items-center gap-2 text-sm text-gray-700"><i class="fas fa-check-circle text-teal-500 text-xs"></i>AI chatbot for 24/7 query resolution</li>
-            <li class="flex items-center gap-2 text-sm text-gray-700"><i class="fas fa-check-circle text-teal-500 text-xs"></i>Auto-escalation on SLA breach</li>
-            <li class="flex items-center gap-2 text-sm text-gray-700"><i class="fas fa-check-circle text-teal-500 text-xs"></i>Grievance tracking &amp; closure</li>
-          </ul>
-        </div>
-      </div>
-
-      <!-- Automation impact stats -->
-      <div class="bg-gradient-to-r from-rose-600 to-pink-600 rounded-2xl p-8 sm:p-12 text-white">
-        <div class="grid grid-cols-1 lg:grid-cols-2 gap-10 items-center">
-          <div>
-            <h3 class="text-2xl font-bold mb-4">Operational Impact</h3>
-            <p class="opacity-90 text-sm mb-6 leading-relaxed">Insurers using Insurex24 operational automation report dramatic reductions in manual effort, processing times, and error rates across every department.</p>
-            <div class="space-y-3">
-              <div class="flex items-center gap-3 bg-white bg-opacity-10 rounded-xl p-3"><i class="fas fa-robot text-pink-200 text-lg"></i><p class="text-sm">End-to-end workflow orchestration — no human in the loop</p></div>
-              <div class="flex items-center gap-3 bg-white bg-opacity-10 rounded-xl p-3"><i class="fas fa-clock text-pink-200 text-lg"></i><p class="text-sm">24/7 automated processing — no business-hour limits</p></div>
-              <div class="flex items-center gap-3 bg-white bg-opacity-10 rounded-xl p-3"><i class="fas fa-chart-line text-pink-200 text-lg"></i><p class="text-sm">Full audit trail on every automated action</p></div>
-            </div>
-          </div>
+        <div class="glass-panel p-5">
+          <p class="text-slate-400 text-xs font-bold uppercase tracking-widest mb-4">Live Metrics</p>
           <div class="grid grid-cols-2 gap-4">
-            <div class="bg-white bg-opacity-15 rounded-xl p-5 text-center"><p class="text-3xl font-black">80%</p><p class="opacity-80 text-sm mt-1">Reduction in Manual Work</p></div>
-            <div class="bg-white bg-opacity-15 rounded-xl p-5 text-center"><p class="text-3xl font-black">10×</p><p class="opacity-80 text-sm mt-1">Faster Processing</p></div>
-            <div class="bg-white bg-opacity-15 rounded-xl p-5 text-center"><p class="text-3xl font-black">99%</p><p class="opacity-80 text-sm mt-1">Error-Free Operations</p></div>
-            <div class="bg-white bg-opacity-15 rounded-xl p-5 text-center"><p class="text-3xl font-black">24/7</p><p class="opacity-80 text-sm mt-1">Always-On Automation</p></div>
+            <div><p class="snum counter" data-target="2847">0</p><p class="text-slate-500 text-xs mt-1">API calls/min</p></div>
+            <div><p class="snum counter" data-target="99.9" data-suffix="%" data-dec="1">0%</p><p class="text-slate-500 text-xs mt-1">Success rate</p></div>
+            <div><p class="snum counter" data-target="187" data-suffix="ms">0ms</p><p class="text-slate-500 text-xs mt-1">Avg latency</p></div>
+            <div><p class="snum counter" data-target="9">0</p><p class="text-slate-500 text-xs mt-1">Active portals</p></div>
           </div>
         </div>
+        <div class="glass-panel p-4 flex items-center gap-3">
+          <div class="live-dot flex-shrink-0"></div>
+          <div><p class="text-slate-900 font-bold text-sm">All systems operational</p><p class="text-slate-500 text-xs">Updated 12s ago</p></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-1.5 text-slate-400 animate-bounce">
+    <span class="text-[.68rem] uppercase tracking-[.15em]">Scroll to explore</span>
+    <i class="fas fa-chevron-down text-xs"></i>
+  </div>
+</section>
+
+<!-- STATS -->
+<section style="background:#EFF6FF;border-top:1px solid #DBEAFE;border-bottom:1px solid #DBEAFE">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
+    <div class="grid grid-cols-2 lg:grid-cols-4 gap-8">
+      <div class="rv text-center">
+        <p class="snum counter" data-target="50" data-suffix="+">0+</p>
+        <p class="text-slate-600 text-sm mt-2 font-medium">Pre-Built APIs</p>
+      </div>
+      <div class="rv d1 text-center">
+        <p class="snum counter" data-target="200" data-suffix="ms">0ms</p>
+        <p class="text-slate-600 text-sm mt-2 font-medium">API Latency</p>
+      </div>
+      <div class="rv d2 text-center">
+        <p class="snum counter" data-target="99.9" data-suffix="%" data-dec="1">0%</p>
+        <p class="text-slate-600 text-sm mt-2 font-medium">Uptime SLA</p>
+      </div>
+      <div class="rv d3 text-center">
+        <p class="snum counter" data-target="9" data-suffix="+">0+</p>
+        <p class="text-slate-600 text-sm mt-2 font-medium">Insurance Portals</p>
       </div>
     </div>
   </div>
 </section>
 
-<!-- ════════════════════ DATA PLATFORM ════════════════════ -->
-<section id="data-platform" class="py-16 sm:py-20 lg:py-24 bg-gray-50">
+<!-- CORE CAPABILITIES -->
+<section class="py-28 bg-white">
   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-    <div class="section-fade">
-      <div class="text-center mb-14">
-        <div class="inline-block bg-sky-100 text-sky-700 px-4 py-2 rounded-full text-sm font-semibold mb-4">Data Platform</div>
-        <h2 class="text-3xl sm:text-4xl lg:text-5xl font-bold text-gray-900 mb-4">Insurance Data Platform</h2>
-        <p class="text-lg text-gray-600 max-w-2xl mx-auto">Turn raw insurance data into governed, actionable intelligence — in real time, at scale, fully compliant.</p>
-      </div>
-
-      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-12">
-        <div class="bg-white rounded-2xl p-8 shadow-sm hover:shadow-xl transition-shadow card-hover border border-gray-100">
-          <div class="w-14 h-14 bg-sky-100 rounded-xl flex items-center justify-center mb-5"><i class="fas fa-stream text-sky-600 text-2xl"></i></div>
-          <h3 class="text-xl font-bold text-gray-900 mb-3">Real-Time Streaming</h3>
-          <p class="text-gray-600 text-sm leading-relaxed mb-4">Ingest and process millions of insurance events per second with sub-100ms latency.</p>
-          <div class="flex flex-wrap gap-2"><span class="bg-gray-100 text-gray-600 text-xs font-medium px-2.5 py-1 rounded-full">Apache Kafka</span><span class="bg-gray-100 text-gray-600 text-xs font-medium px-2.5 py-1 rounded-full">Event sourcing</span><span class="bg-gray-100 text-gray-600 text-xs font-medium px-2.5 py-1 rounded-full">&lt;100ms latency</span></div>
+    <div class="rv text-center mb-16">
+      <span class="sbadge mb-5" style="background:#EFF6FF;border:1px solid #BFDBFE;color:#1D4ED8"><i class="fas fa-star-half-alt text-xs"></i>Core Capabilities</span>
+      <h2 class="text-[clamp(2rem,4.5vw,3.5rem)] font-black text-slate-900 tracking-tight mb-4">One Platform.<br/><span class="grad">Infinite Scale.</span></h2>
+      <p class="text-lg text-slate-500 max-w-2xl mx-auto leading-relaxed">Everything an insurance carrier, broker, or aggregator needs to power digital journeys — out of the box.</p>
+    </div>
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+      <a href="platform.html" class="feat-card rv tilt">
+        <div class="p-8">
+          <div class="ibox w-16 h-16 mb-6" style="background:linear-gradient(135deg,#EFF6FF,#DBEAFE);border-radius:18px"><i class="fas fa-microchip text-blue-600 text-2xl"></i></div>
+          <h3 class="text-xl font-black text-slate-900 mb-3">MACH Platform</h3>
+          <p class="text-slate-500 text-sm leading-relaxed mb-6">Microservices, API-first, Cloud-native, Headless architecture connecting any core system to any digital touchpoint at enterprise scale.</p>
+          <span class="text-blue-600 font-bold text-sm inline-flex items-center gap-2 group">Explore Platform <i class="fas fa-arrow-right text-xs transition-transform group-hover:translate-x-1.5"></i></span>
         </div>
-        <div class="bg-white rounded-2xl p-8 shadow-sm hover:shadow-xl transition-shadow card-hover border border-gray-100">
-          <div class="w-14 h-14 bg-cyan-100 rounded-xl flex items-center justify-center mb-5"><i class="fas fa-brain text-cyan-600 text-2xl"></i></div>
-          <h3 class="text-xl font-bold text-gray-900 mb-3">Analytics Engine</h3>
-          <p class="text-gray-600 text-sm leading-relaxed mb-4">Built-in analytics with 200+ pre-built insurance KPIs — loss ratio, combined ratio, premium GWP.</p>
-          <div class="flex flex-wrap gap-2"><span class="bg-gray-100 text-gray-600 text-xs font-medium px-2.5 py-1 rounded-full">200+ insurance KPIs</span><span class="bg-gray-100 text-gray-600 text-xs font-medium px-2.5 py-1 rounded-full">GWP tracking</span></div>
+      </a>
+      <a href="services.html" class="feat-card rv d1 tilt">
+        <div class="p-8">
+          <div class="ibox w-16 h-16 mb-6" style="background:linear-gradient(135deg,#F5F3FF,#EDE9FE);border-radius:18px"><i class="fas fa-cogs text-violet-600 text-2xl"></i></div>
+          <h3 class="text-xl font-black text-slate-900 mb-3">Services Suite</h3>
+          <p class="text-slate-500 text-sm leading-relaxed mb-6">OCR, KYC/eKYC, SMS & Email communication, and operations automation — all pre-integrated and production-ready.</p>
+          <span class="text-violet-600 font-bold text-sm inline-flex items-center gap-2 group">View Services <i class="fas fa-arrow-right text-xs transition-transform group-hover:translate-x-1.5"></i></span>
         </div>
-        <div class="bg-white rounded-2xl p-8 shadow-sm hover:shadow-xl transition-shadow card-hover border border-gray-100">
-          <div class="w-14 h-14 bg-green-100 rounded-xl flex items-center justify-center mb-5"><i class="fas fa-database text-green-600 text-2xl"></i></div>
-          <h3 class="text-xl font-bold text-gray-900 mb-3">Data Vault</h3>
-          <p class="text-gray-600 text-sm leading-relaxed mb-4">Centralised, governed data store with full lineage, audit trail, and retention policies — IRDAI &amp; GDPR compliant.</p>
-          <div class="flex flex-wrap gap-2"><span class="bg-gray-100 text-gray-600 text-xs font-medium px-2.5 py-1 rounded-full">Full data lineage</span><span class="bg-gray-100 text-gray-600 text-xs font-medium px-2.5 py-1 rounded-full">IRDAI / GDPR ready</span></div>
+      </a>
+      <a href="data-platform.html" class="feat-card rv d2 tilt">
+        <div class="p-8">
+          <div class="ibox w-16 h-16 mb-6" style="background:linear-gradient(135deg,#ECFDF5,#D1FAE5);border-radius:18px"><i class="fas fa-chart-line text-emerald-600 text-2xl"></i></div>
+          <h3 class="text-xl font-black text-slate-900 mb-3">Data Platform</h3>
+          <p class="text-slate-500 text-sm leading-relaxed mb-6">Real-time streaming, 200+ insurance KPIs, regulatory reporting, and white-label BI dashboards — purpose-built for insurers.</p>
+          <span class="text-emerald-600 font-bold text-sm inline-flex items-center gap-2 group">See Data Platform <i class="fas fa-arrow-right text-xs transition-transform group-hover:translate-x-1.5"></i></span>
         </div>
-        <div class="bg-white rounded-2xl p-8 shadow-sm hover:shadow-xl transition-shadow card-hover border border-gray-100">
-          <div class="w-14 h-14 bg-orange-100 rounded-xl flex items-center justify-center mb-5"><i class="fas fa-file-alt text-orange-600 text-2xl"></i></div>
-          <h3 class="text-xl font-bold text-gray-900 mb-3">Regulatory Reporting</h3>
-          <p class="text-gray-600 text-sm leading-relaxed mb-4">Auto-generate returns, statutory reports, and regulatory submissions at a click.</p>
-          <div class="flex flex-wrap gap-2"><span class="bg-gray-100 text-gray-600 text-xs font-medium px-2.5 py-1 rounded-full">Statutory returns</span><span class="bg-gray-100 text-gray-600 text-xs font-medium px-2.5 py-1 rounded-full">Scheduled delivery</span></div>
-        </div>
-        <div class="bg-white rounded-2xl p-8 shadow-sm hover:shadow-xl transition-shadow card-hover border border-gray-100">
-          <div class="w-14 h-14 bg-indigo-100 rounded-xl flex items-center justify-center mb-5"><i class="fas fa-chart-bar text-indigo-600 text-2xl"></i></div>
-          <h3 class="text-xl font-bold text-gray-900 mb-3">BI &amp; Dashboards</h3>
-          <p class="text-gray-600 text-sm leading-relaxed mb-4">White-label dashboards with drag-and-drop builder. Export to Power BI, Tableau, or Looker.</p>
-          <div class="flex flex-wrap gap-2"><span class="bg-gray-100 text-gray-600 text-xs font-medium px-2.5 py-1 rounded-full">White-label BI</span><span class="bg-gray-100 text-gray-600 text-xs font-medium px-2.5 py-1 rounded-full">Power BI / Tableau</span></div>
-        </div>
-        <div class="bg-white rounded-2xl p-8 shadow-sm hover:shadow-xl transition-shadow card-hover border border-gray-100">
-          <div class="w-14 h-14 bg-teal-100 rounded-xl flex items-center justify-center mb-5"><i class="fas fa-exchange-alt text-teal-600 text-2xl"></i></div>
-          <h3 class="text-xl font-bold text-gray-900 mb-3">Data Integration Hub</h3>
-          <p class="text-gray-600 text-sm leading-relaxed mb-4">50+ pre-built connectors for data warehouses, lakes, and external enrichment providers.</p>
-          <div class="flex flex-wrap gap-2"><span class="bg-gray-100 text-gray-600 text-xs font-medium px-2.5 py-1 rounded-full">50+ connectors</span><span class="bg-gray-100 text-gray-600 text-xs font-medium px-2.5 py-1 rounded-full">Low-code canvas</span></div>
-        </div>
-      </div>
-
-      <div class="bg-gradient-to-r from-slate-900 to-slate-800 rounded-2xl p-8 sm:p-12">
-        <div class="text-center mb-10">
-          <h3 class="text-2xl font-bold text-white mb-2">Data Flow Architecture</h3>
-          <p class="text-slate-400 text-sm">From source systems to actionable insights — in milliseconds</p>
-        </div>
-        <div class="flex flex-col lg:flex-row items-center gap-4">
-          <div class="flex-1 bg-slate-700 rounded-xl p-5 text-center w-full">
-            <i class="fas fa-server text-white text-2xl mb-3 block"></i>
-            <p class="text-white font-bold text-sm mb-3">Source Systems</p>
-            <div class="space-y-1.5"><div class="bg-white bg-opacity-10 rounded px-3 py-1.5 text-xs text-white">Core PAS</div><div class="bg-white bg-opacity-10 rounded px-3 py-1.5 text-xs text-white">Claims System</div><div class="bg-white bg-opacity-10 rounded px-3 py-1.5 text-xs text-white">Billing Engine</div></div>
-          </div>
-          <div class="text-sky-400 flex-shrink-0"><i class="fas fa-arrow-right text-2xl hidden lg:block"></i><i class="fas fa-arrow-down text-2xl lg:hidden"></i></div>
-          <div class="flex-1 bg-sky-600 rounded-xl p-5 text-center w-full">
-            <i class="fas fa-layer-group text-white text-2xl mb-3 block"></i>
-            <p class="text-white font-bold text-sm mb-3">Insurex24 Data Layer</p>
-            <div class="space-y-1.5"><div class="bg-white bg-opacity-10 rounded px-3 py-1.5 text-xs text-white">Real-Time Streaming</div><div class="bg-white bg-opacity-10 rounded px-3 py-1.5 text-xs text-white">Transform &amp; Enrich</div><div class="bg-white bg-opacity-10 rounded px-3 py-1.5 text-xs text-white">Data Vault</div></div>
-          </div>
-          <div class="text-sky-400 flex-shrink-0"><i class="fas fa-arrow-right text-2xl hidden lg:block"></i><i class="fas fa-arrow-down text-2xl lg:hidden"></i></div>
-          <div class="flex-1 bg-slate-700 rounded-xl p-5 text-center w-full">
-            <i class="fas fa-chart-line text-white text-2xl mb-3 block"></i>
-            <p class="text-white font-bold text-sm mb-3">Consumers</p>
-            <div class="space-y-1.5"><div class="bg-white bg-opacity-10 rounded px-3 py-1.5 text-xs text-white">BI Dashboards</div><div class="bg-white bg-opacity-10 rounded px-3 py-1.5 text-xs text-white">Regulatory Reports</div><div class="bg-white bg-opacity-10 rounded px-3 py-1.5 text-xs text-white">Analytics APIs</div></div>
-          </div>
-        </div>
-        <div class="grid grid-cols-2 sm:grid-cols-4 gap-4 mt-8">
-          <div class="bg-slate-700 rounded-xl p-4 text-center"><p class="text-sky-400 text-xl font-black">&lt;100ms</p><p class="text-slate-400 text-xs mt-1">Stream Latency</p></div>
-          <div class="bg-slate-700 rounded-xl p-4 text-center"><p class="text-sky-400 text-xl font-black">200+</p><p class="text-slate-400 text-xs mt-1">KPIs Out-of-Box</p></div>
-          <div class="bg-slate-700 rounded-xl p-4 text-center"><p class="text-sky-400 text-xl font-black">50+</p><p class="text-slate-400 text-xs mt-1">Data Connectors</p></div>
-          <div class="bg-slate-700 rounded-xl p-4 text-center"><p class="text-sky-400 text-xl font-black">100%</p><p class="text-slate-400 text-xs mt-1">Audit Coverage</p></div>
-        </div>
-      </div>
+      </a>
     </div>
   </div>
 </section>
 
-<!-- ════════════════════ BENEFITS ════════════════════ -->
-<section id="benefits" class="py-16 sm:py-20 lg:py-24 bg-gray-50">
+<!-- HOW IT WORKS -->
+<section class="py-28" style="background:#F8FAFC">
   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-    <div class="section-fade">
-      <div class="text-center mb-14">
-        <h2 class="text-3xl sm:text-4xl lg:text-5xl font-bold text-gray-900 mb-4">Why Choose Insurex24?</h2>
-        <p class="text-lg text-gray-600 max-w-2xl mx-auto">Transform your insurance operations without disrupting existing systems</p>
+    <div class="rv text-center mb-16">
+      <span class="sbadge mb-5" style="background:#F5F3FF;border:1px solid #DDD6FE;color:#6D28D9"><i class="fas fa-route text-xs"></i>How It Works</span>
+      <h2 class="text-[clamp(2rem,4.5vw,3.5rem)] font-black text-slate-900 tracking-tight mb-4">Live in <span class="grad">3 Steps</span></h2>
+      <p class="text-slate-500 text-lg max-w-xl mx-auto">From onboarding to first production API call — weeks, not quarters.</p>
+    </div>
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-8 relative">
+      <div class="hidden md:block absolute" style="top:29px;left:calc(33% + 20px);right:calc(33% + 20px);height:2px;background:linear-gradient(90deg,rgba(26,143,227,.4),rgba(21,101,192,.4))"></div>
+      <div class="rv text-center bg-white rounded-3xl p-8 shadow-sm border border-slate-100 tilt">
+        <div class="step-n">1</div>
+        <div class="ibox w-14 h-14 mb-5 mx-auto" style="background:#EFF6FF;border-radius:16px"><i class="fas fa-plug text-blue-600 text-2xl"></i></div>
+        <h3 class="text-xl font-black text-slate-900 mb-3">Connect</h3>
+        <p class="text-slate-500 text-sm leading-relaxed">Integrate your core PAS, claims engine, or billing system using pre-built adapters or our low-code studio.</p>
       </div>
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-12">
-        <div class="bg-white rounded-2xl p-7 shadow-sm hover:shadow-lg transition-shadow flex items-start gap-5 card-hover"><div class="w-14 h-14 bg-sky-100 rounded-xl flex items-center justify-center shrink-0"><i class="fas fa-dollar-sign text-sky-600 text-xl"></i></div><div><h3 class="text-lg font-bold text-gray-900 mb-2">Reduce Costs</h3><p class="text-gray-600 text-sm leading-relaxed">No need to replace expensive legacy systems. Extend their life while adding modern capabilities at a fraction of the cost.</p></div></div>
-        <div class="bg-white rounded-2xl p-7 shadow-sm hover:shadow-lg transition-shadow flex items-start gap-5 card-hover"><div class="w-14 h-14 bg-cyan-100 rounded-xl flex items-center justify-center shrink-0"><i class="fas fa-clock text-cyan-600 text-xl"></i></div><div><h3 class="text-lg font-bold text-gray-900 mb-2">Faster Time-to-Market</h3><p class="text-gray-600 text-sm leading-relaxed">Launch new products and features in weeks instead of months. Rapid innovation without system-wide changes.</p></div></div>
-        <div class="bg-white rounded-2xl p-7 shadow-sm hover:shadow-lg transition-shadow flex items-start gap-5 card-hover"><div class="w-14 h-14 bg-green-100 rounded-xl flex items-center justify-center shrink-0"><i class="fas fa-users text-green-600 text-xl"></i></div><div><h3 class="text-lg font-bold text-gray-900 mb-2">Better Customer Experience</h3><p class="text-gray-600 text-sm leading-relaxed">Deliver modern, seamless digital experiences across all channels while maintaining data consistency.</p></div></div>
-        <div class="bg-white rounded-2xl p-7 shadow-sm hover:shadow-lg transition-shadow flex items-start gap-5 card-hover"><div class="w-14 h-14 bg-orange-100 rounded-xl flex items-center justify-center shrink-0"><i class="fas fa-puzzle-piece text-orange-600 text-xl"></i></div><div><h3 class="text-lg font-bold text-gray-900 mb-2">Easy Integration</h3><p class="text-gray-600 text-sm leading-relaxed">Connect with any system, partner, or channel through standardized APIs. No vendor lock-in.</p></div></div>
-        <div class="bg-white rounded-2xl p-7 shadow-sm hover:shadow-lg transition-shadow flex items-start gap-5 card-hover"><div class="w-14 h-14 bg-indigo-100 rounded-xl flex items-center justify-center shrink-0"><i class="fas fa-shield-alt text-indigo-600 text-xl"></i></div><div><h3 class="text-lg font-bold text-gray-900 mb-2">Enterprise-Grade Security</h3><p class="text-gray-600 text-sm leading-relaxed">Built-in security, compliance, and governance features meet the strictest insurance industry requirements.</p></div></div>
-        <div class="bg-white rounded-2xl p-7 shadow-sm hover:shadow-lg transition-shadow flex items-start gap-5 card-hover"><div class="w-14 h-14 bg-teal-100 rounded-xl flex items-center justify-center shrink-0"><i class="fas fa-chart-line text-teal-600 text-xl"></i></div><div><h3 class="text-lg font-bold text-gray-900 mb-2">Scalable Growth</h3><p class="text-gray-600 text-sm leading-relaxed">Platform scales automatically with your business. Handle millions of transactions without performance issues.</p></div></div>
+      <div class="rv d1 text-center bg-white rounded-3xl p-8 shadow-sm border border-slate-100 tilt">
+        <div class="step-n">2</div>
+        <div class="ibox w-14 h-14 mb-5 mx-auto" style="background:#EFF6FF;border-radius:16px"><i class="fas fa-sync-alt text-blue-600 text-2xl"></i></div>
+        <h3 class="text-xl font-black text-slate-900 mb-3">Transform</h3>
+        <p class="text-slate-500 text-sm leading-relaxed">Map, enrich, and orchestrate data flows between legacy formats and modern REST APIs — visually, without code.</p>
       </div>
-      <div class="bg-gradient-to-r from-sky-500 to-sky-600 rounded-2xl p-8 sm:p-12 text-center text-white">
-        <h3 class="text-2xl sm:text-3xl font-bold mb-4">Ready to Transform Your Insurance Operations?</h3>
-        <p class="text-lg mb-8 opacity-90">Join leading insurers who are modernising their systems with Insurex24</p>
-        <a href="#contact" class="inline-block bg-white text-sky-600 px-8 py-4 rounded-xl text-lg font-semibold hover:shadow-2xl transition-shadow">Schedule a Demo</a>
+      <div class="rv d2 text-center bg-white rounded-3xl p-8 shadow-sm border border-slate-100 tilt">
+        <div class="step-n">3</div>
+        <div class="ibox w-14 h-14 mb-5 mx-auto" style="background:#ECFDF5;border-radius:16px"><i class="fas fa-rocket text-emerald-600 text-2xl"></i></div>
+        <h3 class="text-xl font-black text-slate-900 mb-3">Deliver</h3>
+        <p class="text-slate-500 text-sm leading-relaxed">Power web portals, mobile apps, chatbots, and partner ecosystems with real-time, governed APIs at any scale.</p>
       </div>
     </div>
   </div>
 </section>
 
-<!-- ════════════════════ USE CASES ════════════════════ -->
-<section class="py-16 sm:py-20 lg:py-24 bg-white">
+<!-- SERVICES GRID -->
+<section class="py-28 bg-white">
   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-    <div class="section-fade">
-      <div class="text-center mb-14">
-        <h2 class="text-3xl sm:text-4xl lg:text-5xl font-bold text-gray-900 mb-4">Use Cases</h2>
-        <p class="text-lg text-gray-600 max-w-2xl mx-auto">See how Insurex24 enables innovation across insurance operations</p>
-      </div>
-      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
-        <div class="bg-gradient-to-br from-sky-50 to-sky-100 rounded-2xl p-8 border-2 border-sky-200 card-hover"><i class="fas fa-mobile-alt text-sky-600 text-3xl mb-5 block"></i><h3 class="text-xl font-bold text-gray-900 mb-3">Digital Self-Service</h3><p class="text-gray-700 text-sm leading-relaxed">Enable customers to purchase policies, file claims, and manage accounts through web and mobile apps.</p></div>
-        <div class="bg-gradient-to-br from-cyan-50 to-cyan-100 rounded-2xl p-8 border-2 border-cyan-200 card-hover"><i class="fas fa-handshake text-cyan-600 text-3xl mb-5 block"></i><h3 class="text-xl font-bold text-gray-900 mb-3">Partner Ecosystems</h3><p class="text-gray-700 text-sm leading-relaxed">Connect with brokers, agents, and distribution partners through standardized API integrations.</p></div>
-        <div class="bg-gradient-to-br from-green-50 to-green-100 rounded-2xl p-8 border-2 border-green-200 card-hover"><i class="fas fa-bolt text-green-600 text-3xl mb-5 block"></i><h3 class="text-xl font-bold text-gray-900 mb-3">Instant Quotes</h3><p class="text-gray-700 text-sm leading-relaxed">Provide real-time pricing and underwriting decisions powered by modern rating engines.</p></div>
-        <div class="bg-gradient-to-br from-orange-50 to-orange-100 rounded-2xl p-8 border-2 border-orange-200 card-hover"><i class="fas fa-file-invoice text-orange-600 text-3xl mb-5 block"></i><h3 class="text-xl font-bold text-gray-900 mb-3">Claims Automation</h3><p class="text-gray-700 text-sm leading-relaxed">Streamline claims processing with automated workflows, document processing, and fraud detection.</p></div>
-        <div class="bg-gradient-to-br from-indigo-50 to-indigo-100 rounded-2xl p-8 border-2 border-indigo-200 card-hover"><i class="fas fa-chart-pie text-indigo-600 text-3xl mb-5 block"></i><h3 class="text-xl font-bold text-gray-900 mb-3">Analytics &amp; Insights</h3><p class="text-gray-700 text-sm leading-relaxed">Gain real-time visibility into operations with comprehensive dashboards and reporting.</p></div>
-        <div class="bg-gradient-to-br from-teal-50 to-teal-100 rounded-2xl p-8 border-2 border-teal-200 card-hover"><i class="fas fa-box text-teal-600 text-3xl mb-5 block"></i><h3 class="text-xl font-bold text-gray-900 mb-3">Product Innovation</h3><p class="text-gray-700 text-sm leading-relaxed">Launch new insurance products quickly without modifying core systems or lengthy development cycles.</p></div>
+    <div class="rv text-center mb-16">
+      <span class="sbadge mb-5" style="background:#EFF6FF;border:1px solid #BFDBFE;color:#1D4ED8"><i class="fas fa-layer-group text-xs"></i>Services</span>
+      <h2 class="text-[clamp(2rem,4.5vw,3.5rem)] font-black text-slate-900 tracking-tight mb-4">Everything You Need,<br/><span class="grad">Pre-Integrated</span></h2>
+      <p class="text-slate-500 text-lg max-w-xl mx-auto">Each service is production-hardened, SLA-backed, and available standalone or bundled.</p>
+    </div>
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+      <a href="services.html#ocr" class="svc-card p-6 rv">
+        <div class="flex items-start gap-4">
+          <div class="ibox w-12 h-12 flex-shrink-0" style="background:#EFF6FF;border:1px solid #BFDBFE;border-radius:14px"><i class="fas fa-file-alt text-blue-600 text-xl"></i></div>
+          <div><h3 class="text-slate-900 font-bold mb-2">OCR & Document AI</h3><p class="text-slate-500 text-sm leading-relaxed">Extract structured data from policy PDFs, claim forms, ID docs with 99.9% accuracy.</p></div>
+        </div>
+      </a>
+      <a href="services.html#communication" class="svc-card p-6 rv d1">
+        <div class="flex items-start gap-4">
+          <div class="ibox w-12 h-12 flex-shrink-0" style="background:#F5F3FF;border:1px solid #DDD6FE;border-radius:14px"><i class="fas fa-comment-alt text-violet-600 text-xl"></i></div>
+          <div><h3 class="text-slate-900 font-bold mb-2">SMS & Email Engine</h3><p class="text-slate-500 text-sm leading-relaxed">Multi-channel alerts, OTPs, claim updates, and campaigns.</p></div>
+        </div>
+      </a>
+      <a href="services.html#verification" class="svc-card p-6 rv d2">
+        <div class="flex items-start gap-4">
+          <div class="ibox w-12 h-12 flex-shrink-0" style="background:#ECFEFF;border:1px solid #A5F3FC;border-radius:14px"><i class="fas fa-user-check text-cyan-600 text-xl"></i></div>
+          <div><h3 class="text-slate-900 font-bold mb-2">KYC & eKYC</h3><p class="text-slate-500 text-sm leading-relaxed">IRDAI-compliant KYC and Aadhaar-based eKYC in under 5 seconds.</p></div>
+        </div>
+      </a>
+      <a href="api.html" class="svc-card p-6 rv d1">
+        <div class="flex items-start gap-4">
+          <div class="ibox w-12 h-12 flex-shrink-0" style="background:#FFFBEB;border:1px solid #FDE68A;border-radius:14px"><i class="fas fa-bolt text-amber-600 text-xl"></i></div>
+          <div><h3 class="text-slate-900 font-bold mb-2">API Automation</h3><p class="text-slate-500 text-sm leading-relaxed">Visual workflow builder, scheduled triggers, webhooks, error-recovery pipelines.</p></div>
+        </div>
+      </a>
+      <a href="services.html#operations" class="svc-card p-6 rv d2">
+        <div class="flex items-start gap-4">
+          <div class="ibox w-12 h-12 flex-shrink-0" style="background:#FFF1F2;border:1px solid #FECDD3;border-radius:14px"><i class="fas fa-sliders-h text-rose-600 text-xl"></i></div>
+          <div><h3 class="text-slate-900 font-bold mb-2">Operations Suite</h3><p class="text-slate-500 text-sm leading-relaxed">Policy, claims, premium, regulatory, agent and customer ops — fully automated.</p></div>
+        </div>
+      </a>
+      <a href="data-platform.html" class="svc-card p-6 rv d3">
+        <div class="flex items-start gap-4">
+          <div class="ibox w-12 h-12 flex-shrink-0" style="background:#ECFDF5;border:1px solid #A7F3D0;border-radius:14px"><i class="fas fa-database text-emerald-600 text-xl"></i></div>
+          <div><h3 class="text-slate-900 font-bold mb-2">Data Platform</h3><p class="text-slate-500 text-sm leading-relaxed">Real-time streaming, data vault, regulatory reports, and white-label BI dashboards.</p></div>
+        </div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-light py-36 relative">
+  <div class="orb" style="width:700px;height:700px;top:50%;left:50%;transform:translate(-50%,-50%);background:radial-gradient(circle,rgba(26,143,227,.12) 0%,rgba(21,101,192,.07) 40%,transparent 70%);filter:blur(100px)"></div>
+  <div class="cta-ring" style="width:600px;height:600px;top:50%;left:50%;transform:translate(-50%,-50%)"></div>
+  <div class="cta-ring" style="width:900px;height:900px;top:50%;left:50%;transform:translate(-50%,-50%);opacity:.5"></div>
+  <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10">
+    <div class="rv">
+      <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full mb-8 text-xs font-bold tracking-widest uppercase" style="background:rgba(26,143,227,.1);border:1px solid rgba(26,143,227,.25);color:#1565C0"><i class="fas fa-calendar-check text-xs"></i>Free Demo — No Commitment</div>
+      <h2 class="text-[clamp(2rem,5vw,4rem)] font-black text-slate-900 tracking-tight mb-6">Ready to Modernise<br/><span class="grad">Your Insurance Stack?</span></h2>
+      <p class="text-slate-600 text-xl mb-12 max-w-2xl mx-auto leading-relaxed">Join insurance carriers and brokers who've cut integration time from months to weeks with Insurex24.</p>
+      <div class="flex flex-col sm:flex-row gap-4 justify-center">
+        <a href="contact.html" class="btn-primary !py-4 !px-10 !text-base">Schedule a Demo <i class="fas fa-arrow-right text-sm"></i></a>
+        <a href="platform.html" class="btn-ghost !py-4 !px-10 !text-base">Explore Platform</a>
       </div>
     </div>
   </div>
 </section>
 
-<!-- ════════════════════ CONTACT ════════════════════ -->
-<section id="contact" class="py-16 sm:py-20 lg:py-24 bg-gray-50">
-  <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
-    <div class="section-fade">
-      <div class="text-center mb-12">
-        <h2 class="text-3xl sm:text-4xl lg:text-5xl font-bold text-gray-900 mb-4">Get Started with Insurex24</h2>
-        <p class="text-lg text-gray-600">Schedule a demo to see how Insurex24 can transform your insurance operations</p>
+<!-- FOOTER -->
+<footer style="background:#F8FAFC;border-top:1px solid #E2E8F0">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-10 mb-14">
+      <div class="lg:col-span-2">
+        <a href="index.html" class="flex items-center gap-2.5 mb-5">
+          <div class="w-9 h-9 rounded-xl flex items-center justify-center" style="background:linear-gradient(135deg,#1A8FE3,#1565C0);box-shadow:0 0 16px rgba(26,143,227,.3)"><i class="fas fa-layer-group text-white text-sm"></i></div>
+          <span class="text-[1.05rem] font-black text-slate-900">Insurex<span class="grad">24</span></span>
+        </a>
+        <p class="text-slate-500 text-sm leading-relaxed mb-5 max-w-xs">Enabling large insurance ecosystems with modern MACH middleware technology.</p>
+        <a href="mailto:admin@insurex24.com" class="inline-flex items-center gap-2 text-slate-500 hover:text-slate-900 text-sm transition-colors">
+          <div class="w-8 h-8 rounded-lg flex items-center justify-center" style="background:#EFF6FF;border:1px solid #DBEAFE"><i class="fas fa-envelope text-blue-600 text-xs"></i></div>admin@insurex24.com
+        </a>
       </div>
-
-      <div class="bg-white rounded-2xl p-8 sm:p-12 shadow-lg">
-        <div id="form-success" class="hidden mb-6 bg-green-50 border border-green-200 rounded-xl p-4 text-green-800 text-sm flex items-center gap-2">
-          <i class="fas fa-check-circle text-green-500"></i>
-          Thank you! Your inquiry has been sent. We'll get back to you soon.
-        </div>
-        <div id="form-error" class="hidden mb-6 bg-red-50 border border-red-200 rounded-xl p-4 text-red-800 text-sm flex items-center gap-2">
-          <i class="fas fa-exclamation-circle text-red-500"></i>
-          Something went wrong. Please try again or email <a href="mailto:admin@insurex24.com" class="underline ml-1">admin@insurex24.com</a>
-        </div>
-
-        <form id="contact-form" novalidate class="space-y-5">
-          <div class="grid grid-cols-1 sm:grid-cols-2 gap-5">
-            <div>
-              <label class="block text-sm font-semibold text-gray-800 mb-1.5">First Name *</label>
-              <input id="c-firstName" name="firstName" placeholder="John" class="field w-full px-4 py-3 rounded-xl border border-gray-200 text-sm outline-none transition-all focus:border-sky-500 focus:ring-2 focus:ring-sky-100"/>
-              <p id="err-firstName" class="hidden text-red-500 text-xs mt-1"></p>
-            </div>
-            <div>
-              <label class="block text-sm font-semibold text-gray-800 mb-1.5">Last Name *</label>
-              <input id="c-lastName" name="lastName" placeholder="Doe" class="field w-full px-4 py-3 rounded-xl border border-gray-200 text-sm outline-none transition-all focus:border-sky-500 focus:ring-2 focus:ring-sky-100"/>
-              <p id="err-lastName" class="hidden text-red-500 text-xs mt-1"></p>
-            </div>
-          </div>
-          <div>
-            <label class="block text-sm font-semibold text-gray-800 mb-1.5">Work Email *</label>
-            <input id="c-email" type="email" name="email" placeholder="john@company.com" class="field w-full px-4 py-3 rounded-xl border border-gray-200 text-sm outline-none transition-all focus:border-sky-500 focus:ring-2 focus:ring-sky-100"/>
-            <p id="err-email" class="hidden text-red-500 text-xs mt-1"></p>
-          </div>
-          <div>
-            <label class="block text-sm font-semibold text-gray-800 mb-1.5">Company *</label>
-            <input id="c-company" name="company" placeholder="Your Company" class="field w-full px-4 py-3 rounded-xl border border-gray-200 text-sm outline-none transition-all focus:border-sky-500 focus:ring-2 focus:ring-sky-100"/>
-            <p id="err-company" class="hidden text-red-500 text-xs mt-1"></p>
-          </div>
-          <div class="grid grid-cols-1 sm:grid-cols-2 gap-5">
-            <div>
-              <label class="block text-sm font-semibold text-gray-800 mb-1.5">Phone</label>
-              <input id="c-phone" type="tel" name="phone" placeholder="+91 98765 43210" class="w-full px-4 py-3 rounded-xl border border-gray-200 text-sm outline-none transition-all focus:border-sky-500 focus:ring-2 focus:ring-sky-100"/>
-            </div>
-            <div>
-              <label class="block text-sm font-semibold text-gray-800 mb-1.5">Company Size</label>
-              <select id="c-companySize" name="companySize" class="w-full px-4 py-3 rounded-xl border border-gray-200 text-sm outline-none transition-all focus:border-sky-500 focus:ring-2 focus:ring-sky-100">
-                <option value="">Select size</option>
-                <option>1–50 employees</option>
-                <option>51–200 employees</option>
-                <option>201–1000 employees</option>
-                <option>1000+ employees</option>
-              </select>
-            </div>
-          </div>
-          <div>
-            <label class="block text-sm font-semibold text-gray-800 mb-1.5">Message</label>
-            <textarea id="c-message" name="message" rows="4" placeholder="Tell us about your integration needs..." class="w-full px-4 py-3 rounded-xl border border-gray-200 text-sm outline-none transition-all focus:border-sky-500 focus:ring-2 focus:ring-sky-100 resize-none"></textarea>
-          </div>
-          <button type="submit" id="submit-btn" class="w-full bg-gradient-to-r from-sky-500 to-sky-600 text-white px-8 py-4 rounded-xl font-semibold hover:shadow-xl transition-shadow flex items-center justify-center gap-2 text-base">
-            Request Demo
-          </button>
-          <p class="text-xs text-gray-400 text-center">By submitting you agree to our privacy policy and terms of service.</p>
-        </form>
-      </div>
+      <div><p class="text-xs font-black text-slate-900 uppercase tracking-widest mb-5">Platform</p><ul class="space-y-3"><li><a href="platform.html" class="text-slate-500 hover:text-slate-900 text-sm transition-colors">Features</a></li><li><a href="platform.html" class="text-slate-500 hover:text-slate-900 text-sm transition-colors">MACH Architecture</a></li><li><a href="api.html" class="text-slate-500 hover:text-slate-900 text-sm transition-colors">API Automation</a></li><li><a href="data-platform.html" class="text-slate-500 hover:text-slate-900 text-sm transition-colors">Data Platform</a></li></ul></div>
+      <div><p class="text-xs font-black text-slate-900 uppercase tracking-widest mb-5">Services</p><ul class="space-y-3"><li><a href="services.html#ocr" class="text-slate-500 hover:text-slate-900 text-sm transition-colors">OCR & Document AI</a></li><li><a href="services.html#communication" class="text-slate-500 hover:text-slate-900 text-sm transition-colors">SMS & Email</a></li><li><a href="services.html#verification" class="text-slate-500 hover:text-slate-900 text-sm transition-colors">KYC Verification</a></li><li><a href="services.html#operations" class="text-slate-500 hover:text-slate-900 text-sm transition-colors">Operations</a></li></ul></div>
+      <div><p class="text-xs font-black text-slate-900 uppercase tracking-widest mb-5">Company</p><ul class="space-y-3"><li><a href="#" class="text-slate-500 hover:text-slate-900 text-sm transition-colors">About Us</a></li><li><a href="#" class="text-slate-500 hover:text-slate-900 text-sm transition-colors">Careers</a></li><li><a href="#" class="text-slate-500 hover:text-slate-900 text-sm transition-colors">Blog</a></li><li><a href="contact.html" class="text-slate-500 hover:text-slate-900 text-sm transition-colors">Contact</a></li></ul></div>
     </div>
-  </div>
-</section>
-
-<!-- ════════════════════ FOOTER ════════════════════ -->
-<footer class="bg-gray-900 text-white py-14 sm:py-16">
-  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-10 mb-12">
-      <div class="lg:col-span-1">
-        <div class="flex items-center gap-3 mb-5">
-          <div class="w-10 h-10 bg-gradient-to-br from-sky-500 to-sky-600 rounded-lg flex items-center justify-center"><i class="fas fa-layer-group text-white text-lg"></i></div>
-          <span class="text-xl font-bold">Insurex24</span>
-        </div>
-        <p class="text-gray-400 text-sm leading-relaxed mb-5">Enabling large insurance ecosystems with modern middleware technology.</p>
-        <a href="mailto:admin@insurex24.com" class="w-10 h-10 bg-gray-800 rounded-lg flex items-center justify-center hover:bg-sky-600 transition-colors" title="Email us"><i class="fas fa-envelope text-sm"></i></a>
-      </div>
-      <div>
-        <h3 class="text-sm font-semibold text-white mb-4 uppercase tracking-wider">Platform</h3>
-        <ul class="space-y-2.5"><li><a href="#" class="text-gray-400 hover:text-white transition-colors text-sm">Features</a></li><li><a href="#" class="text-gray-400 hover:text-white transition-colors text-sm">Architecture</a></li><li><a href="#" class="text-gray-400 hover:text-white transition-colors text-sm">Security</a></li><li><a href="#" class="text-gray-400 hover:text-white transition-colors text-sm">Integrations</a></li><li><a href="#" class="text-gray-400 hover:text-white transition-colors text-sm">API Documentation</a></li></ul>
-      </div>
-      <div>
-        <h3 class="text-sm font-semibold text-white mb-4 uppercase tracking-wider">Products</h3>
-        <ul class="space-y-2.5"><li><a href="#" class="text-gray-400 hover:text-white transition-colors text-sm">POSP Onboarding</a></li><li><a href="#" class="text-gray-400 hover:text-white transition-colors text-sm">Policy Journey</a></li><li><a href="#" class="text-gray-400 hover:text-white transition-colors text-sm">Policy Admin</a></li><li><a href="#" class="text-gray-400 hover:text-white transition-colors text-sm">CRM</a></li><li><a href="#" class="text-gray-400 hover:text-white transition-colors text-sm">Endowment</a></li></ul>
-      </div>
-      <div>
-        <h3 class="text-sm font-semibold text-white mb-4 uppercase tracking-wider">Company</h3>
-        <ul class="space-y-2.5"><li><a href="#" class="text-gray-400 hover:text-white transition-colors text-sm">About Us</a></li><li><a href="#" class="text-gray-400 hover:text-white transition-colors text-sm">Careers</a></li><li><a href="#" class="text-gray-400 hover:text-white transition-colors text-sm">Blog</a></li><li><a href="#" class="text-gray-400 hover:text-white transition-colors text-sm">Case Studies</a></li><li><a href="#" class="text-gray-400 hover:text-white transition-colors text-sm">Partners</a></li></ul>
-      </div>
-      <div>
-        <h3 class="text-sm font-semibold text-white mb-4 uppercase tracking-wider">Resources</h3>
-        <ul class="space-y-2.5"><li><a href="#" class="text-gray-400 hover:text-white transition-colors text-sm">Documentation</a></li><li><a href="#" class="text-gray-400 hover:text-white transition-colors text-sm">Developer Portal</a></li><li><a href="#" class="text-gray-400 hover:text-white transition-colors text-sm">Support</a></li><li><a href="#" class="text-gray-400 hover:text-white transition-colors text-sm">Community</a></li><li><a href="#" class="text-gray-400 hover:text-white transition-colors text-sm">Contact</a></li></ul>
-      </div>
-    </div>
-    <div class="border-t border-gray-800 pt-8 flex flex-col sm:flex-row justify-between items-center gap-4">
-      <p class="text-gray-500 text-sm">&copy; 2026 Insurex24. All rights reserved.</p>
-      <div class="flex gap-6 text-sm">
-        <a href="#" class="text-gray-500 hover:text-white transition-colors">Privacy Policy</a>
-        <a href="#" class="text-gray-500 hover:text-white transition-colors">Terms of Service</a>
-        <a href="#" class="text-gray-500 hover:text-white transition-colors">Cookie Policy</a>
-      </div>
+    <div class="border-t pt-8 flex flex-col sm:flex-row justify-between items-center gap-4" style="border-color:#E2E8F0">
+      <p class="text-slate-500 text-sm">© 2026 Insurex24. All rights reserved.</p>
+      <div class="flex gap-6"><a href="#" class="text-slate-500 hover:text-slate-900 text-sm transition-colors">Privacy</a><a href="#" class="text-slate-500 hover:text-slate-900 text-sm transition-colors">Terms</a></div>
     </div>
   </div>
 </footer>
 
-<!-- ════════════════════ SUCCESS MODAL ════════════════════ -->
-<div id="success-modal" class="hidden fixed inset-0 flex items-center justify-center z-50" style="background:rgba(0,0,0,.5);backdrop-filter:blur(4px)">
-  <div class="bg-white rounded-2xl shadow-2xl w-full max-w-md p-8 text-center mx-4 modal-anim">
-    <div class="w-16 h-16 mx-auto bg-green-100 rounded-full flex items-center justify-center mb-5"><i class="fas fa-check text-green-600 text-3xl"></i></div>
-    <h2 class="text-2xl font-bold text-gray-900 mb-2">You're all set!</h2>
-    <p class="text-gray-500 leading-relaxed mb-7">Thanks for your interest in Insurex24. Our team will reach out shortly with next steps.</p>
-    <div class="flex gap-3">
-      <button onclick="closeModal()" class="flex-1 bg-white border border-gray-200 text-gray-700 px-4 py-2.5 rounded-xl font-medium hover:bg-gray-50 transition-colors">Close</button>
-      <button onclick="closeModal()" class="flex-1 bg-gradient-to-r from-sky-500 to-sky-600 text-white px-4 py-2.5 rounded-xl font-medium hover:shadow-lg transition-shadow">Stay on page</button>
-    </div>
-  </div>
-</div>
-
-<!-- ════════════════════ JAVASCRIPT ════════════════════ -->
 <script>
-/* ── Navbar ─────────────────────────────────────────── */
-window.addEventListener('scroll', () => {
-  document.getElementById('navbar').classList.toggle('shadow-md', window.scrollY > 20);
-});
+const nav=document.getElementById('nav');
+window.addEventListener('scroll',()=>nav.classList.toggle('solid',scrollY>20));
+const bur=document.getElementById('bur'),mob=document.getElementById('mob'),bic=document.getElementById('bic');
+bur.addEventListener('click',()=>{const o=mob.classList.toggle('open');bic.className=o?'fas fa-times text-lg':'fas fa-bars text-lg'});
+document.querySelectorAll('.ml').forEach(a=>a.addEventListener('click',()=>{mob.classList.remove('open');bic.className='fas fa-bars text-lg'}));
 
-const burger = document.getElementById('burger');
-const mobMenu = document.getElementById('mob-menu');
-const burgerIcon = document.getElementById('burger-icon');
-burger.addEventListener('click', () => {
-  const isOpen = mobMenu.classList.toggle('open');
-  burgerIcon.className = isOpen ? 'fas fa-times text-xl' : 'fas fa-bars text-xl';
-});
-document.querySelectorAll('.mob-link').forEach(a => {
-  a.addEventListener('click', () => { mobMenu.classList.remove('open'); burgerIcon.className = 'fas fa-bars text-xl'; });
-});
+const ro=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');ro.unobserve(e.target)}}),{threshold:.1});
+document.querySelectorAll('.rv').forEach(el=>ro.observe(el));
 
-/* ── Active nav link via IntersectionObserver ────────── */
-const navLinks = document.querySelectorAll('.nav-link[data-sec]');
-const secObs = new IntersectionObserver(entries => {
-  entries.forEach(e => {
-    if (e.isIntersecting) {
-      navLinks.forEach(a => a.classList.remove('active','text-sky-600'));
-      const match = document.querySelector(`.nav-link[data-sec="${e.target.id}"]`);
-      if (match) { match.classList.add('active','text-sky-600'); match.classList.remove('text-gray-600'); }
-    }
-  });
-}, { threshold: 0.35 });
-['platform','mach','ocr-services','communication-services','verification-services','operations-automation','data-platform','benefits'].forEach(id => {
-  const el = document.getElementById(id);
-  if (el) secObs.observe(el);
-});
-
-/* ── Section fade-in ─────────────────────────────────── */
-const fadeObs = new IntersectionObserver(entries => {
-  entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); fadeObs.unobserve(e.target); } });
-}, { threshold: 0.1 });
-document.querySelectorAll('.section-fade').forEach(el => fadeObs.observe(el));
-
-/* ── API Automation Demo ─────────────────────────────── */
-const SCENARIOS = [
-  {
-    method:'POST', endpoint:'POST /api/v1/policies',
-    payload:{ policyType:'Auto', insuredName:'Jane Smith', premium:1240.00, effectiveDate:'2026-06-01', coverageLimit:500000 },
-    steps:[
-      {type:'info',    msg:'[Trigger] New policy request received'},
-      {type:'info',    msg:'[Transform] Mapping payload to core system format'},
-      {type:'info',    msg:'[Execute] POST /core/policies → legacy PAS'},
-      {type:'info',    msg:'[Execute] POST /notifications/welcome-email'},
-      {type:'success', msg:'[Validate] Response schema OK — policyId: POL-20260601-7821'},
-      {type:'success', msg:'[Monitor] Logged to audit trail. Latency: 214ms'},
-    ],
-    result:{ success:true, policyId:'POL-20260601-7821', status:'ACTIVE', premium:1240.00 }
-  },
-  {
-    method:'POST', endpoint:'POST /api/v1/claims',
-    payload:{ policyId:'POL-20250315-4492', claimType:'Accident', incidentDate:'2026-05-12', estimatedLoss:8500.00 },
-    steps:[
-      {type:'info',    msg:'[Trigger] Claim submission event received'},
-      {type:'info',    msg:'[Transform] Enriching with policy data from PAS'},
-      {type:'info',    msg:'[Execute] POST /claims/create → Claims Management System'},
-      {type:'warn',    msg:'[Execute] Fraud-check API timeout — retrying (1/3)'},
-      {type:'info',    msg:'[Execute] Fraud-check API retry succeeded'},
-      {type:'success', msg:'[Validate] Claim created — CLM-20260512-0038. Latency: 389ms'},
-    ],
-    result:{ success:true, claimId:'CLM-20260512-0038', status:'UNDER_REVIEW', estimatedLoss:8500.00 }
-  },
-  {
-    method:'POST', endpoint:'POST /api/v1/quotes',
-    payload:{ product:'Home Insurance', applicantAge:34, propertyValue:320000, location:'Austin, TX', coverageType:'Comprehensive' },
-    steps:[
-      {type:'info',    msg:'[Trigger] Quote request from web portal'},
-      {type:'info',    msg:'[Execute] GET /rating-engine/risk-score'},
-      {type:'info',    msg:'[Execute] GET /reinsurance/capacity-check'},
-      {type:'info',    msg:'[Transform] Applying underwriting rules'},
-      {type:'success', msg:'[Validate] Quote generated in 178ms — QTE-8821'},
-    ],
-    result:{ success:true, quoteId:'QTE-8821', annualPremium:1875.50, riskScore:'LOW', validUntil:'2026-06-17' }
-  },
-  {
-    method:'PUT', endpoint:'PUT /api/v1/premiums/batch-sync',
-    payload:{ trigger:'nightly-cron', schedule:'0 2 * * *', scope:'ALL_ACTIVE_POLICIES', batchSize:500 },
-    steps:[
-      {type:'info',    msg:'[Trigger] Cron job fired: 0 2 * * * (02:00 UTC)'},
-      {type:'info',    msg:'[Execute] Fetching 500 active policies from PAS'},
-      {type:'info',    msg:'[Execute] Recalculating premiums with current rate tables'},
-      {type:'info',    msg:'[Execute] Batch-updating 498 records (2 unchanged)'},
-      {type:'success', msg:'[Monitor] Sync complete. 498 updated, 0 errors. Latency: 1.2s'},
-    ],
-    result:{ success:true, processed:500, updated:498, unchanged:2, errors:0 }
-  }
-];
-const LOG_COLOR = { info:'text-sky-400', success:'text-green-400', warn:'text-yellow-400', error:'text-red-400' };
-let curSc = 0, demoRunning = false, demoStats = { calls:0, success:0, totalMs:0 };
-
-function selectScenario(idx) {
-  if (demoRunning) return;
-  curSc = idx;
-  document.querySelectorAll('.sc-tab').forEach((btn, i) => {
-    btn.classList.toggle('active', i === idx);
-  });
-  const sc = SCENARIOS[idx];
-  document.getElementById('req-method').textContent = sc.method;
-  document.getElementById('req-endpoint').textContent = sc.endpoint;
-  document.getElementById('req-payload').textContent = JSON.stringify(sc.payload, null, 2);
-  document.getElementById('log-output').innerHTML = '<span class="text-gray-600 italic">Click "Run Automation" to start...</span>';
-  document.getElementById('http-badge').classList.add('hidden');
-}
-selectScenario(0);
-
-async function runDemo() {
-  if (demoRunning) return;
-  demoRunning = true;
-  const sc = SCENARIOS[curSc];
-  const log = document.getElementById('log-output');
-  const btn = document.getElementById('run-btn');
-  log.innerHTML = '';
-  document.getElementById('http-badge').classList.add('hidden');
-  btn.disabled = true;
-  btn.innerHTML = '<svg class="animate-spin h-5 w-5" viewBox="0 0 24 24"><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4" fill="none"/><path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"/></svg> Running...';
-  const t0 = Date.now();
-  for (const step of sc.steps) {
-    await new Promise(r => setTimeout(r, 300 + Math.random() * 250));
-    const time = new Date().toTimeString().slice(0,8);
-    const div = document.createElement('div');
-    div.className = 'mb-1 flex items-start gap-2 log-line';
-    div.innerHTML = `<span class="text-gray-600 shrink-0">${time}</span><span class="${LOG_COLOR[step.type]||'text-gray-300'}">${step.msg}</span>`;
-    log.appendChild(div);
-    log.scrollTop = log.scrollHeight;
-  }
-  const ms = Date.now() - t0;
-  const resDiv = document.createElement('div');
-  resDiv.className = 'mt-4 border-t border-gray-700 pt-4';
-  resDiv.innerHTML = `<p class="text-gray-500 mb-2"># Response</p><pre class="text-green-300 whitespace-pre-wrap text-xs">${JSON.stringify(sc.result, null, 2)}</pre>`;
-  log.appendChild(resDiv);
-  document.getElementById('http-badge').classList.remove('hidden');
-  demoStats.calls++; demoStats.success++; demoStats.totalMs += ms;
-  document.getElementById('stat-calls').textContent   = demoStats.calls;
-  document.getElementById('stat-success').textContent = demoStats.success;
-  document.getElementById('stat-latency').textContent = Math.round(demoStats.totalMs / demoStats.calls) + 'ms';
-  document.getElementById('stat-rate').textContent    = Math.round(demoStats.success / demoStats.calls * 100) + '%';
-  btn.disabled = false;
-  btn.innerHTML = '<i class="fas fa-play"></i> Run Automation';
-  demoRunning = false;
-}
-
-/* ── Contact form ────────────────────────────────────── */
-document.getElementById('contact-form').addEventListener('submit', async function(e) {
-  e.preventDefault();
-  /* read every field by its name="" attribute – never by ID */
-  const form = document.getElementById('contact-form');
-  const get  = name => (form.elements[name] ? form.elements[name].value.trim() : '');
-  let firstErrField = null;
-
-  const showErr = (id, msg) => {
-    const errEl = document.getElementById('err-' + id);
-    const inpEl = document.getElementById('c-' + id);
-    errEl.textContent = msg;
-    errEl.classList.remove('hidden');
-    inpEl.classList.add('border-red-400');
-    inpEl.classList.remove('border-gray-200');
-    if (!firstErrField) firstErrField = inpEl;
+function runCounter(el){
+  const t=parseFloat(el.dataset.target);
+  const s=el.dataset.suffix||'';
+  const d=parseInt(el.dataset.dec||0);
+  const dur=2200,st=performance.now();
+  const tick=n=>{
+    const p=Math.min((n-st)/dur,1);
+    const e=1-Math.pow(1-p,4);
+    el.textContent=(d?(e*t).toFixed(d):Math.round(e*t))+s;
+    if(p<1)requestAnimationFrame(tick);
   };
-  const clearErr = id => {
-    document.getElementById('err-' + id).classList.add('hidden');
-    const inpEl = document.getElementById('c-' + id);
-    inpEl.classList.remove('border-red-400');
-    inpEl.classList.add('border-gray-200');
-  };
+  requestAnimationFrame(tick);
+}
+const co=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){runCounter(e.target);co.unobserve(e.target)}}),{threshold:.5});
+document.querySelectorAll('.counter').forEach(el=>co.observe(el));
 
-  // hide any previous top-level validation banner
-  const valBanner = document.getElementById('form-val-banner');
-  if (valBanner) valBanner.remove();
-
-  ['firstName','lastName','email','company'].forEach(clearErr);
-  let valid = true;
-  if (!get('firstName'))                                        { showErr('firstName', 'First name is required'); valid = false; }
-  if (!get('lastName'))                                         { showErr('lastName',  'Last name is required');  valid = false; }
-  if (!get('email'))                                            { showErr('email',     'Email is required');      valid = false; }
-  else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(get('email')))  { showErr('email',     'Enter a valid email');    valid = false; }
-  if (!get('company'))                                          { showErr('company',   'Company is required');   valid = false; }
-
-  if (!valid) {
-    // insert a banner at the top of the form so the user always sees feedback
-    const banner = document.createElement('div');
-    banner.id = 'form-val-banner';
-    banner.className = 'mb-5 bg-red-50 border border-red-200 rounded-xl p-3 text-red-700 text-sm flex items-center gap-2';
-    banner.innerHTML = '<i class="fas fa-exclamation-circle text-red-500 shrink-0"></i> Please fill in all required fields highlighted below.';
-    this.prepend(banner);
-    // scroll to the first invalid field so the user can see it
-    if (firstErrField) {
-      firstErrField.scrollIntoView({ behavior: 'smooth', block: 'center' });
-      firstErrField.focus();
-    }
-    return;
-  }
-
-  const btn = document.getElementById('submit-btn');
-  btn.disabled = true;
-  btn.innerHTML = '<svg class="animate-spin h-5 w-5" viewBox="0 0 24 24"><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4" fill="none"/><path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z"/></svg> Sending...';
-  document.getElementById('form-error').classList.add('hidden');
-
-  try {
-    const res = await fetch('https://api.web3forms.com/submit', {
-      method:'POST',
-      headers:{'Content-Type':'application/json', Accept:'application/json'},
-      body: JSON.stringify({
-        access_key : '298d39ae-34a4-4c8a-aedf-f55cffead471',
-        subject    : `New Demo Request from ${get('firstName')} ${get('lastName')}`,
-        from_name  : 'Insurex24 Website',
-        /* ── contact details as individual fields ── */
-        name         : `${get('firstName')} ${get('lastName')}`,
-        email        : get('email'),
-        company_name : get('company'),          /* company NAME value – not an id */
-        phone        : get('phone'),
-        company_size : get('companySize'),
-        /* ── readable summary for the email body ── */
-        message : [
-          `Name:         ${get('firstName')} ${get('lastName')}`,
-          `Email:        ${get('email')}`,
-          `Company:      ${get('company')}`,
-          `Phone:        ${get('phone')}`,
-          `Company Size: ${get('companySize')}`,
-          '',
-          get('message')
-        ].join('\n'),
-        to : 'admin@insurex24.com'
-      })
-    });
-    const json = await res.json();
-    if (res.ok && json.success) {
-      document.getElementById('contact-form').reset();
-      document.getElementById('form-success').classList.remove('hidden');
-      openModal();
-      setTimeout(closeModal, 5000);
-    } else throw new Error();
-  } catch { document.getElementById('form-error').classList.remove('hidden'); }
-  finally { btn.disabled=false; btn.innerHTML='Request Demo'; }
-});
-
-/* ── Success modal ───────────────────────────────────── */
-function openModal()  { document.getElementById('success-modal').classList.remove('hidden'); }
-function closeModal() { document.getElementById('success-modal').classList.add('hidden'); }
-document.getElementById('success-modal').addEventListener('click', function(e) {
-  if (e.target === this) closeModal();
+document.querySelectorAll('.tilt').forEach(c=>{
+  c.addEventListener('mousemove',e=>{
+    const r=c.getBoundingClientRect(),x=(e.clientX-r.left)/r.width-.5,y=(e.clientY-r.top)/r.height-.5;
+    c.style.transform=`perspective(900px) rotateX(${-y*7}deg) rotateY(${x*7}deg) translateZ(10px)`;
+    c.style.transition='box-shadow .15s';
+  });
+  c.addEventListener('mouseleave',()=>{c.style.transform='';c.style.transition='transform .6s cubic-bezier(.16,1,.3,1)'});
 });
 </script>
 </body>

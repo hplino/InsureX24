@@ -1,0 +1,292 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/><meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>Services – Insurex24</title>
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0%25' y1='0%25' x2='100%25' y2='100%25'%3E%3Cstop offset='0%25' style='stop-color:%231A8FE3'/%3E%3Cstop offset='100%25' style='stop-color:%231565C0'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='100' height='100' rx='22' fill='url(%23g)'/%3E%3Cg fill='white'%3E%3Crect x='24' y='24' width='52' height='11' rx='3'/%3E%3Crect x='24' y='44' width='52' height='11' rx='3'/%3E%3Crect x='24' y='64' width='52' height='11' rx='3'/%3E%3C/g%3E%3C/svg%3E"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet"/>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"/>
+<script src="https://cdn.tailwindcss.com"></script>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}html{scroll-behavior:smooth}body{font-family:'Inter',system-ui,sans-serif;background:#fff;overflow-x:hidden}
+.grad{background:linear-gradient(135deg,#93C5FD,#60A5FA,#1A8FE3,#1240A0);background-size:300%;-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;animation:gf 6s ease infinite}
+@keyframes gf{0%,100%{background-position:0%}50%{background-position:100%}}
+.btn-primary{background:linear-gradient(135deg,#1A8FE3,#1565C0);color:#fff;display:inline-flex;align-items:center;justify-content:center;gap:.6rem;border-radius:14px;padding:.95rem 2.2rem;font-weight:700;font-size:.92rem;text-decoration:none;border:none;cursor:pointer;position:relative;overflow:hidden;transition:transform .25s,box-shadow .25s;box-shadow:0 0 28px rgba(26,143,227,.45),0 8px 32px rgba(26,143,227,.25)}
+.btn-primary::before{content:'';position:absolute;inset:0;background:linear-gradient(135deg,rgba(255,255,255,.18),transparent 60%);pointer-events:none}
+.btn-primary:hover{transform:translateY(-3px) scale(1.02);box-shadow:0 0 48px rgba(21,101,192,.65),0 16px 48px rgba(26,143,227,.35)}
+.btn-ghost{border:1.5px solid rgba(26,143,227,.4);color:#1565C0;background:rgba(26,143,227,.06);display:inline-flex;align-items:center;justify-content:center;gap:.6rem;border-radius:14px;padding:.95rem 2.2rem;font-weight:600;font-size:.92rem;text-decoration:none;transition:all .25s}
+.btn-ghost:hover{background:rgba(26,143,227,.12);border-color:rgba(26,143,227,.6);color:#1240A0;transform:translateY(-2px)}
+#nav{position:fixed;top:0;left:0;right:0;z-index:100;background:rgba(255,255,255,.92);backdrop-filter:blur(28px);border-bottom:1px solid rgba(0,0,0,.07);transition:background .3s,box-shadow .3s}
+#nav.solid{background:rgba(255,255,255,.99);box-shadow:0 4px 32px rgba(0,0,0,.08)}
+.nlink{color:#64748B;font-size:.85rem;font-weight:600;padding:.5rem 1rem;border-radius:10px;text-decoration:none;transition:all .2s}
+.nlink:hover{color:#1E293B;background:rgba(0,0,0,.04)}.nlink.act{color:#1565C0;background:rgba(26,143,227,.1)}
+#mob{max-height:0;overflow:hidden;transition:max-height .4s cubic-bezier(0,.8,.4,1),opacity .3s;opacity:0;background:#fff;border-top:1px solid rgba(0,0,0,.06)}
+#mob.open{max-height:32rem;opacity:1}
+.hero-bg{background:linear-gradient(135deg,#EFF6FF 0%,#DBEAFE 50%,#EFF6FF 100%);position:relative;overflow:hidden;min-height:65vh;display:flex;align-items:center}
+.dot-grid{position:absolute;inset:0;background-image:radial-gradient(rgba(26,143,227,.15) 1.2px,transparent 1.2px);background-size:38px 38px;animation:dd 25s linear infinite}
+@keyframes dd{from{background-position:0 0}to{background-position:38px 38px}}
+.orb{position:absolute;border-radius:50%;filter:blur(90px);pointer-events:none}
+.oa{width:700px;height:700px;top:-250px;left:-150px;background:radial-gradient(circle,rgba(26,143,227,.18),transparent 65%);animation:oa 20s ease-in-out infinite}
+.ob{width:500px;height:500px;bottom:-150px;right:-100px;background:radial-gradient(circle,rgba(21,101,192,.12),transparent 65%);animation:ob 25s ease-in-out infinite}
+@keyframes oa{0%,100%{transform:translate(0,0) scale(1)}50%{transform:translate(60px,-70px) scale(1.1)}}
+@keyframes ob{0%,100%{transform:translate(0,0) scale(1)}50%{transform:translate(-50px,60px) scale(1.08)}}
+.hero-badge{display:inline-flex;align-items:center;gap:.5rem;padding:.45rem 1.2rem;border-radius:24px;background:rgba(26,143,227,.08);border:1px solid rgba(26,143,227,.28);color:#1565C0;font-size:.78rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase}
+.live-dot{width:7px;height:7px;border-radius:50%;background:#1A8FE3;box-shadow:0 0 10px #1A8FE3;animation:ld 1.6s ease-in-out infinite}
+@keyframes ld{0%,100%{opacity:1}50%{opacity:.3}}
+/* Sticky sub-nav */
+.subnav{position:sticky;top:68px;z-index:40;background:rgba(255,255,255,.96);backdrop-filter:blur(20px);border-bottom:1px solid #E2E8F0;padding:.75rem 0}
+.snav-pill{display:inline-flex;align-items:center;gap:.4rem;padding:.45rem 1.1rem;border-radius:24px;font-size:.82rem;font-weight:700;text-decoration:none;transition:all .2s;color:#64748B;border:1.5px solid transparent}
+.snav-pill:hover{color:#1E3A8A;background:#EFF6FF}
+.snav-pill.active{background:linear-gradient(135deg,#1A8FE3,#1565C0);color:#fff;border-color:transparent;box-shadow:0 4px 16px rgba(26,143,227,.3)}
+/* Cards */
+.svc-card{background:#fff;border-radius:24px;border:1px solid #E2E8F0;transition:transform .3s cubic-bezier(.16,1,.3,1),box-shadow .3s;position:relative;overflow:hidden}
+.svc-card::after{content:'';position:absolute;top:0;left:0;right:0;height:4px;opacity:0;transition:opacity .3s}
+.svc-card:hover{transform:translateY(-7px);box-shadow:0 32px 72px -12px rgba(0,0,0,.12)}
+.svc-card:hover::after{opacity:1}
+.ibox{display:inline-flex;align-items:center;justify-content:center;flex-shrink:0}
+.sbadge{display:inline-flex;align-items:center;gap:.4rem;padding:.38rem 1.1rem;border-radius:24px;font-size:.78rem;font-weight:700;letter-spacing:.04em}
+.live-badge{display:inline-flex;align-items:center;gap:.4rem;font-size:.72rem;font-weight:700;padding:.25rem .7rem;border-radius:12px;background:rgba(34,197,94,.1);border:1px solid rgba(34,197,94,.25);color:#22C55E}
+.live-badge::before{content:'';width:5px;height:5px;border-radius:50%;background:#22C55E;box-shadow:0 0 6px #22C55E;animation:ld 1.5s ease-in-out infinite}
+.stats-banner{border-radius:24px;padding:2.5rem;position:relative;overflow:hidden}
+.rv{opacity:0;transform:translateY(36px);transition:opacity .8s cubic-bezier(.16,1,.3,1),transform .8s cubic-bezier(.16,1,.3,1)}
+.rv.in{opacity:1;transform:none}
+.d1{transition-delay:.08s}.d2{transition-delay:.16s}.d3{transition-delay:.24s}
+.cta-light{background:linear-gradient(135deg,#EFF6FF,#DBEAFE);position:relative;overflow:hidden}
+.cta-ring{position:absolute;border-radius:50%;border:1px solid rgba(26,143,227,.2);pointer-events:none}
+::-webkit-scrollbar{width:5px}::-webkit-scrollbar-track{background:#F8FAFC}::-webkit-scrollbar-thumb{background:linear-gradient(#1A8FE3,#1565C0);border-radius:3px}
+</style>
+</head>
+<body>
+<nav id="nav">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="flex justify-between items-center h-[68px]">
+      <a href="index.html" class="flex items-center gap-2.5"><div class="w-9 h-9 rounded-xl flex items-center justify-center" style="background:linear-gradient(135deg,#1A8FE3,#1565C0);box-shadow:0 0 18px rgba(26,143,227,.35)"><i class="fas fa-layer-group text-white text-sm"></i></div><span class="text-[1.08rem] font-black text-slate-900 tracking-tight">Insurex<span class="grad">24</span></span></a>
+      <div class="hidden md:flex items-center gap-0.5">
+        <a href="platform.html" class="nlink">Platform</a><a href="services.html" class="nlink act">Services</a><a href="api.html" class="nlink">API Automation</a><a href="data-platform.html" class="nlink">Data Platform</a>
+        <a href="contact.html" class="btn-primary ml-3 !py-2.5 !px-5 !text-[.84rem] !rounded-xl">Get Demo</a>
+      </div>
+      <button id="bur" class="md:hidden p-2 rounded-xl text-slate-600 hover:bg-black/5"><i id="bic" class="fas fa-bars text-lg"></i></button>
+    </div>
+  </div>
+  <div id="mob">
+    <div class="px-4 py-4 space-y-1">
+      <a href="platform.html" class="ml block py-3 px-4 rounded-xl text-slate-600 hover:text-slate-900 text-sm font-semibold">Platform</a>
+      <a href="services.html" class="ml block py-3 px-4 rounded-xl text-blue-700 bg-blue-50 text-sm font-bold">Services</a>
+      <a href="api.html" class="ml block py-3 px-4 rounded-xl text-slate-600 hover:text-slate-900 text-sm font-semibold">API Automation</a>
+      <a href="data-platform.html" class="ml block py-3 px-4 rounded-xl text-slate-600 hover:text-slate-900 text-sm font-semibold">Data Platform</a>
+      <a href="contact.html" class="ml block mt-3 btn-primary !py-3 !rounded-xl">Get Demo</a>
+    </div>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero-bg pt-[68px]">
+  <div class="dot-grid"></div><div class="orb oa"></div><div class="orb ob"></div>
+  <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-24 lg:py-32 relative z-10 text-center">
+    <div class="hero-badge mb-6 mx-auto w-fit"><div class="live-dot"></div>Services Suite</div>
+    <h1 class="text-[clamp(2.6rem,6vw,4.5rem)] font-black text-slate-900 leading-[1.05] tracking-tight mb-6">Production-Ready<br/><span class="grad">Insurance Services</span></h1>
+    <p class="text-[1.1rem] text-slate-600 leading-relaxed max-w-2xl mx-auto mb-10">OCR, KYC, communications, and operations — every capability pre-integrated, SLA-backed, and IRDAI-compliant out of the box.</p>
+    <div class="flex flex-col sm:flex-row gap-3 justify-center">
+      <a href="contact.html" class="btn-primary">Get Started <i class="fas fa-arrow-right text-sm"></i></a>
+      <a href="#ocr" class="btn-ghost">Browse Services</a>
+    </div>
+  </div>
+</section>
+
+<!-- STICKY SUB-NAV -->
+<div class="subnav">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="flex gap-2 overflow-x-auto pb-0.5">
+      <a href="#ocr" class="snav-pill active" data-target="ocr"><i class="fas fa-file-alt text-xs"></i>OCR</a>
+      <a href="#communication" class="snav-pill" data-target="communication"><i class="fas fa-comment-alt text-xs"></i>SMS & Email</a>
+      <a href="#verification" class="snav-pill" data-target="verification"><i class="fas fa-user-check text-xs"></i>KYC & Verification</a>
+      <a href="#operations" class="snav-pill" data-target="operations"><i class="fas fa-cogs text-xs"></i>Operations</a>
+    </div>
+  </div>
+</div>
+
+<!-- ── OCR ── -->
+<section id="ocr" class="py-28 bg-white">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="rv text-center mb-16">
+      <span class="sbadge mb-5" style="background:#EFF6FF;border:1px solid #BFDBFE;color:#1D4ED8"><i class="fas fa-file-alt text-xs"></i>OCR & Document AI</span>
+      <h2 class="text-[clamp(2rem,4vw,3.2rem)] font-black text-slate-900 tracking-tight mb-4">99.9% Accurate<br/><span class="grad">Document Extraction</span></h2>
+      <p class="text-slate-500 text-lg max-w-xl mx-auto">Extract structured data from any insurance document in under 2 seconds.</p>
+    </div>
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+      <div class="svc-card p-8 rv">
+        <div style="position:absolute;top:0;left:0;right:0;height:4px;background:linear-gradient(90deg,#1A8FE3,#60A5FA)"></div>
+        <div class="ibox w-14 h-14 mb-5" style="background:#EFF6FF;border-radius:18px"><i class="fas fa-file-pdf text-blue-600 text-2xl"></i></div>
+        <h3 class="text-xl font-black text-slate-900 mb-3">PDF-to-Text Extraction</h3>
+        <p class="text-slate-500 text-sm leading-relaxed mb-5">Extract policy schedules, claim forms, and ACORD documents with field-level confidence scores and automatic handwriting recognition.</p>
+        <div class="flex flex-wrap gap-2"><span class="px-3 py-1.5 rounded-xl text-xs font-bold" style="background:#EFF6FF;color:#1D4ED8">50+ document types</span><span class="px-3 py-1.5 rounded-xl text-xs font-bold" style="background:#EFF6FF;color:#1D4ED8">Handwriting OCR</span><span class="px-3 py-1.5 rounded-xl text-xs font-bold" style="background:#EFF6FF;color:#1D4ED8">Confidence scores</span></div>
+      </div>
+      <div class="svc-card p-8 rv d1">
+        <div style="position:absolute;top:0;left:0;right:0;height:4px;background:linear-gradient(90deg,#8B5CF6,#A78BFA)"></div>
+        <div class="ibox w-14 h-14 mb-5" style="background:#F5F3FF;border-radius:18px"><i class="fas fa-image text-violet-600 text-2xl"></i></div>
+        <h3 class="text-xl font-black text-slate-900 mb-3">Image-to-Text Extraction</h3>
+        <p class="text-slate-500 text-sm leading-relaxed mb-5">Process ID cards, vehicle photos, medical reports, and damage images with multi-language support covering 20+ Indian languages.</p>
+        <div class="flex flex-wrap gap-2"><span class="px-3 py-1.5 rounded-xl text-xs font-bold" style="background:#F5F3FF;color:#6D28D9">20+ languages</span><span class="px-3 py-1.5 rounded-xl text-xs font-bold" style="background:#F5F3FF;color:#6D28D9">ID card parsing</span><span class="px-3 py-1.5 rounded-xl text-xs font-bold" style="background:#F5F3FF;color:#6D28D9">Multi-page docs</span></div>
+      </div>
+    </div>
+    <div class="rv stats-banner" style="background:linear-gradient(135deg,#1E3A8A,#312E81)">
+      <div class="grid grid-cols-2 sm:grid-cols-4 gap-6 text-center">
+        <div><p class="text-3xl font-black text-white mb-1">99.9%</p><p class="text-blue-200 text-sm">Extraction Accuracy</p></div>
+        <div><p class="text-3xl font-black text-white mb-1">&lt;2s</p><p class="text-blue-200 text-sm">Avg Processing Time</p></div>
+        <div><p class="text-3xl font-black text-white mb-1">50+</p><p class="text-blue-200 text-sm">Document Types</p></div>
+        <div><p class="text-3xl font-black text-white mb-1">20+</p><p class="text-blue-200 text-sm">Languages Supported</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── COMMUNICATION ── -->
+<section id="communication" class="py-28" style="background:#F8FAFC">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="rv text-center mb-16">
+      <span class="sbadge mb-5" style="background:#ECFDF5;border:1px solid #A7F3D0;color:#065F46"><i class="fas fa-comment-alt text-xs"></i>SMS & Email Communication</span>
+      <h2 class="text-[clamp(2rem,4vw,3.2rem)] font-black text-slate-900 tracking-tight mb-4">Reach Every<br/><span class="grad">Policyholder, Every Time</span></h2>
+      <p class="text-slate-500 text-lg max-w-xl mx-auto">Multi-channel communication with 99.5% delivery rates and real-time status tracking.</p>
+    </div>
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+      <div class="svc-card p-8 rv">
+        <div style="position:absolute;top:0;left:0;right:0;height:4px;background:linear-gradient(90deg,#10B981,#34D399)"></div>
+        <div class="ibox w-14 h-14 mb-5" style="background:#ECFDF5;border-radius:18px"><i class="fas fa-sms text-emerald-600 text-2xl"></i></div>
+        <h3 class="text-xl font-black text-slate-900 mb-3">SMS Service</h3>
+        <p class="text-slate-500 text-sm leading-relaxed mb-5">Transactional and promotional SMS with DLT registration, Unicode support, and real-time delivery reports across all 4 major telecom operators.</p>
+        <div class="flex flex-wrap gap-2"><span class="px-3 py-1.5 rounded-xl text-xs font-bold" style="background:#ECFDF5;color:#065F46">DLT Registered</span><span class="px-3 py-1.5 rounded-xl text-xs font-bold" style="background:#ECFDF5;color:#065F46">Unicode</span><span class="px-3 py-1.5 rounded-xl text-xs font-bold" style="background:#ECFDF5;color:#065F46">Delivery reports</span></div>
+      </div>
+      <div class="svc-card p-8 rv d1">
+        <div style="position:absolute;top:0;left:0;right:0;height:4px;background:linear-gradient(90deg,#1A8FE3,#60A5FA)"></div>
+        <div class="ibox w-14 h-14 mb-5" style="background:#EFF6FF;border-radius:18px"><i class="fas fa-envelope text-blue-600 text-2xl"></i></div>
+        <h3 class="text-xl font-black text-slate-900 mb-3">Email Service</h3>
+        <p class="text-slate-500 text-sm leading-relaxed mb-5">Templated HTML emails with drag-and-drop builder, A/B testing, open/click tracking, and DMARC/SPF compliance.</p>
+        <div class="flex flex-wrap gap-2"><span class="px-3 py-1.5 rounded-xl text-xs font-bold" style="background:#EFF6FF;color:#1D4ED8">A/B Testing</span><span class="px-3 py-1.5 rounded-xl text-xs font-bold" style="background:#EFF6FF;color:#1D4ED8">Open/Click tracking</span><span class="px-3 py-1.5 rounded-xl text-xs font-bold" style="background:#EFF6FF;color:#1D4ED8">DMARC</span></div>
+      </div>
+    </div>
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 rv">
+      <div class="bg-white rounded-2xl p-5 border border-slate-100 shadow-sm"><div class="ibox w-10 h-10 mb-3" style="background:#EFF6FF;border-radius:12px"><i class="fas fa-bell text-blue-600"></i></div><h4 class="font-black text-slate-900 text-sm mb-1">Policy Alerts</h4><p class="text-slate-400 text-xs">Premium due, renewal, endorsement confirmations</p></div>
+      <div class="bg-white rounded-2xl p-5 border border-slate-100 shadow-sm d1"><div class="ibox w-10 h-10 mb-3" style="background:#ECFDF5;border-radius:12px"><i class="fas fa-file-invoice text-emerald-600"></i></div><h4 class="font-black text-slate-900 text-sm mb-1">Claim Updates</h4><p class="text-slate-400 text-xs">FNOL confirmation, inspection schedule, settlement</p></div>
+      <div class="bg-white rounded-2xl p-5 border border-slate-100 shadow-sm d2"><div class="ibox w-10 h-10 mb-3" style="background:#FFFBEB;border-radius:12px"><i class="fas fa-shield-alt text-amber-600"></i></div><h4 class="font-black text-slate-900 text-sm mb-1">OTP & Auth</h4><p class="text-slate-400 text-xs">Login OTP, transaction OTP, document signing</p></div>
+      <div class="bg-white rounded-2xl p-5 border border-slate-100 shadow-sm d3"><div class="ibox w-10 h-10 mb-3" style="background:#F5F3FF;border-radius:12px"><i class="fas fa-bullhorn text-violet-600"></i></div><h4 class="font-black text-slate-900 text-sm mb-1">Campaigns</h4><p class="text-slate-400 text-xs">Upsell, cross-sell, and retention campaigns</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ── KYC ── -->
+<section id="verification" class="py-28 bg-white">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="rv text-center mb-16">
+      <span class="sbadge mb-5" style="background:#FFFBEB;border:1px solid #FDE68A;color:#92400E"><i class="fas fa-user-shield text-xs"></i>KYC & Verification</span>
+      <h2 class="text-[clamp(2rem,4vw,3.2rem)] font-black text-slate-900 tracking-tight mb-4">Verify Every Customer<br/><span class="grad">in Under 5 Seconds</span></h2>
+      <p class="text-slate-500 text-lg max-w-xl mx-auto">IRDAI-compliant KYC and Aadhaar-based eKYC with 99.5% accuracy and full audit trail.</p>
+    </div>
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+      <div class="svc-card p-8 rv">
+        <div style="position:absolute;top:0;left:0;right:0;height:4px;background:linear-gradient(90deg,#D97706,#F59E0B)"></div>
+        <div class="ibox w-14 h-14 mb-5" style="background:#FFFBEB;border-radius:18px"><i class="fas fa-id-card text-amber-600 text-2xl"></i></div>
+        <h3 class="text-xl font-black text-slate-900 mb-3">Full KYC</h3>
+        <p class="text-slate-500 text-sm leading-relaxed mb-5">PAN, Aadhaar, Voter ID, Passport — verify any document with database cross-check and identity matching.</p>
+        <div class="space-y-2">
+          <div class="flex items-center justify-between py-2 border-b border-slate-50"><span class="text-slate-600 text-sm">PAN Verification</span><span class="live-badge">Live</span></div>
+          <div class="flex items-center justify-between py-2 border-b border-slate-50"><span class="text-slate-600 text-sm">Voter ID Check</span><span class="live-badge">Live</span></div>
+          <div class="flex items-center justify-between py-2 border-b border-slate-50"><span class="text-slate-600 text-sm">Passport Validation</span><span class="live-badge">Live</span></div>
+          <div class="flex items-center justify-between py-2"><span class="text-slate-600 text-sm">Biometric Match</span><span class="live-badge">Live</span></div>
+        </div>
+      </div>
+      <div class="svc-card p-8 rv d1">
+        <div style="position:absolute;top:0;left:0;right:0;height:4px;background:linear-gradient(90deg,#10B981,#34D399)"></div>
+        <div class="ibox w-14 h-14 mb-5" style="background:#ECFDF5;border-radius:18px"><i class="fas fa-fingerprint text-emerald-600 text-2xl"></i></div>
+        <h3 class="text-xl font-black text-slate-900 mb-3">Aadhaar eKYC</h3>
+        <p class="text-slate-500 text-sm leading-relaxed mb-5">UIDAI-integrated Aadhaar OTP authentication with consent management, IRDAI CKYC upload, and encrypted storage.</p>
+        <div class="space-y-2">
+          <div class="flex items-center justify-between py-2 border-b border-slate-50"><span class="text-slate-600 text-sm">OTP Authentication</span><span class="live-badge">Live</span></div>
+          <div class="flex items-center justify-between py-2 border-b border-slate-50"><span class="text-slate-600 text-sm">CKYC Auto-Upload</span><span class="live-badge">Live</span></div>
+          <div class="flex items-center justify-between py-2 border-b border-slate-50"><span class="text-slate-600 text-sm">Consent Management</span><span class="live-badge">Live</span></div>
+          <div class="flex items-center justify-between py-2"><span class="text-slate-600 text-sm">Face Match</span><span class="live-badge">Live</span></div>
+        </div>
+      </div>
+    </div>
+    <div class="rv stats-banner" style="background:linear-gradient(135deg,#92400E,#D97706)">
+      <div class="grid grid-cols-2 sm:grid-cols-3 gap-6 text-center">
+        <div><p class="text-3xl font-black text-white mb-1">&lt;5s</p><p class="text-amber-200 text-sm">KYC Verification Time</p></div>
+        <div><p class="text-3xl font-black text-white mb-1">100%</p><p class="text-amber-200 text-sm">IRDAI Compliant</p></div>
+        <div><p class="text-3xl font-black text-white mb-1">99.5%</p><p class="text-amber-200 text-sm">Identity Match Accuracy</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── OPERATIONS ── -->
+<section id="operations" class="py-28" style="background:#F8FAFC">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="rv text-center mb-16">
+      <span class="sbadge mb-5" style="background:#FFF1F2;border:1px solid #FECDD3;color:#9F1239"><i class="fas fa-cogs text-xs"></i>Operations Suite</span>
+      <h2 class="text-[clamp(2rem,4vw,3.2rem)] font-black text-slate-900 tracking-tight mb-4">Automate Every<br/><span class="grad">Operation, End to End</span></h2>
+      <p class="text-slate-500 text-lg max-w-xl mx-auto">Six complete operations modules — from policy issuance to agent payout — production-ready on day one.</p>
+    </div>
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 mb-10">
+      <div class="svc-card p-7 rv bg-white"><div style="position:absolute;top:0;left:0;right:0;height:4px;background:linear-gradient(90deg,#E11D48,#F43F5E)"></div><div class="ibox w-12 h-12 mb-4" style="background:#FFF1F2;border-radius:14px"><i class="fas fa-file-contract text-rose-600 text-xl"></i></div><h3 class="font-black text-slate-900 mb-2">Policy Management</h3><p class="text-slate-500 text-sm leading-relaxed">Issuance, endorsement, cancellation, renewal, and reinstatement — all automated with rule engine.</p></div>
+      <div class="svc-card p-7 rv d1 bg-white"><div style="position:absolute;top:0;left:0;right:0;height:4px;background:linear-gradient(90deg,#D97706,#F59E0B)"></div><div class="ibox w-12 h-12 mb-4" style="background:#FFFBEB;border-radius:14px"><i class="fas fa-hand-holding-usd text-amber-600 text-xl"></i></div><h3 class="font-black text-slate-900 mb-2">Claims Processing</h3><p class="text-slate-500 text-sm leading-relaxed">FNOL to settlement automation with document intake, survey assignment, and payment disbursement.</p></div>
+      <div class="svc-card p-7 rv d2 bg-white"><div style="position:absolute;top:0;left:0;right:0;height:4px;background:linear-gradient(90deg,#1A8FE3,#60A5FA)"></div><div class="ibox w-12 h-12 mb-4" style="background:#EFF6FF;border-radius:14px"><i class="fas fa-rupee-sign text-blue-600 text-xl"></i></div><h3 class="font-black text-slate-900 mb-2">Premium Collection</h3><p class="text-slate-500 text-sm leading-relaxed">Multi-mode payment with UPI, NEFT, card, and payment gateway integrations, plus reconciliation.</p></div>
+      <div class="svc-card p-7 rv bg-white"><div style="position:absolute;top:0;left:0;right:0;height:4px;background:linear-gradient(90deg,#8B5CF6,#A78BFA)"></div><div class="ibox w-12 h-12 mb-4" style="background:#F5F3FF;border-radius:14px"><i class="fas fa-balance-scale text-violet-600 text-xl"></i></div><h3 class="font-black text-slate-900 mb-2">Regulatory Compliance</h3><p class="text-slate-500 text-sm leading-relaxed">Auto-generated IRDAI returns, statutory submissions, and compliance dashboards.</p></div>
+      <div class="svc-card p-7 rv d1 bg-white"><div style="position:absolute;top:0;left:0;right:0;height:4px;background:linear-gradient(90deg,#10B981,#34D399)"></div><div class="ibox w-12 h-12 mb-4" style="background:#ECFDF5;border-radius:14px"><i class="fas fa-users text-emerald-600 text-xl"></i></div><h3 class="font-black text-slate-900 mb-2">Agent Management</h3><p class="text-slate-500 text-sm leading-relaxed">License tracking, commission calculation, hierarchy management, and performance dashboards.</p></div>
+      <div class="svc-card p-7 rv d2 bg-white"><div style="position:absolute;top:0;left:0;right:0;height:4px;background:linear-gradient(90deg,#06B6D4,#22D3EE)"></div><div class="ibox w-12 h-12 mb-4" style="background:#ECFEFF;border-radius:14px"><i class="fas fa-headset text-cyan-600 text-xl"></i></div><h3 class="font-black text-slate-900 mb-2">Customer 360</h3><p class="text-slate-500 text-sm leading-relaxed">Unified customer profile with full policy, claims, communication, and payment history.</p></div>
+    </div>
+    <div class="rv stats-banner" style="background:linear-gradient(135deg,#881337,#E11D48)">
+      <div class="grid grid-cols-2 sm:grid-cols-4 gap-6 text-center">
+        <div><p class="text-3xl font-black text-white mb-1">80%</p><p class="text-rose-200 text-sm">Ops Cost Reduction</p></div>
+        <div><p class="text-3xl font-black text-white mb-1">10×</p><p class="text-rose-200 text-sm">Faster Processing</p></div>
+        <div><p class="text-3xl font-black text-white mb-1">99%</p><p class="text-rose-200 text-sm">Error-Free Ops</p></div>
+        <div><p class="text-3xl font-black text-white mb-1">24/7</p><p class="text-rose-200 text-sm">Automated Coverage</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-light py-32 relative">
+  <div class="orb" style="width:700px;height:700px;top:50%;left:50%;transform:translate(-50%,-50%);background:radial-gradient(circle,rgba(26,143,227,.12),rgba(21,101,192,.07) 40%,transparent 70%);filter:blur(100px)"></div>
+  <div class="cta-ring" style="width:600px;height:600px;top:50%;left:50%;transform:translate(-50%,-50%)"></div>
+  <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10">
+    <div class="rv">
+      <h2 class="text-[clamp(2rem,4vw,3.2rem)] font-black text-slate-900 tracking-tight mb-5">Activate Any Service<br/><span class="grad">in Days, Not Months</span></h2>
+      <p class="text-slate-600 text-xl mb-10 max-w-xl mx-auto">Every service is available standalone or as a bundle — our team will help you configure and go live fast.</p>
+      <div class="flex flex-col sm:flex-row gap-4 justify-center">
+        <a href="contact.html" class="btn-primary !py-4 !px-10 !text-base">Book a Demo <i class="fas fa-arrow-right text-sm"></i></a>
+        <a href="api.html" class="btn-ghost !py-4 !px-10 !text-base">View API Automation</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer style="background:#F8FAFC;border-top:1px solid #E2E8F0">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-14">
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-10 mb-12">
+      <div class="lg:col-span-2"><a href="index.html" class="flex items-center gap-2.5 mb-5"><div class="w-9 h-9 rounded-xl flex items-center justify-center" style="background:linear-gradient(135deg,#1A8FE3,#1565C0)"><i class="fas fa-layer-group text-white text-sm"></i></div><span class="text-[1.05rem] font-black text-slate-900">Insurex<span class="grad">24</span></span></a><p class="text-slate-500 text-sm leading-relaxed max-w-xs mb-5">Enabling large insurance ecosystems with modern MACH middleware technology.</p><a href="mailto:admin@insurex24.com" class="inline-flex items-center gap-2 text-slate-500 hover:text-slate-900 text-sm transition-colors"><div class="w-8 h-8 rounded-lg flex items-center justify-center" style="background:#EFF6FF;border:1px solid #DBEAFE"><i class="fas fa-envelope text-blue-600 text-xs"></i></div>admin@insurex24.com</a></div>
+      <div><p class="text-xs font-black text-slate-900 uppercase tracking-widest mb-4">Platform</p><ul class="space-y-2.5"><li><a href="platform.html" class="text-slate-500 hover:text-slate-900 text-sm">Features</a></li><li><a href="api.html" class="text-slate-500 hover:text-slate-900 text-sm">API Automation</a></li><li><a href="data-platform.html" class="text-slate-500 hover:text-slate-900 text-sm">Data Platform</a></li></ul></div>
+      <div><p class="text-xs font-black text-slate-900 uppercase tracking-widest mb-4">Services</p><ul class="space-y-2.5"><li><a href="#ocr" class="text-slate-500 hover:text-slate-900 text-sm">OCR</a></li><li><a href="#communication" class="text-slate-500 hover:text-slate-900 text-sm">SMS & Email</a></li><li><a href="#verification" class="text-slate-500 hover:text-slate-900 text-sm">KYC</a></li><li><a href="#operations" class="text-slate-500 hover:text-slate-900 text-sm">Operations</a></li></ul></div>
+      <div><p class="text-xs font-black text-slate-900 uppercase tracking-widest mb-4">Company</p><ul class="space-y-2.5"><li><a href="#" class="text-slate-500 hover:text-slate-900 text-sm">About</a></li><li><a href="contact.html" class="text-slate-500 hover:text-slate-900 text-sm">Contact</a></li></ul></div>
+    </div>
+    <div class="border-t pt-8 flex flex-col sm:flex-row justify-between items-center gap-4" style="border-color:#E2E8F0"><p class="text-slate-500 text-sm">© 2026 Insurex24. All rights reserved.</p></div>
+  </div>
+</footer>
+
+<script>
+const nav=document.getElementById('nav');
+window.addEventListener('scroll',()=>nav.classList.toggle('solid',scrollY>20));
+const bur=document.getElementById('bur'),mob=document.getElementById('mob'),bic=document.getElementById('bic');
+bur.addEventListener('click',()=>{const o=mob.classList.toggle('open');bic.className=o?'fas fa-times text-lg':'fas fa-bars text-lg'});
+document.querySelectorAll('.ml').forEach(a=>a.addEventListener('click',()=>{mob.classList.remove('open');bic.className='fas fa-bars text-lg'}));
+const ro=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');ro.unobserve(e.target)}}),{threshold:.1});
+document.querySelectorAll('.rv').forEach(el=>ro.observe(el));
+
+const sections=['ocr','communication','verification','operations'];
+const pills=document.querySelectorAll('.snav-pill');
+const sObs=new IntersectionObserver(es=>{es.forEach(e=>{if(e.isIntersecting&&e.intersectionRatio>.4){const id=e.target.id;pills.forEach(p=>{p.classList.toggle('active',p.dataset.target===id)})}})},{threshold:.4});
+sections.forEach(id=>{const el=document.getElementById(id);if(el)sObs.observe(el)});
+document.querySelectorAll('.feat-card').forEach(c=>{c.addEventListener('mousemove',e=>{const r=c.getBoundingClientRect(),x=(e.clientX-r.left)/r.width-.5,y=(e.clientY-r.top)/r.height-.5;c.style.transform=`perspective(900px) rotateX(${-y*6}deg) rotateY(${x*6}deg) translateZ(8px)`});c.addEventListener('mouseleave',()=>{c.style.transform='';c.style.transition='transform .6s cubic-bezier(.16,1,.3,1)'})});
+</script>
+</body>
+</html>

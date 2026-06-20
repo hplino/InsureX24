@@ -1,0 +1,248 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/><meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>Platform – Insurex24</title>
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0%25' y1='0%25' x2='100%25' y2='100%25'%3E%3Cstop offset='0%25' style='stop-color:%231A8FE3'/%3E%3Cstop offset='100%25' style='stop-color:%231565C0'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='100' height='100' rx='22' fill='url(%23g)'/%3E%3Cg fill='white'%3E%3Crect x='24' y='24' width='52' height='11' rx='3'/%3E%3Crect x='24' y='44' width='52' height='11' rx='3'/%3E%3Crect x='24' y='64' width='52' height='11' rx='3'/%3E%3C/g%3E%3C/svg%3E"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet"/>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"/>
+<script src="https://cdn.tailwindcss.com"></script>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}html{scroll-behavior:smooth}body{font-family:'Inter',system-ui,sans-serif;background:#fff;overflow-x:hidden}
+.grad{background:linear-gradient(135deg,#93C5FD,#60A5FA,#1A8FE3,#1240A0);background-size:300%;-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;animation:gf 6s ease infinite}
+@keyframes gf{0%,100%{background-position:0%}50%{background-position:100%}}
+.btn-primary{background:linear-gradient(135deg,#1A8FE3,#1565C0);color:#fff;display:inline-flex;align-items:center;justify-content:center;gap:.6rem;border-radius:14px;padding:.95rem 2.2rem;font-weight:700;font-size:.92rem;text-decoration:none;border:none;cursor:pointer;position:relative;overflow:hidden;transition:transform .25s,box-shadow .25s;box-shadow:0 0 28px rgba(26,143,227,.45),0 8px 32px rgba(26,143,227,.25)}
+.btn-primary::before{content:'';position:absolute;inset:0;background:linear-gradient(135deg,rgba(255,255,255,.18),transparent 60%);pointer-events:none}
+.btn-primary:hover{transform:translateY(-3px) scale(1.02);box-shadow:0 0 48px rgba(21,101,192,.65),0 16px 48px rgba(26,143,227,.35)}
+.btn-ghost{border:1.5px solid rgba(26,143,227,.4);color:#1565C0;background:rgba(26,143,227,.06);display:inline-flex;align-items:center;justify-content:center;gap:.6rem;border-radius:14px;padding:.95rem 2.2rem;font-weight:600;font-size:.92rem;text-decoration:none;transition:all .25s}
+.btn-ghost:hover{background:rgba(26,143,227,.12);border-color:rgba(26,143,227,.6);color:#1240A0;transform:translateY(-2px)}
+#nav{position:fixed;top:0;left:0;right:0;z-index:100;background:rgba(255,255,255,.92);backdrop-filter:blur(28px);border-bottom:1px solid rgba(0,0,0,.07);transition:background .3s,box-shadow .3s}
+#nav.solid{background:rgba(255,255,255,.99);box-shadow:0 4px 32px rgba(0,0,0,.08)}
+.nlink{color:#64748B;font-size:.85rem;font-weight:600;padding:.5rem 1rem;border-radius:10px;text-decoration:none;transition:all .2s}
+.nlink:hover{color:#1E293B;background:rgba(0,0,0,.04)}.nlink.act{color:#1565C0;background:rgba(26,143,227,.1)}
+#mob{max-height:0;overflow:hidden;transition:max-height .4s cubic-bezier(0,.8,.4,1),opacity .3s;opacity:0;background:#fff;border-top:1px solid rgba(0,0,0,.06)}
+#mob.open{max-height:32rem;opacity:1}
+.hero-bg{background:linear-gradient(135deg,#EFF6FF 0%,#DBEAFE 50%,#EFF6FF 100%);position:relative;overflow:hidden;min-height:70vh;display:flex;align-items:center}
+.dot-grid{position:absolute;inset:0;background-image:radial-gradient(rgba(26,143,227,.15) 1.2px,transparent 1.2px);background-size:38px 38px;animation:dd 25s linear infinite}
+@keyframes dd{from{background-position:0 0}to{background-position:38px 38px}}
+.orb{position:absolute;border-radius:50%;filter:blur(90px);pointer-events:none}
+.oa{width:700px;height:700px;top:-250px;left:-200px;background:radial-gradient(circle,rgba(59,130,246,.18),transparent 65%);animation:oa 20s ease-in-out infinite}
+.ob{width:500px;height:500px;bottom:-150px;right:-100px;background:radial-gradient(circle,rgba(21,101,192,.12),transparent 65%);animation:ob 25s ease-in-out infinite}
+@keyframes oa{0%,100%{transform:translate(0,0) scale(1)}50%{transform:translate(60px,-70px) scale(1.1)}}
+@keyframes ob{0%,100%{transform:translate(0,0) scale(1)}50%{transform:translate(-50px,60px) scale(1.08)}}
+.hero-badge{display:inline-flex;align-items:center;gap:.5rem;padding:.45rem 1.2rem;border-radius:24px;background:rgba(26,143,227,.08);border:1px solid rgba(26,143,227,.28);color:#1565C0;font-size:.78rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase}
+.live-dot{width:7px;height:7px;border-radius:50%;background:#1A8FE3;box-shadow:0 0 10px #1A8FE3;animation:ld 1.6s ease-in-out infinite}
+@keyframes ld{0%,100%{opacity:1}50%{opacity:.3}}
+.sbadge{display:inline-flex;align-items:center;gap:.4rem;padding:.38rem 1.1rem;border-radius:24px;font-size:.78rem;font-weight:700;letter-spacing:.04em}
+.ibox{display:inline-flex;align-items:center;justify-content:center;border-radius:16px;flex-shrink:0}
+.feat-card{background:#fff;border-radius:24px;border:1px solid #E2E8F0;transition:transform .3s cubic-bezier(.16,1,.3,1),box-shadow .3s;position:relative;overflow:hidden}
+.feat-card::after{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,#1A8FE3,#60A5FA,#06B6D4);opacity:0;transition:opacity .3s}
+.feat-card:hover{transform:translateY(-7px);box-shadow:0 32px 72px -12px rgba(0,0,0,.12),0 0 0 1px rgba(26,143,227,.15)}
+.feat-card:hover::after{opacity:1}
+.glass-card{background:#fff;border:1px solid #E2E8F0;border-radius:22px;box-shadow:0 4px 20px rgba(0,0,0,.05);transition:all .3s}
+.glass-card:hover{box-shadow:0 12px 40px rgba(26,143,227,.12);border-color:rgba(26,143,227,.3);transform:translateY(-4px)}
+.mach-letter{font-size:4rem;font-weight:900;line-height:1;background:linear-gradient(135deg,#60A5FA,#1A8FE3);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.arch-layer{border-radius:20px;border:1px solid;padding:1.5rem 2rem;display:flex;align-items:center;justify-content:between;gap:1rem}
+.rv{opacity:0;transform:translateY(36px);transition:opacity .8s cubic-bezier(.16,1,.3,1),transform .8s cubic-bezier(.16,1,.3,1)}
+.rv.in{opacity:1;transform:none}
+.d1{transition-delay:.08s}.d2{transition-delay:.16s}.d3{transition-delay:.24s}.d4{transition-delay:.32s}.d5{transition-delay:.42s}
+.snum{font-size:2.8rem;font-weight:900;background:linear-gradient(135deg,#60A5FA,#1A8FE3);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;line-height:1}
+.cta-light{background:linear-gradient(135deg,#EFF6FF,#DBEAFE);position:relative;overflow:hidden}
+.cta-ring{position:absolute;border-radius:50%;border:1px solid rgba(26,143,227,.2);pointer-events:none}
+::-webkit-scrollbar{width:5px}::-webkit-scrollbar-track{background:#F8FAFC}::-webkit-scrollbar-thumb{background:linear-gradient(#1A8FE3,#1565C0);border-radius:3px}
+</style>
+</head>
+<body>
+<nav id="nav">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="flex justify-between items-center h-[68px]">
+      <a href="index.html" class="flex items-center gap-2.5">
+        <div class="w-9 h-9 rounded-xl flex items-center justify-center" style="background:linear-gradient(135deg,#1A8FE3,#1565C0);box-shadow:0 0 18px rgba(26,143,227,.35)"><i class="fas fa-layer-group text-white text-sm"></i></div>
+        <span class="text-[1.08rem] font-black text-slate-900 tracking-tight">Insurex<span class="grad">24</span></span>
+      </a>
+      <div class="hidden md:flex items-center gap-0.5">
+        <a href="platform.html" class="nlink act">Platform</a>
+        <a href="services.html" class="nlink">Services</a>
+        <a href="api.html" class="nlink">API Automation</a>
+        <a href="data-platform.html" class="nlink">Data Platform</a>
+        <a href="contact.html" class="btn-primary ml-3 !py-2.5 !px-5 !text-[.84rem] !rounded-xl">Get Demo</a>
+      </div>
+      <button id="bur" class="md:hidden p-2 rounded-xl text-slate-600 hover:bg-black/5"><i id="bic" class="fas fa-bars text-lg"></i></button>
+    </div>
+  </div>
+  <div id="mob">
+    <div class="px-4 py-4 space-y-1">
+      <a href="platform.html" class="ml block py-3 px-4 rounded-xl text-blue-700 bg-blue-50 text-sm font-bold">Platform</a>
+      <a href="services.html" class="ml block py-3 px-4 rounded-xl text-slate-600 hover:text-slate-900 text-sm font-semibold">Services</a>
+      <a href="api.html" class="ml block py-3 px-4 rounded-xl text-slate-600 hover:text-slate-900 text-sm font-semibold">API Automation</a>
+      <a href="data-platform.html" class="ml block py-3 px-4 rounded-xl text-slate-600 hover:text-slate-900 text-sm font-semibold">Data Platform</a>
+      <a href="contact.html" class="ml block mt-3 btn-primary !py-3 !rounded-xl">Get Demo</a>
+    </div>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero-bg pt-[68px]">
+  <div class="dot-grid"></div><div class="orb oa"></div><div class="orb ob"></div>
+  <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-24 lg:py-32 relative z-10 text-center">
+    <div class="hero-badge mb-6 mx-auto w-fit"><div class="live-dot"></div>Platform & MACH Architecture</div>
+    <h1 class="text-[clamp(2.6rem,6vw,4.5rem)] font-black text-slate-900 leading-[1.05] tracking-tight mb-6">The <span class="grad">Modern Core</span><br/>for Insurance Innovation</h1>
+    <p class="text-[1.1rem] text-slate-600 leading-relaxed max-w-2xl mx-auto mb-10">A fully composable, cloud-native middleware layer that eliminates integration complexity and powers digital insurance at any scale.</p>
+    <div class="flex flex-col sm:flex-row gap-3 justify-center">
+      <a href="contact.html" class="btn-primary">Request Demo <i class="fas fa-arrow-right text-sm"></i></a>
+      <a href="#mach" class="btn-ghost">Explore MACH <i class="fas fa-chevron-down text-sm"></i></a>
+    </div>
+  </div>
+</section>
+
+<!-- ARCHITECTURE TIERS -->
+<section class="py-28 bg-white">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="rv text-center mb-16">
+      <span class="sbadge mb-5" style="background:#EFF6FF;border:1px solid #BFDBFE;color:#1D4ED8"><i class="fas fa-sitemap text-xs"></i>Architecture</span>
+      <h2 class="text-[clamp(2rem,4vw,3.2rem)] font-black text-slate-900 tracking-tight mb-4">How <span class="grad">Insurex24 Fits</span></h2>
+      <p class="text-slate-500 text-lg max-w-xl mx-auto">A universal middleware layer that bridges any legacy system to any digital experience.</p>
+    </div>
+    <div class="max-w-3xl mx-auto space-y-4">
+      <div class="rv rounded-2xl p-6 border" style="background:#F8FAFC;border-color:#E2E8F0">
+        <div class="flex items-center gap-4 mb-4"><div class="ibox w-10 h-10" style="background:#EFF6FF;border-radius:12px"><i class="fas fa-mobile-alt text-blue-600 text-lg"></i></div><h3 class="font-black text-slate-900 text-lg">Digital Channels</h3></div>
+        <div class="flex flex-wrap gap-2">
+          <span class="px-3 py-1.5 rounded-xl text-xs font-bold" style="background:#fff;border:1px solid #E2E8F0;color:#475569">Web Portals</span>
+          <span class="px-3 py-1.5 rounded-xl text-xs font-bold" style="background:#fff;border:1px solid #E2E8F0;color:#475569">Mobile Apps</span>
+          <span class="px-3 py-1.5 rounded-xl text-xs font-bold" style="background:#fff;border:1px solid #E2E8F0;color:#475569">Chatbots</span>
+          <span class="px-3 py-1.5 rounded-xl text-xs font-bold" style="background:#fff;border:1px solid #E2E8F0;color:#475569">Partner APIs</span>
+          <span class="px-3 py-1.5 rounded-xl text-xs font-bold" style="background:#fff;border:1px solid #E2E8F0;color:#475569">Aggregators</span>
+        </div>
+      </div>
+      <div class="flex justify-center"><div class="flex flex-col items-center gap-1"><div class="w-0.5 h-5" style="background:linear-gradient(#1A8FE3,#1565C0)"></div><div class="w-0 h-0" style="border-left:8px solid transparent;border-right:8px solid transparent;border-top:10px solid #1565C0"></div></div></div>
+      <div class="rv rounded-2xl p-7" style="background:linear-gradient(135deg,#1E3A8A,#312E81);border:1px solid rgba(255,255,255,.15)">
+        <div class="flex items-center gap-4 mb-5"><div class="ibox w-12 h-12" style="background:rgba(255,255,255,.12);border-radius:14px"><i class="fas fa-layer-group text-white text-xl"></i></div><div><h3 class="font-black text-white text-xl">Insurex24 Middleware Layer</h3><p class="text-blue-200 text-sm">API Gateway · Orchestration · Transformation · Automation</p></div></div>
+        <div class="grid grid-cols-2 sm:grid-cols-4 gap-3">
+          <div class="rounded-xl p-3 text-center" style="background:rgba(255,255,255,.08)"><i class="fas fa-route text-blue-300 text-lg mb-1 block"></i><p class="text-white text-xs font-bold">API Gateway</p></div>
+          <div class="rounded-xl p-3 text-center" style="background:rgba(255,255,255,.08)"><i class="fas fa-project-diagram text-blue-200 text-lg mb-1 block"></i><p class="text-white text-xs font-bold">Orchestration</p></div>
+          <div class="rounded-xl p-3 text-center" style="background:rgba(255,255,255,.08)"><i class="fas fa-exchange-alt text-cyan-300 text-lg mb-1 block"></i><p class="text-white text-xs font-bold">Transform</p></div>
+          <div class="rounded-xl p-3 text-center" style="background:rgba(255,255,255,.08)"><i class="fas fa-robot text-emerald-300 text-lg mb-1 block"></i><p class="text-white text-xs font-bold">Automation</p></div>
+        </div>
+      </div>
+      <div class="flex justify-center"><div class="flex flex-col items-center gap-1"><div class="w-0.5 h-5" style="background:linear-gradient(#1A8FE3,#1565C0)"></div><div class="w-0 h-0" style="border-left:8px solid transparent;border-right:8px solid transparent;border-top:10px solid #1565C0"></div></div></div>
+      <div class="rv rounded-2xl p-6 border" style="background:#F8FAFC;border-color:#E2E8F0">
+        <div class="flex items-center gap-4 mb-4"><div class="ibox w-10 h-10" style="background:#F5F3FF;border-radius:12px"><i class="fas fa-server text-violet-600 text-lg"></i></div><h3 class="font-black text-slate-900 text-lg">Core Insurance Systems</h3></div>
+        <div class="flex flex-wrap gap-2">
+          <span class="px-3 py-1.5 rounded-xl text-xs font-bold" style="background:#fff;border:1px solid #E2E8F0;color:#475569">Policy Admin</span>
+          <span class="px-3 py-1.5 rounded-xl text-xs font-bold" style="background:#fff;border:1px solid #E2E8F0;color:#475569">Claims Engine</span>
+          <span class="px-3 py-1.5 rounded-xl text-xs font-bold" style="background:#fff;border:1px solid #E2E8F0;color:#475569">Billing System</span>
+          <span class="px-3 py-1.5 rounded-xl text-xs font-bold" style="background:#fff;border:1px solid #E2E8F0;color:#475569">CRM</span>
+          <span class="px-3 py-1.5 rounded-xl text-xs font-bold" style="background:#fff;border:1px solid #E2E8F0;color:#475569">Data Warehouse</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- MACH -->
+<section id="mach" class="py-28" style="background:#F0F7FF">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="rv text-center mb-16">
+      <span class="sbadge mb-5" style="background:#EFF6FF;border:1px solid #BFDBFE;color:#1D4ED8"><i class="fas fa-cube text-xs"></i>Architecture Principles</span>
+      <h2 class="text-[clamp(2rem,4vw,3.2rem)] font-black text-slate-900 tracking-tight mb-4">Built on <span class="grad">MACH</span></h2>
+      <p class="text-slate-600 text-lg max-w-xl mx-auto">Four principles that make Insurex24 future-proof and infinitely extensible.</p>
+    </div>
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
+      <div class="glass-card p-7 rv">
+        <div class="mach-letter mb-3" style="background:linear-gradient(135deg,#1A8FE3,#60A5FA);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text">M</div>
+        <h3 class="text-slate-900 font-black text-lg mb-3">Microservices</h3>
+        <p class="text-slate-600 text-sm leading-relaxed">Independently deployable services — scale what you need, when you need it, without touching anything else.</p>
+      </div>
+      <div class="glass-card p-7 rv d1">
+        <div class="mach-letter mb-3" style="background:linear-gradient(135deg,#06B6D4,#67E8F9);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text">A</div>
+        <h3 class="text-slate-900 font-black text-lg mb-3">API-First</h3>
+        <p class="text-slate-600 text-sm leading-relaxed">Every capability is accessible via a standard REST or GraphQL API. No UI lock-in, no vendor dependency.</p>
+      </div>
+      <div class="glass-card p-7 rv d2">
+        <div class="mach-letter mb-3" style="background:linear-gradient(135deg,#10B981,#6EE7B7);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text">C</div>
+        <h3 class="text-slate-900 font-black text-lg mb-3">Cloud-Native</h3>
+        <p class="text-slate-600 text-sm leading-relaxed">Containerised, auto-scaling, multi-cloud — AWS, GCP, Azure — with 99.9% uptime SLA guaranteed.</p>
+      </div>
+      <div class="glass-card p-7 rv d3">
+        <div class="mach-letter mb-3" style="background:linear-gradient(135deg,#F59E0B,#FCD34D);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text">H</div>
+        <h3 class="text-slate-900 font-black text-lg mb-3">Headless</h3>
+        <p class="text-slate-600 text-sm leading-relaxed">Decoupled front and back. Any UI, any channel, any device — powered by the same governed API layer.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PAAS FEATURES -->
+<section class="py-28 bg-white">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="rv text-center mb-16">
+      <span class="sbadge mb-5" style="background:#F5F3FF;border:1px solid #DDD6FE;color:#6D28D9"><i class="fas fa-boxes text-xs"></i>PaaS Features</span>
+      <h2 class="text-[clamp(2rem,4vw,3.2rem)] font-black text-slate-900 tracking-tight mb-4">Everything You Need,<br/><span class="grad">Ready to Deploy</span></h2>
+    </div>
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+      <div class="feat-card p-7 rv"><div class="ibox w-13 h-13 mb-5" style="background:#EFF6FF;width:52px;height:52px;border-radius:14px"><i class="fas fa-key text-blue-600 text-xl"></i></div><h3 class="text-lg font-black text-slate-900 mb-3">API Gateway & Auth</h3><p class="text-slate-500 text-sm leading-relaxed">OAuth 2.0, API keys, rate limiting, and IP whitelisting — all managed from a single control plane.</p></div>
+      <div class="feat-card p-7 rv d1"><div class="ibox w-13 h-13 mb-5" style="background:#F5F3FF;width:52px;height:52px;border-radius:14px"><i class="fas fa-project-diagram text-violet-600 text-xl"></i></div><h3 class="text-lg font-black text-slate-900 mb-3">Workflow Orchestration</h3><p class="text-slate-500 text-sm leading-relaxed">Drag-and-drop workflow builder for complex multi-step insurance processes — no code required.</p></div>
+      <div class="feat-card p-7 rv d2"><div class="ibox w-13 h-13 mb-5" style="background:#ECFDF5;width:52px;height:52px;border-radius:14px"><i class="fas fa-exchange-alt text-emerald-600 text-xl"></i></div><h3 class="text-lg font-black text-slate-900 mb-3">Data Transformation</h3><p class="text-slate-500 text-sm leading-relaxed">Map between legacy COBOL formats, ACORD XML, and modern JSON/REST with visual mapping tools.</p></div>
+      <div class="feat-card p-7 rv"><div class="ibox w-13 h-13 mb-5" style="background:#FFFBEB;width:52px;height:52px;border-radius:14px"><i class="fas fa-chart-bar text-amber-600 text-xl"></i></div><h3 class="text-lg font-black text-slate-900 mb-3">Real-Time Monitoring</h3><p class="text-slate-500 text-sm leading-relaxed">Live dashboards, error alerting, SLA tracking, and per-API performance metrics across all integrations.</p></div>
+      <div class="feat-card p-7 rv d1"><div class="ibox w-13 h-13 mb-5" style="background:#FFF1F2;width:52px;height:52px;border-radius:14px"><i class="fas fa-shield-alt text-rose-600 text-xl"></i></div><h3 class="text-lg font-black text-slate-900 mb-3">Security & Compliance</h3><p class="text-slate-500 text-sm leading-relaxed">End-to-end encryption, IRDAI data residency, GDPR controls, and full immutable audit trail.</p></div>
+      <div class="feat-card p-7 rv d2"><div class="ibox w-13 h-13 mb-5" style="background:#EFF6FF;width:52px;height:52px;border-radius:14px"><i class="fas fa-tachometer-alt text-blue-600 text-xl"></i></div><h3 class="text-lg font-black text-slate-900 mb-3">Auto-Scaling Engine</h3><p class="text-slate-500 text-sm leading-relaxed">Kubernetes-based auto-scaling that handles renewal season spikes without manual intervention.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- STATS -->
+<section class="py-24" style="background:#EFF6FF;border-top:1px solid #DBEAFE;border-bottom:1px solid #DBEAFE">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="grid grid-cols-2 lg:grid-cols-4 gap-8 text-center">
+      <div class="rv"><p class="snum counter" data-target="50" data-suffix="+">0+</p><p class="text-slate-600 text-sm mt-2">Pre-Built Connectors</p></div>
+      <div class="rv d1"><p class="snum counter" data-target="99.9" data-suffix="%" data-dec="1">0%</p><p class="text-slate-600 text-sm mt-2">Uptime SLA</p></div>
+      <div class="rv d2"><p class="snum counter" data-target="200" data-suffix="ms">0ms</p><p class="text-slate-600 text-sm mt-2">API Latency</p></div>
+      <div class="rv d3"><p class="snum counter" data-target="9" data-suffix="+">0+</p><p class="text-slate-600 text-sm mt-2">Live Portals</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-light py-32 relative">
+  <div class="orb" style="width:700px;height:700px;top:50%;left:50%;transform:translate(-50%,-50%);background:radial-gradient(circle,rgba(26,143,227,.12),rgba(21,101,192,.07) 40%,transparent 70%);filter:blur(100px)"></div>
+  <div class="cta-ring" style="width:600px;height:600px;top:50%;left:50%;transform:translate(-50%,-50%)"></div>
+  <div class="cta-ring" style="width:900px;height:900px;top:50%;left:50%;transform:translate(-50%,-50%);opacity:.5"></div>
+  <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10">
+    <div class="rv">
+      <h2 class="text-[clamp(2rem,4vw,3.2rem)] font-black text-slate-900 tracking-tight mb-5">Start Building on<br/><span class="grad">Insurex24 Today</span></h2>
+      <p class="text-slate-600 text-xl mb-10 max-w-xl mx-auto">Go from integration design to live APIs in weeks. Schedule a technical walkthrough with our platform team.</p>
+      <div class="flex flex-col sm:flex-row gap-4 justify-center">
+        <a href="contact.html" class="btn-primary !py-4 !px-10 !text-base">Book a Demo <i class="fas fa-arrow-right text-sm"></i></a>
+        <a href="api.html" class="btn-ghost !py-4 !px-10 !text-base">View API Automation</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer style="background:#F8FAFC;border-top:1px solid #E2E8F0">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-14">
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-10 mb-12">
+      <div class="lg:col-span-2"><a href="index.html" class="flex items-center gap-2.5 mb-5"><div class="w-9 h-9 rounded-xl flex items-center justify-center" style="background:linear-gradient(135deg,#1A8FE3,#1565C0)"><i class="fas fa-layer-group text-white text-sm"></i></div><span class="text-[1.05rem] font-black text-slate-900">Insurex<span class="grad">24</span></span></a><p class="text-slate-500 text-sm leading-relaxed max-w-xs mb-5">Enabling large insurance ecosystems with modern MACH middleware technology.</p><a href="mailto:admin@insurex24.com" class="inline-flex items-center gap-2 text-slate-500 hover:text-slate-900 text-sm transition-colors"><div class="w-8 h-8 rounded-lg flex items-center justify-center" style="background:#EFF6FF;border:1px solid #DBEAFE"><i class="fas fa-envelope text-blue-600 text-xs"></i></div>admin@insurex24.com</a></div>
+      <div><p class="text-xs font-black text-slate-900 uppercase tracking-widest mb-4">Platform</p><ul class="space-y-2.5"><li><a href="platform.html" class="text-slate-500 hover:text-slate-900 text-sm transition-colors">Features</a></li><li><a href="platform.html" class="text-slate-500 hover:text-slate-900 text-sm transition-colors">MACH Architecture</a></li><li><a href="api.html" class="text-slate-500 hover:text-slate-900 text-sm transition-colors">API Automation</a></li><li><a href="data-platform.html" class="text-slate-500 hover:text-slate-900 text-sm transition-colors">Data Platform</a></li></ul></div>
+      <div><p class="text-xs font-black text-slate-900 uppercase tracking-widest mb-4">Services</p><ul class="space-y-2.5"><li><a href="services.html#ocr" class="text-slate-500 hover:text-slate-900 text-sm transition-colors">OCR & Document AI</a></li><li><a href="services.html#communication" class="text-slate-500 hover:text-slate-900 text-sm transition-colors">SMS & Email</a></li><li><a href="services.html#verification" class="text-slate-500 hover:text-slate-900 text-sm transition-colors">KYC Verification</a></li><li><a href="services.html#operations" class="text-slate-500 hover:text-slate-900 text-sm transition-colors">Operations</a></li></ul></div>
+      <div><p class="text-xs font-black text-slate-900 uppercase tracking-widest mb-4">Company</p><ul class="space-y-2.5"><li><a href="#" class="text-slate-500 hover:text-slate-900 text-sm transition-colors">About</a></li><li><a href="#" class="text-slate-500 hover:text-slate-900 text-sm transition-colors">Careers</a></li><li><a href="contact.html" class="text-slate-500 hover:text-slate-900 text-sm transition-colors">Contact</a></li></ul></div>
+    </div>
+    <div class="border-t pt-8 flex flex-col sm:flex-row justify-between items-center gap-4" style="border-color:#E2E8F0"><p class="text-slate-500 text-sm">© 2026 Insurex24. All rights reserved.</p><div class="flex gap-6"><a href="#" class="text-slate-500 hover:text-slate-900 text-sm">Privacy</a><a href="#" class="text-slate-500 hover:text-slate-900 text-sm">Terms</a></div></div>
+  </div>
+</footer>
+<script>
+const nav=document.getElementById('nav');
+window.addEventListener('scroll',()=>nav.classList.toggle('solid',scrollY>20));
+const bur=document.getElementById('bur'),mob=document.getElementById('mob'),bic=document.getElementById('bic');
+bur.addEventListener('click',()=>{const o=mob.classList.toggle('open');bic.className=o?'fas fa-times text-lg':'fas fa-bars text-lg'});
+document.querySelectorAll('.ml').forEach(a=>a.addEventListener('click',()=>{mob.classList.remove('open');bic.className='fas fa-bars text-lg'}));
+const ro=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');ro.unobserve(e.target)}}),{threshold:.1});
+document.querySelectorAll('.rv').forEach(el=>ro.observe(el));
+function runCounter(el){const t=parseFloat(el.dataset.target),s=el.dataset.suffix||'',d=parseInt(el.dataset.dec||0),dur=2200,st=performance.now();const tick=n=>{const p=Math.min((n-st)/dur,1),e=1-Math.pow(1-p,4);el.textContent=(d?(e*t).toFixed(d):Math.round(e*t))+s;if(p<1)requestAnimationFrame(tick)};requestAnimationFrame(tick)}
+const co=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){runCounter(e.target);co.unobserve(e.target)}}),{threshold:.5});
+document.querySelectorAll('.counter').forEach(el=>co.observe(el));
+document.querySelectorAll('.feat-card').forEach(c=>{c.addEventListener('mousemove',e=>{const r=c.getBoundingClientRect(),x=(e.clientX-r.left)/r.width-.5,y=(e.clientY-r.top)/r.height-.5;c.style.transform=`perspective(900px) rotateX(${-y*6}deg) rotateY(${x*6}deg) translateZ(8px)`;c.style.transition='box-shadow .15s'});c.addEventListener('mouseleave',()=>{c.style.transform='';c.style.transition='transform .6s cubic-bezier(.16,1,.3,1)'})});
+</script>
+</body>
+</html>
