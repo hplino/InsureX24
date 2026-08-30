@@ -3,162 +3,148 @@
 <head>
 <meta charset="UTF-8"/><meta name="viewport" content="width=device-width,initial-scale=1.0"/>
 <title>API Automation – Insurex24</title>
+<meta name="description" content="Visual workflow builder, scheduled triggers, intelligent error recovery, and real-time monitoring — one engine built for insurance complexity."/>
 <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0%25' y1='0%25' x2='100%25' y2='100%25'%3E%3Cstop offset='0%25' style='stop-color:%231A8FE3'/%3E%3Cstop offset='100%25' style='stop-color:%231565C0'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='100' height='100' rx='22' fill='url(%23g)'/%3E%3Cg fill='white'%3E%3Crect x='24' y='24' width='52' height='11' rx='3'/%3E%3Crect x='24' y='44' width='52' height='11' rx='3'/%3E%3Crect x='24' y='64' width='52' height='11' rx='3'/%3E%3C/g%3E%3C/svg%3E"/>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet"/>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet"/>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"/>
 <script src="https://cdn.tailwindcss.com"></script>
 <style>
-*{box-sizing:border-box;margin:0;padding:0}html{scroll-behavior:smooth}body{font-family:'Inter',system-ui,sans-serif;background:#fff;overflow-x:hidden}
-.grad{background:linear-gradient(135deg,#93C5FD,#60A5FA,#1A8FE3,#1240A0);background-size:300%;-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;animation:gf 6s ease infinite}
-@keyframes gf{0%,100%{background-position:0%}50%{background-position:100%}}
-.btn-primary{background:linear-gradient(135deg,#1A8FE3,#1565C0);color:#fff;display:inline-flex;align-items:center;justify-content:center;gap:.6rem;border-radius:14px;padding:.95rem 2.2rem;font-weight:700;font-size:.92rem;text-decoration:none;border:none;cursor:pointer;position:relative;overflow:hidden;transition:transform .25s,box-shadow .25s;box-shadow:0 0 28px rgba(26,143,227,.45),0 8px 32px rgba(26,143,227,.25)}
-.btn-primary::before{content:'';position:absolute;inset:0;background:linear-gradient(135deg,rgba(255,255,255,.18),transparent 60%);pointer-events:none}
-.btn-primary:hover{transform:translateY(-3px) scale(1.02);box-shadow:0 0 48px rgba(21,101,192,.65),0 16px 48px rgba(26,143,227,.35)}
-.btn-ghost{border:1.5px solid rgba(26,143,227,.4);color:#1565C0;background:rgba(26,143,227,.06);display:inline-flex;align-items:center;justify-content:center;gap:.6rem;border-radius:14px;padding:.95rem 2.2rem;font-weight:600;font-size:.92rem;text-decoration:none;transition:all .25s}
-.btn-ghost:hover{background:rgba(26,143,227,.12);border-color:rgba(26,143,227,.6);color:#1240A0;transform:translateY(-2px)}
-#nav{position:fixed;top:0;left:0;right:0;z-index:100;background:rgba(255,255,255,.92);backdrop-filter:blur(28px);border-bottom:1px solid rgba(0,0,0,.07);transition:background .3s,box-shadow .3s}
-#nav.solid{background:rgba(255,255,255,.99);box-shadow:0 4px 32px rgba(0,0,0,.08)}
-.nlink{color:#64748B;font-size:.85rem;font-weight:600;padding:.5rem 1rem;border-radius:10px;text-decoration:none;transition:all .2s}
-.nlink:hover{color:#1E293B;background:rgba(0,0,0,.04)}.nlink.act{color:#1565C0;background:rgba(26,143,227,.1)}
-#mob{max-height:0;overflow:hidden;transition:max-height .4s cubic-bezier(0,.8,.4,1),opacity .3s;opacity:0;background:#fff;border-top:1px solid rgba(0,0,0,.06)}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:'Inter',system-ui,sans-serif;background:#fff;color:#0A2540;overflow-x:hidden;-webkit-font-smoothing:antialiased}
+.grad-text{background:linear-gradient(100deg,#1565C0 0%,#1A8FE3 55%,#00B4D8 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.btn-primary{background:#0A2540;color:#fff;display:inline-flex;align-items:center;justify-content:center;gap:.55rem;border-radius:10px;padding:.9rem 1.9rem;font-weight:600;font-size:.92rem;text-decoration:none;border:none;cursor:pointer;transition:transform .2s,background .2s,box-shadow .2s;box-shadow:0 1px 2px rgba(10,37,64,.1)}
+.btn-primary:hover{background:#0d3258;transform:translateY(-2px);box-shadow:0 12px 24px -8px rgba(10,37,64,.35)}
+.btn-secondary{background:#fff;color:#0A2540;border:1px solid #E3E8EF;display:inline-flex;align-items:center;justify-content:center;gap:.55rem;border-radius:10px;padding:.9rem 1.9rem;font-weight:600;font-size:.92rem;text-decoration:none;transition:all .2s}
+.btn-secondary:hover{border-color:#B9C4D3;background:#F7F9FC;transform:translateY(-2px)}
+#nav{position:fixed;top:0;left:0;right:0;z-index:100;background:rgba(255,255,255,.85);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);border-bottom:1px solid transparent;transition:border-color .25s}
+#nav.solid{border-bottom-color:#E3E8EF}
+.nlink{color:#425466;font-size:.88rem;font-weight:500;padding:.55rem .9rem;border-radius:8px;text-decoration:none;transition:all .2s}
+.nlink:hover{color:#0A2540;background:#F7F9FC}
+.nlink.act{color:#0A2540;background:#EEF2FF;font-weight:600}
+#mob{max-height:0;overflow:hidden;transition:max-height .4s cubic-bezier(0,.8,.4,1),opacity .3s;opacity:0;background:#fff;border-top:1px solid #E3E8EF}
 #mob.open{max-height:32rem;opacity:1}
-.hero-bg{background:linear-gradient(135deg,#EFF6FF 0%,#DBEAFE 50%,#EFF6FF 100%);position:relative;overflow:hidden;min-height:70vh;display:flex;align-items:center}
-.dot-grid{position:absolute;inset:0;background-image:radial-gradient(rgba(26,143,227,.15) 1.2px,transparent 1.2px);background-size:38px 38px;animation:dd 25s linear infinite}
-@keyframes dd{from{background-position:0 0}to{background-position:38px 38px}}
-.orb{position:absolute;border-radius:50%;filter:blur(90px);pointer-events:none}
-.oa{width:700px;height:700px;top:-200px;left:-150px;background:radial-gradient(circle,rgba(59,130,246,.18),transparent 65%);animation:oa 20s ease-in-out infinite}
-.ob{width:500px;height:500px;bottom:-150px;right:-100px;background:radial-gradient(circle,rgba(245,158,11,.12),transparent 65%);animation:ob 25s ease-in-out infinite}
-@keyframes oa{0%,100%{transform:translate(0,0) scale(1)}50%{transform:translate(60px,-70px) scale(1.1)}}
-@keyframes ob{0%,100%{transform:translate(0,0) scale(1)}50%{transform:translate(-50px,60px) scale(1.08)}}
-.hero-badge{display:inline-flex;align-items:center;gap:.5rem;padding:.45rem 1.2rem;border-radius:24px;background:rgba(245,158,11,.1);border:1px solid rgba(245,158,11,.3);color:#B45309;font-size:.78rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase}
-.live-dot{width:7px;height:7px;border-radius:50%;background:#F59E0B;box-shadow:0 0 10px #F59E0B;animation:ld 1.6s ease-in-out infinite}
-@keyframes ld{0%,100%{opacity:1}50%{opacity:.3}}
-.sbadge{display:inline-flex;align-items:center;gap:.4rem;padding:.38rem 1.1rem;border-radius:24px;font-size:.78rem;font-weight:700;letter-spacing:.04em}
-.ibox{display:inline-flex;align-items:center;justify-content:center;flex-shrink:0}
-.feat-card{background:#fff;border-radius:24px;border:1px solid #E2E8F0;transition:transform .3s cubic-bezier(.16,1,.3,1),box-shadow .3s;position:relative;overflow:hidden}
-.feat-card::after{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,#F59E0B,#EF4444,#3B82F6);opacity:0;transition:opacity .3s}
-.feat-card:hover{transform:translateY(-7px);box-shadow:0 32px 72px -12px rgba(0,0,0,.12),0 0 0 1px rgba(245,158,11,.2)}
-.feat-card:hover::after{opacity:1}
+.hero-badge{display:inline-flex;align-items:center;gap:.55rem;padding:.4rem 1rem .4rem .55rem;border-radius:999px;background:#fff;border:1px solid #E3E8EF;color:#0A2540;font-size:.8rem;font-weight:600;box-shadow:0 1px 2px rgba(10,37,64,.06)}
+.hero-badge .tag{background:#0A2540;color:#fff;font-size:.68rem;font-weight:700;padding:.18rem .5rem;border-radius:999px}
+.snum{font-size:2.6rem;font-weight:800;color:#0A2540;line-height:1;letter-spacing:-.02em}
+.feat-card{background:#fff;border-radius:16px;border:1px solid #E3E8EF;transition:transform .25s,box-shadow .25s,border-color .25s}
+.feat-card:hover{transform:translateY(-4px);box-shadow:0 24px 48px -16px rgba(10,37,64,.14);border-color:#D3DBE6}
+.ibox{display:inline-flex;align-items:center;justify-content:center;border-radius:12px;flex-shrink:0}
 /* Terminal */
-.terminal{background:#0D1117;border:1px solid rgba(255,255,255,.08);border-radius:20px;overflow:hidden;font-family:'JetBrains Mono','Courier New',monospace}
-.terminal-bar{background:#1C2128;padding:.75rem 1rem;display:flex;align-items:center;gap:.5rem;border-bottom:1px solid rgba(255,255,255,.06)}
-.t-dot{width:12px;height:12px;border-radius:50%}
-.t-dot.r{background:#FF5F57}.t-dot.y{background:#FFBD2E}.t-dot.g{background:#28CA41}
-.sc-tab{background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.08);color:rgba(203,213,225,.7);padding:.5rem 1rem;border-radius:10px;font-size:.8rem;font-weight:600;cursor:pointer;transition:all .2s;font-family:'Inter',sans-serif}
-.sc-tab.active,.sc-tab:hover{background:rgba(59,130,246,.15);border-color:rgba(59,130,246,.35);color:#93C5FD}
+.terminal{background:#0A2540;border-radius:14px;overflow:hidden;font-family:'JetBrains Mono',monospace;box-shadow:0 20px 44px -18px rgba(10,37,64,.35)}
+.terminal-bar{background:rgba(255,255,255,.04);padding:.75rem 1rem;display:flex;align-items:center;gap:.5rem;border-bottom:1px solid rgba(255,255,255,.08)}
+.t-dot{width:11px;height:11px;border-radius:50%}
+.t-dot.r{background:#FF5F57}.t-dot.y{background:#FEBC2E}.t-dot.g{background:#28C840}
+.sc-tab{background:#fff;border:1px solid #E3E8EF;color:#425466;padding:.55rem 1.1rem;border-radius:8px;font-size:.82rem;font-weight:600;cursor:pointer;transition:all .2s;font-family:'Inter',sans-serif}
+.sc-tab.active,.sc-tab:hover{background:#0A2540;border-color:#0A2540;color:#fff}
 /* Pipeline */
-.pipe-stage{background:#fff;border:1px solid #E2E8F0;border-radius:16px;padding:1rem 1.25rem;text-align:center;flex:1;min-width:0;box-shadow:0 2px 8px rgba(0,0,0,.04)}
-.pipe-arrow{color:rgba(26,143,227,.5);font-size:1.2rem;flex-shrink:0}
-.bounce-dot{width:8px;height:8px;border-radius:50%;background:#1A8FE3;box-shadow:0 0 8px #1A8FE3;animation:bounceDot 1.4s ease-in-out infinite}
-@keyframes bounceDot{0%,80%,100%{transform:scale(0)}40%{transform:scale(1)}}
-.run-btn{background:linear-gradient(135deg,#F59E0B,#EF4444);border:none;color:#fff;padding:.7rem 1.5rem;border-radius:12px;font-weight:700;font-size:.85rem;cursor:pointer;display:inline-flex;align-items:center;gap:.5rem;transition:all .2s;box-shadow:0 0 20px rgba(245,158,11,.3);font-family:'Inter',sans-serif}
-.run-btn:hover{box-shadow:0 0 32px rgba(239,68,68,.5);transform:translateY(-2px) scale(1.02)}
+.pipe-stage{background:#fff;border:1px solid #E3E8EF;border-radius:12px;padding:1rem 1.1rem;text-align:center;flex:1;min-width:0}
+.pipe-arrow{color:#B9C4D3;font-size:1rem;flex-shrink:0}
+.run-btn{background:#0A2540;border:none;color:#fff;padding:.7rem 1.5rem;border-radius:10px;font-weight:600;font-size:.85rem;cursor:pointer;display:inline-flex;align-items:center;gap:.5rem;transition:all .2s;font-family:'Inter',sans-serif}
+.run-btn:hover{background:#0d3258;transform:translateY(-1px)}
 .run-btn:disabled{opacity:.5;cursor:not-allowed;transform:none}
-.log-line{display:block;padding:.2rem 0;font-size:.8rem;line-height:1.6;border-bottom:1px solid rgba(255,255,255,.04)}
-.log-ts{color:#4B5563}.log-ok{color:#22C55E}.log-err{color:#EF4444}.log-info{color:#3B82F6}.log-data{color:#A78BFA}.log-warn{color:#F59E0B}
+.log-line{display:block;padding:.2rem 0;font-size:.79rem;line-height:1.65;border-bottom:1px solid rgba(255,255,255,.04)}
+.log-ts{color:#5A7291}.log-ok{color:#4ADE80}.log-err{color:#F87171}.log-info{color:#60A5FA}.log-data{color:#C4B5FD}.log-warn{color:#FBBF24}
 .http-badge{font-size:.7rem;font-weight:700;padding:.2rem .6rem;border-radius:6px;font-family:'JetBrains Mono',monospace}
-.http-2xx{background:rgba(34,197,94,.15);color:#22C55E;border:1px solid rgba(34,197,94,.25)}
-.http-4xx{background:rgba(239,68,68,.15);color:#EF4444;border:1px solid rgba(239,68,68,.25)}
-.stat-box{background:#fff;border:1px solid #E2E8F0;border-radius:12px;padding:.85rem 1rem;box-shadow:0 2px 8px rgba(0,0,0,.04)}
-.rv{opacity:0;transform:translateY(36px);transition:opacity .8s cubic-bezier(.16,1,.3,1),transform .8s cubic-bezier(.16,1,.3,1)}
+.http-2xx{background:rgba(74,222,128,.15);color:#4ADE80;border:1px solid rgba(74,222,128,.25)}
+.stat-box{background:#fff;border:1px solid #E3E8EF;border-radius:10px;padding:.85rem 1rem}
+.rv{opacity:0;transform:translateY(28px);transition:opacity .7s cubic-bezier(.16,1,.3,1),transform .7s cubic-bezier(.16,1,.3,1)}
 .rv.in{opacity:1;transform:none}
 .d1{transition-delay:.08s}.d2{transition-delay:.16s}.d3{transition-delay:.24s}
-.snum{font-size:2.8rem;font-weight:900;background:linear-gradient(135deg,#60A5FA,#1A8FE3);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;line-height:1}
-.cta-light{background:linear-gradient(135deg,#EFF6FF,#DBEAFE);position:relative;overflow:hidden}
-.cta-ring{position:absolute;border-radius:50%;border:1px solid rgba(26,143,227,.2);pointer-events:none}
-::-webkit-scrollbar{width:5px}::-webkit-scrollbar-track{background:#F8FAFC}::-webkit-scrollbar-thumb{background:linear-gradient(#1A8FE3,#1565C0);border-radius:3px}
+.divider{border-color:#E3E8EF}
+.cta-dark{background:#0A2540}
+::-webkit-scrollbar{width:6px}::-webkit-scrollbar-track{background:#F7F9FC}::-webkit-scrollbar-thumb{background:#B9C4D3;border-radius:3px}
 </style>
 </head>
 <body>
 <nav id="nav">
   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-    <div class="flex justify-between items-center h-[68px]">
-      <a href="index.html" class="flex items-center gap-2.5"><div class="w-9 h-9 rounded-xl flex items-center justify-center" style="background:linear-gradient(135deg,#1A8FE3,#1565C0);box-shadow:0 0 18px rgba(26,143,227,.35)"><i class="fas fa-layer-group text-white text-sm"></i></div><span class="text-[1.08rem] font-black text-slate-900 tracking-tight">Insurex<span class="grad">24</span></span></a>
-      <div class="hidden md:flex items-center gap-0.5">
-        <a href="platform.html" class="nlink">Platform</a><a href="services.html" class="nlink">Services</a><a href="api.html" class="nlink act">API Automation</a><a href="data-platform.html" class="nlink">Data Platform</a>
-        <a href="contact.html" class="btn-primary ml-3 !py-2.5 !px-5 !text-[.84rem] !rounded-xl">Get Demo</a>
+    <div class="flex justify-between items-center h-[64px]">
+      <a href="index.html" class="flex items-center gap-2.5"><div class="w-8 h-8 rounded-lg flex items-center justify-center" style="background:#1A8FE3"><i class="fas fa-layer-group text-white text-xs"></i></div><span class="text-[1.02rem] font-bold text-[#0A2540] tracking-tight">Insurex24</span></a>
+      <div class="hidden md:flex items-center gap-1">
+        <a href="platform.html" class="nlink">Platform</a>
+        <a href="services.html" class="nlink">Services</a>
+        <a href="api.html" class="nlink act">API Automation</a>
+        <a href="data-platform.html" class="nlink">Data Platform</a>
+        <a href="contact.html" class="nlink">Contact</a>
+        <a href="contact.html" class="btn-primary ml-3 !py-2.5 !px-4 !text-[.85rem]">Get a demo</a>
       </div>
-      <button id="bur" class="md:hidden p-2 rounded-xl text-slate-600 hover:bg-black/5"><i id="bic" class="fas fa-bars text-lg"></i></button>
+      <button id="bur" class="md:hidden p-2 rounded-lg text-[#0A2540] hover:bg-black/5"><i id="bic" class="fas fa-bars text-lg"></i></button>
     </div>
   </div>
   <div id="mob">
     <div class="px-4 py-4 space-y-1">
-      <a href="platform.html" class="ml block py-3 px-4 rounded-xl text-slate-600 hover:text-slate-900 text-sm font-semibold">Platform</a>
-      <a href="services.html" class="ml block py-3 px-4 rounded-xl text-slate-600 hover:text-slate-900 text-sm font-semibold">Services</a>
-      <a href="api.html" class="ml block py-3 px-4 rounded-xl text-amber-700 bg-amber-50 text-sm font-bold">API Automation</a>
-      <a href="data-platform.html" class="ml block py-3 px-4 rounded-xl text-slate-600 hover:text-slate-900 text-sm font-semibold">Data Platform</a>
-      <a href="contact.html" class="ml block mt-3 btn-primary !py-3 !rounded-xl">Get Demo</a>
+      <a href="platform.html" class="ml block py-3 px-4 rounded-lg text-[#425466] hover:bg-[#F7F9FC] text-sm font-semibold">Platform</a>
+      <a href="services.html" class="ml block py-3 px-4 rounded-lg text-[#425466] hover:bg-[#F7F9FC] text-sm font-semibold">Services</a>
+      <a href="api.html" class="ml block py-3 px-4 rounded-lg text-[#0A2540] bg-[#EEF2FF] text-sm font-bold">API Automation</a>
+      <a href="data-platform.html" class="ml block py-3 px-4 rounded-lg text-[#425466] hover:bg-[#F7F9FC] text-sm font-semibold">Data Platform</a>
+      <a href="contact.html" class="ml block py-3 px-4 rounded-lg text-[#425466] hover:bg-[#F7F9FC] text-sm font-semibold">Contact</a>
+      <a href="contact.html" class="ml block mt-3 btn-primary !py-3 justify-center">Get a demo</a>
     </div>
   </div>
 </nav>
 
 <!-- HERO -->
-<section class="hero-bg pt-[68px]">
-  <div class="dot-grid"></div><div class="orb oa"></div><div class="orb ob"></div>
-  <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-24 lg:py-32 relative z-10 text-center">
-    <div class="hero-badge mb-6 mx-auto w-fit"><div class="live-dot"></div>API Automation Engine</div>
-    <h1 class="text-[clamp(2.6rem,6vw,4.5rem)] font-black text-slate-900 leading-[1.05] tracking-tight mb-6">Automate Every<br/><span class="grad">Insurance API Flow</span></h1>
-    <p class="text-[1.1rem] text-slate-600 leading-relaxed max-w-2xl mx-auto mb-10">Visual workflow builder, scheduled triggers, intelligent error recovery, and real-time monitoring — all in one engine built for insurance complexity.</p>
+<section class="pt-[64px] bg-white">
+  <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 pt-20 pb-16 text-center">
+    <div class="hero-badge mb-6 mx-auto w-fit"><span class="tag">Automation</span>API automation engine</div>
+    <h1 class="text-[clamp(2.4rem,5.4vw,4rem)] font-extrabold leading-[1.08] tracking-[-0.03em] mb-6 text-[#0A2540]">Automate every <span class="grad-text">insurance API flow</span></h1>
+    <p class="text-[1.1rem] text-[#425466] leading-[1.7] max-w-2xl mx-auto mb-9">Visual workflow builder, scheduled triggers, intelligent error recovery, and real-time monitoring — all in one engine built for insurance complexity.</p>
     <div class="flex flex-col sm:flex-row gap-3 justify-center">
-      <a href="#demo" class="btn-primary"><i class="fas fa-play text-sm"></i>Try Live Demo</a>
-      <a href="contact.html" class="btn-ghost">Book a Walkthrough</a>
+      <a href="#demo" class="btn-primary"><i class="fas fa-play text-sm"></i>Try live demo</a>
+      <a href="contact.html" class="btn-secondary">Book a walkthrough</a>
     </div>
   </div>
 </section>
 
 <!-- FEATURES -->
-<section class="py-28 bg-white">
+<section class="py-24 border-t divider bg-[#FAFBFC]">
   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-    <div class="rv text-center mb-16">
-      <span class="sbadge mb-5" style="background:#FFFBEB;border:1px solid #FDE68A;color:#92400E"><i class="fas fa-bolt text-xs"></i>Automation Features</span>
-      <h2 class="text-[clamp(2rem,4vw,3.2rem)] font-black text-slate-900 tracking-tight mb-4">The Engine Behind<br/><span class="grad">Zero-Touch Operations</span></h2>
+    <div class="rv max-w-2xl mb-14">
+      <p class="text-[#D97706] font-bold text-sm uppercase tracking-[.08em] mb-4">Automation features</p>
+      <h2 class="text-[clamp(1.9rem,3.6vw,2.9rem)] font-extrabold text-[#0A2540] tracking-tight mb-4 leading-[1.12]">The engine behind zero-touch operations</h2>
     </div>
     <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-      <div class="feat-card p-7 rv"><div class="ibox w-13 h-13 mb-5" style="background:#FFFBEB;width:52px;height:52px;border-radius:14px"><i class="fas fa-code-branch text-amber-600 text-xl"></i></div><h3 class="text-lg font-black text-slate-900 mb-3">Visual Workflow Builder</h3><p class="text-slate-500 text-sm leading-relaxed">Drag-and-drop canvas to design complex multi-step workflows with conditions, loops, and parallel branches — no code.</p></div>
-      <div class="feat-card p-7 rv d1"><div class="ibox w-13 h-13 mb-5" style="background:#EFF6FF;width:52px;height:52px;border-radius:14px"><i class="fas fa-clock text-blue-600 text-xl"></i></div><h3 class="text-lg font-black text-slate-900 mb-3">Scheduled Triggers</h3><p class="text-slate-500 text-sm leading-relaxed">Cron-based, event-driven, and webhook-triggered automation with retry logic and exponential backoff.</p></div>
-      <div class="feat-card p-7 rv d2"><div class="ibox w-13 h-13 mb-5" style="background:#ECFDF5;width:52px;height:52px;border-radius:14px"><i class="fas fa-link text-emerald-600 text-xl"></i></div><h3 class="text-lg font-black text-slate-900 mb-3">Webhook Management</h3><p class="text-slate-500 text-sm leading-relaxed">Inbound and outbound webhook orchestration with signature validation, replay, and dead-letter queues.</p></div>
-      <div class="feat-card p-7 rv"><div class="ibox w-13 h-13 mb-5" style="background:#F5F3FF;width:52px;height:52px;border-radius:14px"><i class="fas fa-vial text-violet-600 text-xl"></i></div><h3 class="text-lg font-black text-slate-900 mb-3">API Testing Suite</h3><p class="text-slate-500 text-sm leading-relaxed">Integrated test runner with environment-based configs, assertion libraries, and CI/CD export for GitLab/GitHub Actions.</p></div>
-      <div class="feat-card p-7 rv d1"><div class="ibox w-13 h-13 mb-5" style="background:#FFF1F2;width:52px;height:52px;border-radius:14px"><i class="fas fa-redo-alt text-rose-600 text-xl"></i></div><h3 class="text-lg font-black text-slate-900 mb-3">Error Recovery</h3><p class="text-slate-500 text-sm leading-relaxed">Auto-retry with circuit breakers, fallback chains, and intelligent dead-letter queue management with alerting.</p></div>
-      <div class="feat-card p-7 rv d2"><div class="ibox w-13 h-13 mb-5" style="background:#ECFDF5;width:52px;height:52px;border-radius:14px"><i class="fas fa-heartbeat text-emerald-600 text-xl"></i></div><h3 class="text-lg font-black text-slate-900 mb-3">Health Monitoring</h3><p class="text-slate-500 text-sm leading-relaxed">Real-time uptime monitoring, latency P95/P99 tracking, and SLA breach alerts via Slack, email, or PagerDuty.</p></div>
+      <div class="feat-card p-7 rv"><div class="ibox w-12 h-12 mb-5" style="background:#FFF7E6"><i class="fas fa-code-branch text-[#D97706] text-lg"></i></div><h3 class="text-lg font-bold text-[#0A2540] mb-3">Visual workflow builder</h3><p class="text-[#425466] text-sm leading-relaxed">Drag-and-drop canvas to design complex multi-step workflows with conditions, loops, and parallel branches — no code.</p></div>
+      <div class="feat-card p-7 rv d1"><div class="ibox w-12 h-12 mb-5" style="background:#EEF2FF"><i class="fas fa-clock text-[#1A8FE3] text-lg"></i></div><h3 class="text-lg font-bold text-[#0A2540] mb-3">Scheduled triggers</h3><p class="text-[#425466] text-sm leading-relaxed">Cron-based, event-driven, and webhook-triggered automation with retry logic and exponential backoff.</p></div>
+      <div class="feat-card p-7 rv d2"><div class="ibox w-12 h-12 mb-5" style="background:#E9FBF3"><i class="fas fa-link text-[#059669] text-lg"></i></div><h3 class="text-lg font-bold text-[#0A2540] mb-3">Webhook management</h3><p class="text-[#425466] text-sm leading-relaxed">Inbound and outbound webhook orchestration with signature validation, replay, and dead-letter queues.</p></div>
+      <div class="feat-card p-7 rv"><div class="ibox w-12 h-12 mb-5" style="background:#EFF6FF"><i class="fas fa-vial text-[#1565C0] text-lg"></i></div><h3 class="text-lg font-bold text-[#0A2540] mb-3">API testing suite</h3><p class="text-[#425466] text-sm leading-relaxed">Integrated test runner with environment-based configs, assertion libraries, and CI/CD export for GitLab/GitHub Actions.</p></div>
+      <div class="feat-card p-7 rv d1"><div class="ibox w-12 h-12 mb-5" style="background:#FFEFEF"><i class="fas fa-redo-alt text-[#E11D48] text-lg"></i></div><h3 class="text-lg font-bold text-[#0A2540] mb-3">Error recovery</h3><p class="text-[#425466] text-sm leading-relaxed">Auto-retry with circuit breakers, fallback chains, and intelligent dead-letter queue management with alerting.</p></div>
+      <div class="feat-card p-7 rv d2"><div class="ibox w-12 h-12 mb-5" style="background:#E9FBF3"><i class="fas fa-heartbeat text-[#059669] text-lg"></i></div><h3 class="text-lg font-bold text-[#0A2540] mb-3">Health monitoring</h3><p class="text-[#425466] text-sm leading-relaxed">Real-time uptime monitoring, latency P95/P99 tracking, and SLA breach alerts via Slack, email, or PagerDuty.</p></div>
     </div>
   </div>
 </section>
 
 <!-- PIPELINE FLOW -->
-<section class="py-20" style="background:#EFF6FF">
+<section class="py-20 bg-white">
   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
     <div class="rv text-center mb-12">
-      <h2 class="text-2xl font-black text-slate-900 mb-2">Automation <span class="grad">Pipeline</span></h2>
-      <p class="text-slate-500 text-sm">End-to-end flow from trigger to delivery</p>
+      <h2 class="text-2xl font-extrabold text-[#0A2540] mb-2">Automation pipeline</h2>
+      <p class="text-[#425466] text-sm">End-to-end flow from trigger to delivery</p>
     </div>
-    <div class="rv flex flex-col sm:flex-row items-center gap-3 overflow-x-auto pb-4">
-      <div class="pipe-stage"><i class="fas fa-play-circle text-blue-500 text-lg mb-1 block"></i><p class="text-slate-900 text-xs font-bold">Trigger</p><p class="text-slate-500 text-[.7rem]">Event / Schedule / Webhook</p></div>
+    <div class="rv flex flex-col sm:flex-row items-center gap-3 overflow-x-auto pb-2">
+      <div class="pipe-stage"><i class="fas fa-play-circle text-[#1A8FE3] text-lg mb-1 block"></i><p class="text-[#0A2540] text-xs font-bold">Trigger</p><p class="text-[#425466] text-[.7rem]">Event / Schedule / Webhook</p></div>
       <div class="pipe-arrow"><i class="fas fa-arrow-right"></i></div>
-      <div class="pipe-stage"><i class="fas fa-filter text-violet-500 text-lg mb-1 block"></i><p class="text-slate-900 text-xs font-bold">Validate</p><p class="text-slate-500 text-[.7rem]">Schema + Auth check</p></div>
+      <div class="pipe-stage"><i class="fas fa-filter text-[#1565C0] text-lg mb-1 block"></i><p class="text-[#0A2540] text-xs font-bold">Validate</p><p class="text-[#425466] text-[.7rem]">Schema + Auth check</p></div>
       <div class="pipe-arrow"><i class="fas fa-arrow-right"></i></div>
-      <div class="pipe-stage"><i class="fas fa-exchange-alt text-amber-500 text-lg mb-1 block"></i><p class="text-slate-900 text-xs font-bold">Transform</p><p class="text-slate-500 text-[.7rem]">Map + Enrich data</p></div>
+      <div class="pipe-stage"><i class="fas fa-exchange-alt text-[#D97706] text-lg mb-1 block"></i><p class="text-[#0A2540] text-xs font-bold">Transform</p><p class="text-[#425466] text-[.7rem]">Map + Enrich data</p></div>
       <div class="pipe-arrow"><i class="fas fa-arrow-right"></i></div>
-      <div class="pipe-stage"><i class="fas fa-project-diagram text-emerald-500 text-lg mb-1 block"></i><p class="text-slate-900 text-xs font-bold">Orchestrate</p><p class="text-slate-500 text-[.7rem]">Parallel / Sequential</p></div>
+      <div class="pipe-stage"><i class="fas fa-project-diagram text-[#059669] text-lg mb-1 block"></i><p class="text-[#0A2540] text-xs font-bold">Orchestrate</p><p class="text-[#425466] text-[.7rem]">Parallel / Sequential</p></div>
       <div class="pipe-arrow"><i class="fas fa-arrow-right"></i></div>
-      <div class="pipe-stage"><i class="fas fa-rocket text-rose-500 text-lg mb-1 block"></i><p class="text-slate-900 text-xs font-bold">Deliver</p><p class="text-slate-500 text-[.7rem]">Response + Webhooks</p></div>
-    </div>
-    <div class="flex justify-center gap-2 mt-6">
-      <div class="bounce-dot" style="animation-delay:0s"></div>
-      <div class="bounce-dot" style="animation-delay:.16s"></div>
-      <div class="bounce-dot" style="animation-delay:.32s"></div>
-      <div class="bounce-dot" style="animation-delay:.48s"></div>
-      <div class="bounce-dot" style="animation-delay:.64s"></div>
+      <div class="pipe-stage"><i class="fas fa-rocket text-[#E11D48] text-lg mb-1 block"></i><p class="text-[#0A2540] text-xs font-bold">Deliver</p><p class="text-[#425466] text-[.7rem]">Response + Webhooks</p></div>
     </div>
   </div>
 </section>
 
 <!-- LIVE DEMO -->
-<section id="demo" class="py-28 bg-white">
+<section id="demo" class="py-24 border-t divider bg-[#FAFBFC]">
   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
     <div class="rv text-center mb-12">
-      <span class="sbadge mb-5" style="background:#FFFBEB;border:1px solid #FDE68A;color:#92400E"><i class="fas fa-terminal text-xs"></i>Interactive Demo</span>
-      <h2 class="text-[clamp(2rem,4vw,3.2rem)] font-black text-slate-900 tracking-tight mb-4">Live <span class="grad">API Simulator</span></h2>
-      <p class="text-slate-500 max-w-xl mx-auto">Select a real insurance scenario and watch the automation engine process it in real time.</p>
+      <p class="text-[#D97706] font-bold text-sm uppercase tracking-[.08em] mb-4">Interactive demo</p>
+      <h2 class="text-[clamp(1.9rem,3.6vw,2.9rem)] font-extrabold text-[#0A2540] tracking-tight mb-4">Live API simulator</h2>
+      <p class="text-[#425466] max-w-xl mx-auto">Select a real insurance scenario and watch the automation engine process it in real time.</p>
     </div>
     <div class="rv max-w-5xl mx-auto">
       <div class="flex flex-wrap gap-2 mb-6" id="tabs">
@@ -169,75 +155,75 @@
       </div>
       <div class="grid grid-cols-1 lg:grid-cols-2 gap-4">
         <div class="terminal">
-          <div class="terminal-bar"><div class="t-dot r"></div><div class="t-dot y"></div><div class="t-dot g"></div><span class="text-slate-400 text-xs ml-2 font-mono">REQUEST</span><span id="http-badge" class="ml-auto http-badge http-2xx">POST</span></div>
+          <div class="terminal-bar"><div class="t-dot r"></div><div class="t-dot y"></div><div class="t-dot g"></div><span class="text-[#5A7291] text-xs ml-2 font-mono">REQUEST</span><span id="http-badge" class="ml-auto http-badge http-2xx">POST</span></div>
           <div class="p-5 space-y-3">
-            <div><p class="text-slate-500 text-[.72rem] uppercase tracking-widest mb-1">Endpoint</p><p class="text-emerald-400 text-sm font-mono" id="req-endpoint">/v1/policies/issue</p></div>
-            <div><p class="text-slate-500 text-[.72rem] uppercase tracking-widest mb-1">Payload</p><pre class="text-[.8rem] text-slate-300 overflow-x-auto leading-relaxed" id="req-payload">{}</pre></div>
+            <div><p class="text-[#5A7291] text-[.72rem] uppercase tracking-widest mb-1">Endpoint</p><p class="text-[#4ADE80] text-sm font-mono" id="req-endpoint">/v1/policies/issue</p></div>
+            <div><p class="text-[#5A7291] text-[.72rem] uppercase tracking-widest mb-1">Payload</p><pre class="text-[.8rem] text-slate-200 overflow-x-auto leading-relaxed" id="req-payload">{}</pre></div>
             <button class="run-btn mt-2" onclick="runDemo()" id="run-btn"><i class="fas fa-play text-xs"></i>Run</button>
           </div>
         </div>
         <div class="terminal">
-          <div class="terminal-bar"><div class="t-dot r"></div><div class="t-dot y"></div><div class="t-dot g"></div><span class="text-slate-400 text-xs ml-2 font-mono">LOG OUTPUT</span></div>
-          <div class="p-5 h-[260px] overflow-y-auto font-mono text-xs" id="log-output"><p class="text-slate-600 italic">Select a scenario and click Run…</p></div>
+          <div class="terminal-bar"><div class="t-dot r"></div><div class="t-dot y"></div><div class="t-dot g"></div><span class="text-[#5A7291] text-xs ml-2 font-mono">LOG OUTPUT</span></div>
+          <div class="p-5 h-[260px] overflow-y-auto font-mono text-xs" id="log-output"><p class="text-[#5A7291] italic">Select a scenario and click Run…</p></div>
         </div>
       </div>
       <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 mt-4">
-        <div class="stat-box text-center"><p class="text-xl font-black" style="color:#1A8FE3" id="stat-calls">0</p><p class="text-slate-500 text-xs mt-0.5">API Calls</p></div>
-        <div class="stat-box text-center"><p class="text-xl font-black" style="color:#22C55E" id="stat-success">0%</p><p class="text-slate-500 text-xs mt-0.5">Success Rate</p></div>
-        <div class="stat-box text-center"><p class="text-xl font-black" style="color:#8B5CF6" id="stat-latency">0ms</p><p class="text-slate-500 text-xs mt-0.5">Avg Latency</p></div>
-        <div class="stat-box text-center"><p class="text-xl font-black" style="color:#F59E0B" id="stat-rate">0/s</p><p class="text-slate-500 text-xs mt-0.5">Req/sec</p></div>
+        <div class="stat-box text-center"><p class="text-xl font-extrabold" style="color:#1A8FE3" id="stat-calls">0</p><p class="text-[#425466] text-xs mt-0.5">API calls</p></div>
+        <div class="stat-box text-center"><p class="text-xl font-extrabold" style="color:#059669" id="stat-success">0%</p><p class="text-[#425466] text-xs mt-0.5">Success rate</p></div>
+        <div class="stat-box text-center"><p class="text-xl font-extrabold" style="color:#1565C0" id="stat-latency">0ms</p><p class="text-[#425466] text-xs mt-0.5">Avg latency</p></div>
+        <div class="stat-box text-center"><p class="text-xl font-extrabold" style="color:#D97706" id="stat-rate">0/s</p><p class="text-[#425466] text-xs mt-0.5">Req/sec</p></div>
       </div>
     </div>
   </div>
 </section>
 
 <!-- STATS -->
-<section class="py-20" style="background:#EFF6FF;border-top:1px solid #DBEAFE">
+<section class="py-16 bg-white border-t divider">
   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
     <div class="grid grid-cols-2 lg:grid-cols-4 gap-8 text-center">
-      <div class="rv"><p class="snum counter" data-target="99.9" data-suffix="%" data-dec="1">0%</p><p class="text-slate-600 text-sm mt-2">Automation Uptime</p></div>
-      <div class="rv d1"><p class="snum counter" data-target="50" data-suffix="+">0+</p><p class="text-slate-600 text-sm mt-2">Pre-Built Workflows</p></div>
-      <div class="rv d2"><p class="snum counter" data-target="10" data-suffix="M+">0</p><p class="text-slate-600 text-sm mt-2">API Calls/Day</p></div>
-      <div class="rv d3"><p class="snum counter" data-target="200" data-suffix="ms">0ms</p><p class="text-slate-600 text-sm mt-2">P95 Latency</p></div>
+      <div class="rv"><p class="snum counter" data-target="99.9" data-suffix="%" data-dec="1">0%</p><p class="text-[#425466] text-sm mt-2 font-medium">Automation uptime</p></div>
+      <div class="rv d1"><p class="snum counter" data-target="50" data-suffix="+">0+</p><p class="text-[#425466] text-sm mt-2 font-medium">Pre-built workflows</p></div>
+      <div class="rv d2"><p class="snum counter" data-target="10" data-suffix="M+">0</p><p class="text-[#425466] text-sm mt-2 font-medium">API calls/day</p></div>
+      <div class="rv d3"><p class="snum counter" data-target="200" data-suffix="ms">0ms</p><p class="text-[#425466] text-sm mt-2 font-medium">P95 latency</p></div>
     </div>
   </div>
 </section>
 
 <!-- CTA -->
-<section class="cta-light py-32 relative">
-  <div class="orb" style="width:700px;height:700px;top:50%;left:50%;transform:translate(-50%,-50%);background:radial-gradient(circle,rgba(245,158,11,.1),rgba(26,143,227,.08) 40%,transparent 70%);filter:blur(100px)"></div>
-  <div class="cta-ring" style="width:600px;height:600px;top:50%;left:50%;transform:translate(-50%,-50%)"></div>
-  <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10">
-    <div class="rv">
-      <h2 class="text-[clamp(2rem,4vw,3.2rem)] font-black text-slate-900 tracking-tight mb-5">Automate Your<br/><span class="grad">First Workflow Today</span></h2>
-      <p class="text-slate-600 text-xl mb-10">Our team will help you design and deploy your first automated insurance API flow in under 2 hours.</p>
-      <a href="contact.html" class="btn-primary !py-4 !px-10 !text-base">Get Started <i class="fas fa-arrow-right text-sm"></i></a>
-    </div>
+<section class="cta-dark py-28">
+  <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10 rv">
+    <h2 class="text-[clamp(1.9rem,4.2vw,3.2rem)] font-extrabold text-white tracking-tight mb-5 leading-[1.12]">Automate your first workflow today</h2>
+    <p class="text-[#B4C2D6] text-lg mb-10 max-w-xl mx-auto leading-relaxed">Our team will help you design and deploy your first automated insurance API flow in under 2 hours.</p>
+    <a href="contact.html" class="inline-flex items-center justify-center gap-2 bg-white text-[#0A2540] font-semibold text-sm rounded-[10px] px-8 py-4 hover:bg-slate-100 transition-colors">Get started <i class="fas fa-arrow-right text-xs"></i></a>
   </div>
 </section>
 
 <!-- FOOTER -->
-<footer style="background:#F8FAFC;border-top:1px solid #E2E8F0">
-  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-14">
-    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-10 mb-12">
-      <div class="lg:col-span-2"><a href="index.html" class="flex items-center gap-2.5 mb-5"><div class="w-9 h-9 rounded-xl flex items-center justify-center" style="background:linear-gradient(135deg,#1A8FE3,#1565C0)"><i class="fas fa-layer-group text-white text-sm"></i></div><span class="text-[1.05rem] font-black text-slate-900">Insurex<span class="grad">24</span></span></a><p class="text-slate-500 text-sm leading-relaxed max-w-xs mb-5">Enabling large insurance ecosystems with modern MACH middleware technology.</p><a href="mailto:admin@insurex24.com" class="inline-flex items-center gap-2 text-slate-500 hover:text-slate-900 text-sm transition-colors"><div class="w-8 h-8 rounded-lg flex items-center justify-center" style="background:#EFF6FF;border:1px solid #DBEAFE"><i class="fas fa-envelope text-blue-600 text-xs"></i></div>admin@insurex24.com</a></div>
-      <div><p class="text-xs font-black text-slate-900 uppercase tracking-widest mb-4">Platform</p><ul class="space-y-2.5"><li><a href="platform.html" class="text-slate-500 hover:text-slate-900 text-sm transition-colors">Features</a></li><li><a href="api.html" class="text-slate-500 hover:text-slate-900 text-sm transition-colors">API Automation</a></li><li><a href="data-platform.html" class="text-slate-500 hover:text-slate-900 text-sm transition-colors">Data Platform</a></li></ul></div>
-      <div><p class="text-xs font-black text-slate-900 uppercase tracking-widest mb-4">Services</p><ul class="space-y-2.5"><li><a href="services.html#ocr" class="text-slate-500 hover:text-slate-900 text-sm transition-colors">OCR</a></li><li><a href="services.html#communication" class="text-slate-500 hover:text-slate-900 text-sm transition-colors">SMS & Email</a></li><li><a href="services.html#verification" class="text-slate-500 hover:text-slate-900 text-sm transition-colors">KYC</a></li></ul></div>
-      <div><p class="text-xs font-black text-slate-900 uppercase tracking-widest mb-4">Company</p><ul class="space-y-2.5"><li><a href="#" class="text-slate-500 hover:text-slate-900 text-sm transition-colors">About</a></li><li><a href="contact.html" class="text-slate-500 hover:text-slate-900 text-sm transition-colors">Contact</a></li></ul></div>
+<footer class="bg-white border-t divider">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-10 mb-14">
+      <div class="lg:col-span-2">
+        <a href="index.html" class="flex items-center gap-2.5 mb-5"><div class="w-8 h-8 rounded-lg flex items-center justify-center" style="background:#1A8FE3"><i class="fas fa-layer-group text-white text-xs"></i></div><span class="text-[1.02rem] font-bold text-[#0A2540]">Insurex24</span></a>
+        <p class="text-[#425466] text-sm leading-relaxed mb-5 max-w-xs">Enabling large insurance ecosystems with modern MACH middleware technology.</p>
+        <a href="mailto:admin@insurex24.com" class="inline-flex items-center gap-2 text-[#425466] hover:text-[#0A2540] text-sm transition-colors"><div class="w-8 h-8 rounded-lg flex items-center justify-center bg-[#F7F9FC] border border-[#E3E8EF]"><i class="fas fa-envelope text-[#1A8FE3] text-xs"></i></div>admin@insurex24.com</a>
+      </div>
+      <div><p class="text-xs font-bold text-[#0A2540] uppercase tracking-[.1em] mb-5">Platform</p><ul class="space-y-3"><li><a href="platform.html" class="text-[#425466] hover:text-[#0A2540] text-sm transition-colors">Features</a></li><li><a href="api.html" class="text-[#425466] hover:text-[#0A2540] text-sm transition-colors">API automation</a></li><li><a href="data-platform.html" class="text-[#425466] hover:text-[#0A2540] text-sm transition-colors">Data platform</a></li></ul></div>
+      <div><p class="text-xs font-bold text-[#0A2540] uppercase tracking-[.1em] mb-5">Services</p><ul class="space-y-3"><li><a href="services.html#ocr" class="text-[#425466] hover:text-[#0A2540] text-sm transition-colors">OCR</a></li><li><a href="services.html#communication" class="text-[#425466] hover:text-[#0A2540] text-sm transition-colors">SMS & Email</a></li><li><a href="services.html#verification" class="text-[#425466] hover:text-[#0A2540] text-sm transition-colors">KYC</a></li></ul></div>
+      <div><p class="text-xs font-bold text-[#0A2540] uppercase tracking-[.1em] mb-5">Company</p><ul class="space-y-3"><li><a href="#" class="text-[#425466] hover:text-[#0A2540] text-sm transition-colors">About</a></li><li><a href="contact.html" class="text-[#425466] hover:text-[#0A2540] text-sm transition-colors">Contact</a></li></ul></div>
     </div>
-    <div class="border-t pt-8 flex flex-col sm:flex-row justify-between items-center gap-4" style="border-color:#E2E8F0"><p class="text-slate-500 text-sm">© 2026 Insurex24. All rights reserved.</p></div>
+    <div class="border-t pt-8 flex flex-col sm:flex-row justify-between items-center gap-4 divider"><p class="text-[#425466] text-sm">© 2026 Insurex24. All rights reserved.</p></div>
   </div>
 </footer>
 
 <script>
 const nav=document.getElementById('nav');
-window.addEventListener('scroll',()=>nav.classList.toggle('solid',scrollY>20));
+window.addEventListener('scroll',()=>nav.classList.toggle('solid',scrollY>10));
 const bur=document.getElementById('bur'),mob=document.getElementById('mob'),bic=document.getElementById('bic');
 bur.addEventListener('click',()=>{const o=mob.classList.toggle('open');bic.className=o?'fas fa-times text-lg':'fas fa-bars text-lg'});
 document.querySelectorAll('.ml').forEach(a=>a.addEventListener('click',()=>{mob.classList.remove('open');bic.className='fas fa-bars text-lg'}));
 const ro=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');ro.unobserve(e.target)}}),{threshold:.1});
 document.querySelectorAll('.rv').forEach(el=>ro.observe(el));
-function runCounter(el){const t=parseFloat(el.dataset.target),s=el.dataset.suffix||'',d=parseInt(el.dataset.dec||0),dur=2200,st=performance.now();const tick=n=>{const p=Math.min((n-st)/dur,1),e=1-Math.pow(1-p,4);el.textContent=(d?(e*t).toFixed(d):Math.round(e*t))+s;if(p<1)requestAnimationFrame(tick)};requestAnimationFrame(tick)}
+function runCounter(el){const t=parseFloat(el.dataset.target),s=el.dataset.suffix||'',d=parseInt(el.dataset.dec||0),dur=2000,st=performance.now();const tick=n=>{const p=Math.min((n-st)/dur,1),e=1-Math.pow(1-p,4);el.textContent=(d?(e*t).toFixed(d):Math.round(e*t))+s;if(p<1)requestAnimationFrame(tick)};requestAnimationFrame(tick)}
 const co=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){runCounter(e.target);co.unobserve(e.target)}}),{threshold:.5});
 document.querySelectorAll('.counter').forEach(el=>co.observe(el));
 
@@ -308,7 +294,7 @@ function selectScenario(i){
   document.getElementById('req-payload').textContent=s.payload;
   document.getElementById('http-badge').textContent=s.badge;
   document.getElementById('http-badge').className='http-badge ml-auto '+s.badgeClass;
-  document.getElementById('log-output').innerHTML='<p class="text-slate-600 italic">Click Run to execute this scenario…</p>';
+  document.getElementById('log-output').innerHTML='<p class="text-[#5A7291] italic">Click Run to execute this scenario…</p>';
 }
 document.querySelectorAll('.sc-tab').forEach((b,i)=>b.addEventListener('click',()=>selectScenario(i)));
 selectScenario(0);
